@@ -1,0 +1,12 @@
+version: 1
+steps:
+  - name: Confirm ExecPlan
+    action: "Run 'exec plan' and verify PLANS.md Big Picture / To-do sections are current."
+  - name: Compliance Check
+    action: "uv run -m automation.compliance.pre --task-name '<Task>' --categories docs,qa,ops"
+  - name: Config Selection
+    action: "Export WORKFLOW_CONFIG pointing to runtime/automation/workflows/configs/workflow-mag/<file>.json"
+  - name: Dry Run
+    action: "PYTHONPATH=src uv run flowctl run --dry-run runtime/automation/flow_runner/flows/workflow_mag.flow.yaml"
+  - name: Log Preparation
+    action: "Ensure runtime/automation/logs/workflow/ exists and is writable"

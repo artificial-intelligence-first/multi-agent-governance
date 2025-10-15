@@ -1,0 +1,6 @@
+version: 1
+steps:
+  - description: Disable prompt-engineering automation route and notify ops channel.
+  - description: Revert to latest known-good prompt templates stored under docs/reference/.
+  - description: Run manual prompt review using Docs Ops checklist until automation is restored.
+  - description: File incident report and capture remediation tasks in backlog.

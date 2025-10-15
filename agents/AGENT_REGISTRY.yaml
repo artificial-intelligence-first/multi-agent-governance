@@ -1,0 +1,76 @@
+version: 2
+defaults:
+  deadline_s: 90
+  quality: balanced
+  handoff_format: ResultEnvelope
+  escalation_channel: "#ops-ai"
+routes:
+  knowledge:
+    primary: agents/main-agents/knowledge-mag:curate
+    backup: manual-handlers/manual-knowledge:triage
+    description: Curate governed knowledge collections with provenance, dependencies, and outstanding actions.
+    preconditions:
+      - contract: agents/contracts/knowledge_request.schema.json
+      - sop: agents/main-agents/knowledge-mag/sop/README.md
+    telemetry:
+      metric: knowledge.latency_ms
+      budget_s: 50
+  documentation:
+    primary: agents/sub-agents/docs-sag:draft
+    backup: manual-handlers/manual-docs:triage
+    description: Expand knowledge cards into publication-ready documentation drafts with review signals.
+    preconditions:
+      - contract: agents/contracts/docs_sag_request.schema.json
+      - sop: agents/sub-agents/docs-sag/sop/README.md
+    telemetry:
+      metric: docs_sag.latency_ms
+      budget_s: 60
+  prompt-engineering:
+    primary: agents/sub-agents/prompt-sag:engineer
+    backup: manual-handlers/manual-prompt:triage
+    description: Compose structured prompt packages with guardrails, examples, and validation guidance.
+    preconditions:
+      - contract: agents/contracts/prompt_sag_request.schema.json
+      - sop: agents/sub-agents/prompt-sag/sop/README.md
+    telemetry:
+      metric: prompt_sag.latency_ms
+      budget_s: 45
+  context-engineering:
+    primary: agents/sub-agents/context-sag:assemble
+    backup: manual-handlers/manual-context:triage
+    description: Curate and package context bundles with prioritisation, packaging guidance, and risk surfacing.
+    preconditions:
+      - contract: agents/contracts/context_sag_request.schema.json
+      - sop: agents/sub-agents/context-sag/sop/README.md
+    telemetry:
+      metric: context_sag.latency_ms
+      budget_s: 65
+  workflow:
+    primary: agents/main-agents/workflow-mag:run
+    backup: manual-handlers/manual-ops:triage
+    description: Orchestrate the end-to-end Multi Agent System pipeline via Flow Runner and keep PLANS.md in sync.
+    preconditions:
+      - sop: agents/main-agents/workflow-mag/sop/README.md
+      - workflow: runtime/automation/flow_runner/flows/workflow_mag.flow.yaml
+    telemetry:
+      metric: workflow.latency_ms
+      budget_s: 120
+  operations:
+    primary: agents/main-agents/operations-mag:observe
+    backup: manual-handlers/manual-ops:triage
+    description: Monitor telemetry, enforce log policies, and escalate anomalies.
+    preconditions:
+      - sop: agents/main-agents/operations-mag/sop/README.md
+    telemetry:
+      metric: operations.latency_ms
+      budget_s: 40
+  qa:
+    primary: agents/main-agents/qa-mag:review
+    backup: manual-handlers/manual-qa:triage
+    description: Run quality gates, schema checks, and publish audit notes before artefacts advance.
+    preconditions:
+      - sop: agents/main-agents/qa-mag/sop/README.md
+      - contract: agents/contracts/qa_response.schema.json
+    telemetry:
+      metric: qa.latency_ms
+      budget_s: 45

@@ -1,0 +1,13 @@
+version: 1
+scenarios:
+  - name: Schema Failure
+    detect: "Validation script reports contract mismatch"
+    actions:
+      - "Flag failure in PLANS.md Progress and Decision Log"
+      - "Notify WorkFlowMAG and relevant specialist agent"
+      - "Provide reproduction steps and failing artefact path"
+  - name: Critical Quality Regression
+    detect: "QA checklist item marked fail"
+    actions:
+      - "Stop promotion of artefacts"
+      - "Coordinate remediation before rerunning QA"

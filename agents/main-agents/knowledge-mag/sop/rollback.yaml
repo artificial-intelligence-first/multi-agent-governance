@@ -1,0 +1,10 @@
+version: 1
+steps:
+  - description: Switch `knowledge` route primary handler to manual knowledge custodians.
+    run: src/automation/scripts/update_registry.py --route knowledge --primary manual-handlers/manual-knowledge:triage
+  - description: Restore the last known good KnowledgeMag prompt from git history.
+    run: git checkout HEAD~1 -- agents/main-agents/knowledge-mag/prompts/curate.prompt.yaml
+  - description: Re-run knowledge workflow smoke tests to confirm regression.
+    run: make validate-knowledge
+  - description: Notify stakeholders about the rollback and remediation plan.
+    run: src/automation/scripts/notify.py --channel "#ops-ai" --message "KnowledgeMag rolled back to previous stable version."

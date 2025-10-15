@@ -1,0 +1,14 @@
+{
+  "status": "needs-review",
+  "references": [
+    {
+      "id": "docs/reference/files/SSOT.md/overview.md",
+      "state": "ok"
+    },
+    {
+      "id": "external-api-spec",
+      "state": "stale",
+      "notes": "Update to v2.1"
+    }
+  ]
+}

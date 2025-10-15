@@ -1,0 +1,10 @@
+{
+  "run_id": "run-001",
+  "status": "planned",
+  "artifacts": [
+    "plan.json",
+    "docs/draft.md",
+    "prompts/prompt_package.json"
+  ],
+  "notes": "Initial workflow scaffold generated."
+}

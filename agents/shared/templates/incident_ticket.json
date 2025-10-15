@@ -1,0 +1,12 @@
+{
+  "project": "OPS",
+  "issue_type": "Incident",
+  "title": "Automated escalation from agents-directory",
+  "fields": {
+    "severity": "P2",
+    "summary": "{{ summary }}",
+    "details": "{{ details }}",
+    "run_id": "{{ run_id }}",
+    "owner": "{{ owner }}"
+  }
+}

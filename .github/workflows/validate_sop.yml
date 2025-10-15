@@ -1,0 +1,69 @@
+name: Validate SOP
+on: [push, pull_request]
+jobs:
+  validate-sop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          test -d agents/main-agents
+          test -d agents/sub-agents
+          test -f agents/AGENT_REGISTRY.yaml
+          test -f SSOT.md
+
+      - name: Validate agent sop presence
+        shell: bash
+        run: |
+          set -e
+          missing=0
+          mapfile -t sop_dirs < <(find agents/main-agents agents/sub-agents -mindepth 2 -maxdepth 2 -type d -name sop)
+          if [[ ${#sop_dirs[@]} -eq 0 ]]; then
+            echo "::warning ::No sop directories found under agents/"
+          fi
+          for dir in "${sop_dirs[@]}"; do
+            echo "Checking ${dir}"
+            for required in README.md preflight.yaml rollback.yaml; do
+              if [[ ! -f "${dir}/${required}" ]]; then
+                echo "::error file=${dir}/${required}::Missing ${required}"
+                missing=1
+              fi
+            done
+          done
+          if [[ ${missing} -ne 0 ]]; then
+            exit 1
+          fi
+
+      - name: Validate preflight.yaml keys (simple)
+        shell: bash
+        run: |
+          set -e
+          mapfile -t preflights < <(find agents/main-agents agents/sub-agents -mindepth 3 -maxdepth 3 -type f -name preflight.yaml)
+          if [[ ${#preflights[@]} -eq 0 ]]; then
+            echo "::warning ::No preflight.yaml files found"
+          fi
+          for f in "${preflights[@]}"; do
+            echo "Checking $f"
+            if [[ ! -s "$f" ]]; then
+              echo "::error file=$f::preflight.yaml is empty"
+              exit 1
+            fi
+          done
+
+      - name: Validate sop_refs links in sop/README.md
+        run: |
+          mapfile -t readmes < <(find agents/main-agents agents/sub-agents -mindepth 3 -maxdepth 3 -type f -name README.md -path '*/sop/README.md')
+          if [[ ${#readmes[@]} -eq 0 ]]; then
+            echo "::warning ::No sop README files found"
+          fi
+          for f in "${readmes[@]}"; do
+            echo "Scanning $f"
+            if grep -q 'sop_refs:' "$f"; then
+              if ! grep -q '/sop/' "$f"; then
+                echo "::warning file=$f::sop_refs present but missing link to /sop/ assets"
+              fi
+            else
+              echo "::warning file=$f::Missing sop_refs section"
+            fi
+          done

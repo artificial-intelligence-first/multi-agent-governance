@@ -1,0 +1,7 @@
+version: 1
+scenarios:
+  - name: Localization Disabled
+    detect: "Attempt to run retired localization workflow"
+    actions:
+      - "Abort run; communicate that localization support has been removed."
+      - "Update PLANS.md to reflect English-only scope."

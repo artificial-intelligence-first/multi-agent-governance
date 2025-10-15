@@ -1,0 +1,39 @@
+$schema: ../../../../agents/docs/flow.schema.json
+version: 1
+agent_paths:
+  - ../../../../agents
+  - ../../../../agents/main-agents/workflow-mag/src
+  - ../../../../agents/main-agents/operations-mag/src
+  - ../../../../agents/main-agents/qa-mag/src
+  - ../../../../agents/sub-agents/docs-sag/src
+  - ../../../../agents/sub-agents/prompt-sag/src
+  - ../../../../agents/sub-agents/context-sag/src
+  - ../../../../agents/sub-agents/quality-sag/src
+  - ../../../../agents/sub-agents/reference-sag/src
+  - ../../../../src
+run:
+  output_dir: .runs/${RUN_ID}
+  env:
+    WORKFLOW_CONFIG: ${WORKFLOW_CONFIG}
+    AIAMS_RUN_ID: ${RUN_ID}
+steps:
+  - id: plan
+    uses: flow_runner.tasks.workflow_mag.stages:PlanStage
+  - id: docs
+    needs: [plan]
+    uses: flow_runner.tasks.workflow_mag.stages:DocsStage
+  - id: prompts
+    needs: [plan]
+    uses: flow_runner.tasks.workflow_mag.stages:PromptsStage
+  - id: context
+    needs: [prompts]
+    uses: flow_runner.tasks.workflow_mag.stages:ContextStage
+  - id: qa
+    needs: [docs, context]
+    uses: flow_runner.tasks.workflow_mag.stages:QAStage
+  - id: operations
+    needs: [qa]
+    uses: flow_runner.tasks.workflow_mag.stages:OperationsStage
+  - id: finalize
+    needs: [operations]
+    uses: flow_runner.tasks.workflow_mag.stages:FinalizeStage

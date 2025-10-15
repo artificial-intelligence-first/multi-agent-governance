@@ -1,0 +1,6 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: QAMAG quality gate workflow
+steps:
+  - id: qa
+    run: python -m flow_runner.tasks.workflow_mag.qa_stage --config ${WORKFLOW_CONFIG}

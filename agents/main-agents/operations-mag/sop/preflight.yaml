@@ -1,0 +1,10 @@
+version: 1
+steps:
+  - name: Access Summary
+    action: "Confirm .runs/<run_id>/summary.json exists"
+  - name: Fetch Budgets
+    action: "Load telemetry budgets from agents/SSOT.md or config file"
+  - name: Log Directory Check
+    action: "Ensure runtime/automation/logs/workflow/ is writable"
+  - name: ExecPlan Sync
+    action: "Update PLANS.md with OperationsMAG involvement"

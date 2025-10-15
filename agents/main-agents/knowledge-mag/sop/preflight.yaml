@@ -1,0 +1,8 @@
+version: 1
+checks:
+  - name: Schema examples updated
+    run: test -f agents/contracts/examples/knowledge/request.json && test -f agents/contracts/examples/knowledge/response.json
+  - name: Workflow validation
+    run: make validate-knowledge
+  - name: Observability dashboard current
+    run: src/automation/scripts/ensure_dashboard.py knowledge-mag

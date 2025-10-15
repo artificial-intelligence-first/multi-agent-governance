@@ -1,0 +1,13 @@
+version: 1
+scenarios:
+  - name: Telemetry Overrun
+    detect: "Latency exceeds budget in operations_summary.json"
+    actions:
+      - "Notify #ops-ai with affected stage and variance"
+      - "Coordinate rerun with WorkFlowMAG after root cause is addressed"
+      - "Document decision in PLANS.md Decision Log"
+  - name: Missing Logs
+    detect: "runtime/automation/logs entries missing for run"
+    actions:
+      - "Regenerate logs from Flow Runner output"
+      - "Update retention script references"

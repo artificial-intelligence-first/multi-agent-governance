@@ -1,0 +1,61 @@
+{
+  "id": "docs-sag-example-001",
+  "version": "1.0",
+  "doc_type": "overview",
+  "title": "KnowledgeMag to DocsSAG Workflow Overview",
+  "summary": "Document how KnowledgeMag outputs are transformed into publication-ready drafts by DocsSAG.",
+  "audience": [
+    "Docs platform engineers",
+    "Knowledge custodians"
+  ],
+  "style_tone": "Concise, operational English",
+  "constraints": [
+    "Reference SSOT terminology verbatim",
+    "Surface unresolved knowledge gaps explicitly"
+  ],
+  "references": [
+    "https://docs.multi-agent-system.example.com",
+    "Knowledge packet ID: knowledge-example-001"
+  ],
+  "sections": [
+    {
+      "heading": "Purpose",
+      "knowledge_refs": [
+        "Incident Response Playbook"
+      ],
+      "key_points": [
+        "Document automation-first workflows",
+        "Centralise editorial guardrails"
+      ],
+      "details": "DocsSAG delivers publication-ready drafts derived from knowledge packets."
+    },
+    {
+      "heading": "Workflow",
+      "knowledge_refs": [
+        "Knowledge Refresh Cadence"
+      ],
+      "key_points": [
+        "Validate payload against docs_sag_request schema",
+        "Generate markdown with actionable sections",
+        "Emit diagnostics metrics for observability"
+      ],
+      "status": "stable"
+    },
+    {
+      "heading": "Open Questions",
+      "knowledge_refs": [
+        "Knowledge Refresh Cadence"
+      ],
+      "details": "Need confirmation on integration timelines and release notes coverage.",
+      "status": "draft"
+    }
+  ],
+  "metadata": {
+    "owner": "docs-ops@multi-agent-system.example.com",
+    "deadline_utc": "2025-10-22T23:59:00Z",
+    "related_agents": [
+      "knowledge-mag",
+      "workflow-mag"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+version: 1
+scenarios:
+  - name: Stale ExecPlan
+    detect: "Progress entries older than 24 hours"
+    actions:
+      - "Ping WorkFlowMAG to refresh PLANS.md"
+      - "Document finding for QAMAG"

@@ -1,0 +1,12 @@
+steps:
+  - name: Verify contract version
+    action: >
+      Confirm the incoming brief declares version 1.x of context_sag_request.schema.json.
+  - name: Check provenance coverage
+    action: >
+      Ensure at least 80% of context inputs provide source or last_updated metadata.
+  - name: Run validator
+    action: make validate-context
+  - name: Sync references
+    action: >
+      Review docs/reference/engineering/context/ for the latest context packaging guidance.

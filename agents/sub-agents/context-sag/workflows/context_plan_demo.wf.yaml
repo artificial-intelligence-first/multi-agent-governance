@@ -1,0 +1,9 @@
+version: 1
+name: context-plan-demo
+description: Demo flow for generating a context assembly plan with ContextSAG.
+steps:
+  - id: prepare-context
+    type: agent
+    agent: agents/sub-agents/context-sag:assemble
+    input:
+      request_path: ./fixtures/context-brief.json

@@ -1,0 +1,13 @@
+name: Docs Link Check
+on: [push, pull_request]
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --no-progress --verbose "docs/**/*.md" "main/**/README.md" "sub/**/README.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

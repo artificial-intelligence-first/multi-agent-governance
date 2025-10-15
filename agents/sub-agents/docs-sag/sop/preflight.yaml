@@ -1,0 +1,8 @@
+version: 1
+checks:
+  - name: Schema examples updated
+    run: test -f agents/contracts/examples/docs-sag/request.json && test -f agents/contracts/examples/docs-sag/response.json
+  - name: Workflow validation
+    run: make validate-docs-sag
+  - name: Observability dashboard current
+    run: src/automation/scripts/ensure_dashboard.py docs-sag

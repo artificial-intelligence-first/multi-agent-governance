@@ -1,0 +1,6 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: QualitySAG ExecPlan audit workflow
+steps:
+  - id: quality-check
+    run: python -m flow_runner.tasks.workflow_mag.qa_stage --config ${WORKFLOW_CONFIG}

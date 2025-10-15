@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReferenceSAGRequest",
+  "type": "object",
+  "required": ["draft_path"],
+  "properties": {
+    "draft_path": {
+      "type": "string",
+      "description": "Path to the documentation draft under review"
+    }
+  },
+  "additionalProperties": false
+}

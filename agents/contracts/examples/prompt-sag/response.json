@@ -1,0 +1,36 @@
+{
+  "id": "prompt-001",
+  "version": "1.0",
+  "objective": "Design a prompt for Codex to refactor logging into structured JSON output.",
+  "context": "Services use Python 3.13 and must maintain backward compatibility.",
+  "target_models": ["gpt-5-codex"],
+  "prompt_components": [
+    {
+      "role": "system",
+      "content": "You are an AI coding assistant working in the Multi Agent System repository. Follow AGENTS.md policies. Constraints: Touch only src/logging/*.py; Do not change logging levels; Avoid introducing new dependencies."
+    },
+    {
+      "role": "user",
+      "content": "Refactor the logging module to emit structured JSON. Context: Services use Python 3.13 and must maintain backward compatibility. Verification expectations: - Run pytest src/logging/tests - Document changes in CHANGELOG.md"
+    }
+  ],
+  "guardrails": [
+    "Run tests or linters specified in the prompt before completion.",
+    "Do not modify files outside the listed targets.",
+    "Explain reasoning briefly when deviating from suggested steps."
+  ],
+  "evaluation": [
+    "Run pytest src/logging/tests",
+    "Document changes in CHANGELOG.md"
+  ],
+  "follow_up_questions": [],
+  "diagnostics": {
+    "latency_ms": 123.45,
+    "review_flag": false,
+    "metrics": {
+      "prompt_sag.latency_ms": 123.45,
+      "prompt_sag.prompt_count": 2,
+      "prompt_sag.review_flag": 0
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "status": "warn",
+  "alerts": ["docs latency approaching budget"],
+  "recommendations": ["notify docs team", "review prompt complexity"]
+}

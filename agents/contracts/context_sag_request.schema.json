@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://multi-agent-system.example.com/contracts/context_sag_request.schema.json",
+  "title": "ContextSAGRequest",
+  "description": "Schema describing context-engineering briefs consumed by ContextSAG.",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "objective",
+    "primary_use_case",
+    "context_inputs"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the context engineering task."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.\\d+$",
+      "description": "Contract version. Increment the minor version for backwards compatible changes."
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Plain-language description of the desired context outcome."
+    },
+    "primary_use_case": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Primary workflow or runbook that will consume the assembled context."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional operator notes or extra nuances."
+    },
+    "target_models": {
+      "type": "array",
+      "description": "List of target model identifiers to tune packaging decisions.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "audience": {
+      "type": "array",
+      "description": "Stakeholder audiences who will review or operate with the context bundle.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "constraints": {
+      "type": "array",
+      "description": "Non-negotiable constraints or guardrails (e.g., privacy, ordering rules, token limits).",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evaluation_checks": {
+      "type": "array",
+      "description": "Evaluation rituals, regression prompts, or review cadences that must remain satisfied.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "context_inputs": {
+      "type": "array",
+      "description": "Candidate artefacts to consider when constructing the context bundle.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "summary"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "type": {
+            "type": "string",
+            "description": "Artefact category (document, dataset, knowledge_card, metric, signal, etc.)."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Concise description of the artefact."
+          },
+          "importance": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low", "optional"],
+            "default": "medium"
+          },
+          "source": {
+            "type": "string",
+            "description": "Provenance reference (URL, repository path, dataset handle)."
+          },
+          "last_updated": {
+            "type": "string",
+            "description": "ISO date or timestamp representing when the artefact was last refreshed."
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

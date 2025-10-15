@@ -1,0 +1,10 @@
+version: 1
+steps:
+  - description: Switch `documentation` route primary handler to manual editorial operations.
+    run: src/automation/scripts/update_registry.py --route documentation --primary manual-handlers/manual-docs:triage
+  - description: Restore the last known good DocsSAG prompt from git history.
+    run: git checkout HEAD~1 -- agents/sub-agents/docs-sag/prompts/draft.prompt.yaml
+  - description: Re-run docs workflow smoke tests to confirm regression.
+    run: make validate-docs-sag
+  - description: Notify stakeholders about the rollback and remediation plan.
+    run: src/automation/scripts/notify.py --channel "#ops-ai" --message "DocsSAG rolled back to previous stable version."

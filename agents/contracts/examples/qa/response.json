@@ -1,0 +1,14 @@
+{
+  "status": "warn",
+  "findings": [
+    {
+      "item": "docs completeness",
+      "result": "warn",
+      "notes": "Missing API error section"
+    },
+    {
+      "item": "prompt guardrails",
+      "result": "pass"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkflowMAGResponse",
+  "type": "object",
+  "required": ["run_id", "status", "artifacts"],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "Identifier for the Flow Runner execution."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "in-progress", "completed", "failed"]
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Relative paths to generated artefacts."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or follow-ups."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://multi-agent-system.example.com/contracts/docs_sag_request.schema.json",
+  "title": "DocsSAGRequest",
+  "description": "Schema describing documentation drafting briefs consumed by DocsSAG.",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "doc_type",
+    "title",
+    "summary",
+    "audience",
+    "sections"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the documentation drafting task."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.\\d+$",
+      "description": "Contract version. Increment the minor version for backwards compatible changes."
+    },
+    "doc_type": {
+      "type": "string",
+      "description": "Type of document to generate (e.g., overview, runbook, sop, api_reference, release_notes, policy, other)."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Document title rendered in the Markdown output."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One paragraph summary capturing the intent of the document."
+    },
+    "audience": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Primary audience or stakeholder group for the document."
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of primary audiences."
+        }
+      ]
+    },
+    "style_tone": {
+      "type": "string",
+      "description": "Desired tone or style guidance (e.g., concise, tutorial, executive)."
+    },
+    "constraints": {
+      "type": "array",
+      "description": "List of constraints or non-negotiables (e.g., terminology guardrails, deadlines).",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "references": {
+      "type": "array",
+      "description": "Resource links, tickets, or documents that must be cited.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "sections": {
+      "type": "array",
+      "description": "Ordered sections to render in the output document.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["heading"],
+        "properties": {
+          "heading": {
+            "type": "string",
+            "minLength": 3
+          },
+          "knowledge_refs": {
+            "type": "array",
+            "description": "IDs of knowledge cards that seed this section.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "key_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "details": {
+            "type": "string",
+            "description": "Optional paragraph of detailed content or context."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["draft", "stable", "deprecated", "n/a"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional structured metadata for automation use.",
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "deadline_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "related_agents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

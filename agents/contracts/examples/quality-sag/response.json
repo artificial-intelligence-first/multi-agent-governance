@@ -1,0 +1,4 @@
+{
+  "status": "issues-found",
+  "issues": ["Progress timestamps older than 24h"]
+}

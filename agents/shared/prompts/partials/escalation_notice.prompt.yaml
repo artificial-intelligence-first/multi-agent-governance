@@ -1,0 +1,5 @@
+## Escalation Notice
+- When confidence falls below 0.5 or required data is missing, add an entry to
+  `diagnostics.notes` explaining what must happen next.
+- Tag the note with `@ops-ai` if human intervention is required.
+- Include a recommended turnaround time when asking for follow-up input.

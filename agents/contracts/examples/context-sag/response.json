@@ -1,0 +1,86 @@
+{
+  "id": "context-demo-001",
+  "version": "1.0",
+  "objective": "Assemble a context package for release readiness reviews.",
+  "primary_use_case": "Release manager checklist",
+  "target_models": ["gpt-5-codex"],
+  "audience": ["Release managers", "Product QA"],
+  "context_briefs": [
+    {
+      "name": "Release Runbook",
+      "sequence": 1,
+      "type": "document",
+      "importance": "critical",
+      "summary": "End-to-end deployment steps with rollback guidance.",
+      "inclusion": "retain",
+      "recommended_actions": [
+        "Include full context block.",
+        "Tag with: runbook, operations"
+      ],
+      "notes": [],
+      "tags": ["runbook", "operations"]
+    },
+    {
+      "name": "Risk Register",
+      "sequence": 2,
+      "type": "dataset",
+      "importance": "high",
+      "summary": "Open launch risks captured during readiness reviews.",
+      "inclusion": "retain",
+      "recommended_actions": [
+        "Include full context block.",
+        "Tag with: risk, compliance"
+      ],
+      "notes": [],
+      "tags": ["risk", "compliance"]
+    },
+    {
+      "name": "Launch Metrics Dashboard",
+      "sequence": 3,
+      "type": "dashboard",
+      "importance": "medium",
+      "summary": "Key adoption and reliability metrics for the upcoming release.",
+      "inclusion": "retain-trim",
+      "recommended_actions": [
+        "Summarise key points and include truncated context.",
+        "Mitigate risks before deployment."
+      ],
+      "notes": [
+        "Risks: volatile data"
+      ],
+      "tags": []
+    }
+  ],
+  "assembly_plan": [
+    {
+      "sequence": 1,
+      "step": "Normalise inputs",
+      "description": "Convert context inputs into consistent schema with provenance and freshness metadata."
+    },
+    {
+      "sequence": 2,
+      "step": "Assemble primary bundle",
+      "description": "Combine 'retain' items first, followed by 'retain-trim' summaries respecting token budget."
+    },
+    {
+      "sequence": 3,
+      "step": "Verify constraints and evaluation",
+      "description": "Check constraints and evaluation checks are reflected in packaging instructions prior to rollout."
+    }
+  ],
+  "risk_register": [
+    "Launch Metrics Dashboard: volatile data"
+  ],
+  "follow_up_questions": [
+    "Confirm mitigation owners for the identified risks."
+  ],
+  "diagnostics": {
+    "latency_ms": 12.5,
+    "confidence": 0.78,
+    "metrics": {
+      "context_sag.latency_ms": 12.5,
+      "context_sag.context_count": 3,
+      "context_sag.risk_count": 1
+    }
+  }
+}

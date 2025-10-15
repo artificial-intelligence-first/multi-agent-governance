@@ -1,0 +1,109 @@
+{
+  "id": "knowledge-example-001",
+  "version": "1.0",
+  "knowledge_domain": "operations",
+  "title": "Multi Agent System Operations Knowledge Pack",
+  "summary": "Consolidated knowledge covering incident response, SSOT maintenance, and staffing dependencies for the Multi Agent System program.",
+  "audience": [
+    "Ops on-call",
+    "Program managers"
+  ],
+  "tags": [
+    "operations",
+    "sop",
+    "governance"
+  ],
+  "knowledge_cards": [
+    {
+      "topic": "Incident Response Playbook",
+      "sequence": 1,
+      "overview": "Summarise detection signals for WorkFlowMAG and KnowledgeMag and outline manual fallback steps.",
+      "key_intents": [
+        "Summarise detection signals for WorkFlowMAG and KnowledgeMag",
+        "Outline manual fallback steps"
+      ],
+      "recommended_actions": [
+        "Operationalise intent: Summarise detection signals for WorkFlowMAG and KnowledgeMag",
+        "Operationalise intent: Outline manual fallback steps"
+      ],
+      "dependencies": [
+        "On-call staffing model"
+      ],
+      "source_refs": [
+        "KB-OPS-001"
+      ],
+      "gaps": []
+    },
+    {
+      "topic": "Knowledge Refresh Cadence",
+      "sequence": 2,
+      "overview": "Define quarterly review checkpoints; capture SSOT update workflow.",
+      "key_intents": [
+        "Define quarterly review checkpoints",
+        "Capture SSOT update workflow"
+      ],
+      "recommended_actions": [
+        "Operationalise intent: Define quarterly review checkpoints",
+        "Operationalise intent: Capture SSOT update workflow",
+        "Resolve gap: Need confirmed reviewer list from Ops PM"
+      ],
+      "dependencies": [],
+      "source_refs": [],
+      "gaps": [
+        "Need confirmed reviewer list from Ops PM"
+      ]
+    },
+    {
+      "topic": "On-call staffing model",
+      "sequence": 3,
+      "overview": "List primary and backup rotations; link to pager escalation chart.",
+      "key_intents": [
+        "List primary and backup rotations",
+        "Link to pager escalation chart"
+      ],
+      "recommended_actions": [
+        "Operationalise intent: List primary and backup rotations",
+        "Operationalise intent: Link to pager escalation chart",
+        "Document ownership and next review date."
+      ],
+      "dependencies": [],
+      "source_refs": [
+        "KB-OPS-002"
+      ],
+      "gaps": []
+    }
+  ],
+  "source_index": [
+    {
+      "id": "KB-OPS-001",
+      "title": "WorkFlowMAG Runbook",
+      "uri": "https://kb.multi-agent-system.example.com/workflow-mag/runbook",
+      "type": "runbook",
+      "last_reviewed": "2025-09-30"
+    },
+    {
+      "id": "KB-OPS-002",
+      "title": "Ops Staffing Model",
+      "uri": "https://kb.multi-agent-system.example.com/ops/staffing",
+      "type": "policy",
+      "last_reviewed": null
+    }
+  ],
+  "review_notes": [
+    "Update last_reviewed metadata for sources: KB-OPS-002.",
+    "Topic gaps identified; ensure follow-up owners are assigned."
+  ],
+  "follow_up_questions": [
+    "Provide forecast for next SSOT delta review.",
+    "Confirm pager escalation chart version."
+  ],
+  "diagnostics": {
+    "latency_ms": 28.4,
+    "confidence": 0.66,
+    "metrics": {
+      "knowledge.latency_ms": 28.4,
+      "knowledge.topic_count": 3,
+      "knowledge.source_count": 2
+    }
+  }
+}

@@ -1,0 +1,36 @@
+[project]
+name = "mcprouter"
+version = "0.1.0"
+description = "Async queue and provider orchestration layer for Flow Runner"
+readme = "README.md"
+authors = [{ name = "Flow Runner Contributors" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12"
+dependencies = [
+  "httpx>=0.27.0",
+  "pydantic>=2.6.0",
+  "typing-extensions>=4.8.0"
+]
+
+[project.scripts]
+mcpctl = "mcp_router.cli:main"
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.4",
+  "pytest-asyncio>=0.23",
+  "anyio>=4.3"
+]
+
+[project.urls]
+Homepage = "https://example.com/flowrunner"
+
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

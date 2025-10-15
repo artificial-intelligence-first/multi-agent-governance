@@ -1,0 +1,46 @@
+{
+  "task": {
+    "name": "workflow-mag-demo",
+    "categories": [
+      "workflow",
+      "documentation",
+      "prompt",
+      "context",
+      "qa",
+      "operations"
+    ]
+  },
+  "paths": {
+    "output_dir": ".runs/${RUN_ID}",
+    "logs_dir": "runtime/automation/logs/workflow"
+  },
+  "documentation": {
+    "target": "docs/generated/workflow-mag-demo.md"
+  },
+  "prompt": {
+    "audience": "internal agents",
+    "style": "structured"
+  },
+  "context": {
+    "primary_sources": [
+      "agents/SSOT.md",
+      "docs/reference/files/PLANS.md/execplan.md"
+    ]
+  },
+  "qa": {
+    "checklist": [
+      "documentation completeness",
+      "prompt guardrails present",
+      "context bundles prioritised"
+    ]
+  },
+  "operations": {
+    "telemetry_budget_s": {
+      "workflow": 120,
+      "docs": 60,
+      "prompt": 45,
+      "context": 65,
+      "qa": 40
+    }
+  }
+}

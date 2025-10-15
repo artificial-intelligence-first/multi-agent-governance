@@ -1,0 +1,23 @@
+$schema: ../../../docs/flow.schema.json
+version: 1
+run:
+  output_dir: .runs/${RUN_ID}
+steps:
+  - id: schema_validation
+    uses: shell
+    run: >
+      jsonschema --instance artifacts/prompt_sag_response.json
+      agents/contracts/prompt_sag_response.schema.json
+    timeout_sec: 30
+  - id: terminology_check
+    uses: shell
+    run: >
+      python src/automation/scripts/check_terminology.py
+      artifacts/prompt_sag_response.json --ssot agents/SSOT.md
+    timeout_sec: 30
+  - id: prompt_validation
+    uses: shell
+    run: >
+      python src/automation/scripts/validate_prompt_sag.py
+      artifacts/prompt_sag_response.json
+    timeout_sec: 30

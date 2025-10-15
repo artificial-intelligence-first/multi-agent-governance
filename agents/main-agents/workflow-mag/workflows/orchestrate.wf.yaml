@@ -1,0 +1,20 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: WorkFlowMAG end-to-end orchestration
+env:
+  WORKFLOW_CONFIG: runtime/automation/workflows/configs/workflow-mag/base.json
+steps:
+  - id: plan
+    run: python -m flow_runner.tasks.workflow_mag.orchestrate --config ${WORKFLOW_CONFIG} --stage plan
+  - id: docs
+    run: python -m flow_runner.tasks.workflow_mag.docs_stage --config ${WORKFLOW_CONFIG}
+  - id: prompts
+    run: python -m flow_runner.tasks.workflow_mag.prompt_stage --config ${WORKFLOW_CONFIG}
+  - id: context
+    run: python -m flow_runner.tasks.workflow_mag.context_stage --config ${WORKFLOW_CONFIG}
+  - id: qa
+    run: python -m flow_runner.tasks.workflow_mag.qa_stage --config ${WORKFLOW_CONFIG}
+  - id: operations
+    run: python -m flow_runner.tasks.workflow_mag.operations_stage --config ${WORKFLOW_CONFIG}
+  - id: finalize
+    run: python -m flow_runner.tasks.workflow_mag.finalize_stage --config ${WORKFLOW_CONFIG}

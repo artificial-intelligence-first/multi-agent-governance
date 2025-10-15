@@ -1,0 +1,46 @@
+# Flowrunner Package
+
+`flowrunner` ships the Typer-based `flowctl` CLI and supports the following step types:
+
+- Shell steps (`uses: shell`)
+- MCP steps (`uses: mcp`)
+- Dynamic agents (`uses: "module:Class"`)
+
+## Core commands
+
+```bash
+flowctl run <flow.yaml>
+flowctl logs <run_id>
+flowctl gc --keep 100
+flowctl run --progress <flow.yaml>
+```
+
+Key options:
+
+- `--dry-run` previews the execution order without running.
+- `--only <step>` executes a specific step and automatically includes its dependencies.
+- `--continue-from <step>` treats earlier steps as completed and resumes from the given step.
+- `gc` prunes old run directories (combine with `--dry-run` to preview deletions).
+
+## agent_paths
+
+Add `agent_paths` to a flow definition to push directories onto `sys.path` before step instantiation. `examples/prompt_flow_with_agent.yaml` demonstrates the pattern while `examples/prompt_flow.yaml` remains agent-free.
+
+## Validation
+
+When a flow declares `$schema`, `flowctl` validates the document against the referenced JSON Schema before execution. Validation errors surface with clear messages prior to running any steps.
+
+## Performance tips
+
+- Run logs flush every 50 writes by default; set `FLOWCTL_LOG_FLUSH_EVERY` to customise the cadence or drop to `1` when you need immediate persistence.
+- `MCP_LOG_FLUSH_EVERY` mirrors the same behaviour for the MCP audit log (default: 50).
+- MCP requests run concurrently (default `MCP_MAX_SESSIONS=5`). Increase or decrease the value to match your provider quota and desired parallelism.
+- Pass `--progress` while running longer flows to stream step status updates in-place. On Python 3.14.0 the upstream `dataclasses` module has a known bug that breaks Typer; run `flowctl` with Python 3.12 or 3.13 until a patched interpreter is available.
+
+## Tests
+
+```bash
+python -m pytest packages/flowrunner
+```
+
+Tests run offline; the MCP router falls back to the dummy provider by default.

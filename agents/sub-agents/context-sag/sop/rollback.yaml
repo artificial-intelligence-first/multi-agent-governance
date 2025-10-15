@@ -1,0 +1,15 @@
+triggers:
+  - description: ContextSAG repeatedly returns low confidence (<0.5) or high risk counts (>5).
+    actions:
+      - name: Switch routing
+        action: >
+          Update agents/AGENT_REGISTRY.yaml to route context-engineering briefs to manual-handlers/manual-context:triage.
+      - name: Notify stakeholders
+        action: >
+          Post incident details in #ops-ai and escalate to Context Ops owner.
+      - name: Restore previous guidance
+        action: >
+          Revert to the last known-good context packaging template stored under docs/reference/engineering/context/.
+      - name: File incident review
+        action: >
+          Create an Ops postmortem and record remediation steps, then update this rollback plan.

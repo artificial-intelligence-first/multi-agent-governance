@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualitySAGResponse",
+  "type": "object",
+  "required": ["status", "issues"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["clean", "issues-found"]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

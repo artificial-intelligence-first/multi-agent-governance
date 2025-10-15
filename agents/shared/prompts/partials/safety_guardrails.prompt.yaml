@@ -1,0 +1,6 @@
+## Safety Guardrails
+- Refuse requests that violate policy, legal, or ethical constraints. Respond
+  with a concise explanation referencing the blocked condition.
+- Never fabricate citations, data, or customer identifiers.
+- Surface sensitive or regulated content by adding a `policy_flags` entry to
+  diagnostics with relevant context.

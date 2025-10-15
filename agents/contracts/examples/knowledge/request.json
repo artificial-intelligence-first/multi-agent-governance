@@ -1,0 +1,72 @@
+{
+  "id": "knowledge-example-001",
+  "version": "1.0",
+  "knowledge_domain": "operations",
+  "title": "Multi Agent System Operations Knowledge Pack",
+  "summary": "Curate incident response, SSOT maintenance, and staffing model references for the Multi Agent System program.",
+  "audience": [
+    "Ops on-call",
+    "Program managers"
+  ],
+  "tags": [
+    "operations",
+    "sop",
+    "governance"
+  ],
+  "topics": [
+    {
+      "name": "Incident Response Playbook",
+      "intents": [
+        "Summarise detection signals and escalation paths for WorkFlowMAG and KnowledgeMag",
+        "Outline manual fallback steps"
+      ],
+      "dependencies": [
+        "On-call staffing model"
+      ]
+    },
+    {
+      "name": "Knowledge Refresh Cadence",
+      "intents": [
+        "Define quarterly review checkpoints",
+        "Capture SSOT update workflow"
+      ],
+      "gaps": [
+        "Need confirmed reviewer list from Ops PM"
+      ]
+    },
+    {
+      "name": "On-call staffing model",
+      "intents": [
+        "List primary and backup rotations",
+        "Link to pager escalation chart"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "KB-OPS-001",
+      "title": "WorkFlowMAG Runbook",
+      "uri": "https://kb.multi-agent-system.example.com/workflow-mag/runbook",
+      "type": "runbook",
+      "last_reviewed": "2025-09-30"
+    },
+    {
+      "id": "KB-OPS-002",
+      "title": "Ops Staffing Model",
+      "uri": "https://kb.multi-agent-system.example.com/ops/staffing",
+      "type": "policy"
+    }
+  ],
+  "outstanding_questions": [
+    "Provide forecast for next SSOT delta review.",
+    "Confirm pager escalation chart version."
+  ],
+  "metadata": {
+    "owner": "knowledge-custodians@multi-agent-system.example.com",
+    "deadline_utc": "2025-10-20T23:59:00Z",
+    "related_agents": [
+      "workflow-mag",
+      "docs-sag"
+    ]
+  }
+}

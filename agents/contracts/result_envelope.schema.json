@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/example/agents-directory/contracts/result_envelope.schema.json",
+  "title": "ResultEnvelope",
+  "type": "object",
+  "required": ["status", "payload", "diagnostics"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "partial", "failure", "refused"]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "diagnostics": {
+      "type": "object",
+      "required": ["notes", "metrics"],
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    },
+    "children": {
+      "type": "array",
+      "items": {"$ref": "#/"}
+    }
+  }
+}

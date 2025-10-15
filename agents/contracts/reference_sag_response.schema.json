@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReferenceSAGResponse",
+  "type": "object",
+  "required": ["status", "references"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["ok", "needs-review"]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "state"],
+        "properties": {
+          "id": {"type": "string"},
+          "state": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

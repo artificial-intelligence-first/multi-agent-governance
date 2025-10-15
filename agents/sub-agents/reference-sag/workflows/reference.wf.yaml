@@ -1,0 +1,6 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: ReferenceSAG audit workflow
+steps:
+  - id: reference-audit
+    run: python -m flow_runner.tasks.workflow_mag.docs_stage --config ${WORKFLOW_CONFIG}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OperationsMAGRequest",
+  "type": "object",
+  "required": ["run_id", "telemetry"],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "telemetry": {
+      "type": "object",
+      "description": "Telemetry metrics indexed by stage.",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  },
+  "additionalProperties": false
+}

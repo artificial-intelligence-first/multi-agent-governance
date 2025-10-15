@@ -1,0 +1,7 @@
+version: 1
+scenarios:
+  - name: Missing Reference
+    detect: "Citation lacks matching SSOT entry"
+    actions:
+      - "Record issue in PLANS.md"
+      - "Alert DocsSAG to supply updated source or remove citation"

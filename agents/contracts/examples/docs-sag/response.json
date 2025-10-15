@@ -1,0 +1,69 @@
+{
+  "id": "docs-sag-example-001",
+  "version": "1.0",
+  "doc_type": "overview",
+  "title": "KnowledgeMag to DocsSAG Workflow Overview",
+  "audience": [
+    "Docs platform engineers",
+    "Knowledge custodians"
+  ],
+  "summary": "Overview describing how KnowledgeMag knowledge packets flow into DocsSAG drafting, highlighting responsibilities and remaining actions.",
+  "document_markdown": "# KnowledgeMag to DocsSAG Workflow Overview\n\n**Document Type:** overview\n**Primary Audience:** Docs platform engineers, Knowledge custodians\n\nDocsSAG converts KnowledgeMag packets into publication-ready Markdown while tracking outstanding editorial gaps.\n\n## Purpose\nDocsSAG delivers publication-ready drafts derived from knowledge packets and centralises editorial guardrails.\n\nKey Actions:\n- Document automation-first workflows.\n- Centralise editorial guardrails.\n\n## Workflow\nValidate payloads against docs_sag_request schema, generate Markdown sections, and emit diagnostics for observability.\n\nKey Actions:\n- Validate payload against docs_sag_request schema.\n- Generate markdown with actionable sections.\n- Emit diagnostics metrics for observability.\n\n## Open Questions\nNeed confirmation on integration timelines and release notes coverage.\n\nKey Actions:\n- Confirm integration timelines with KnowledgeMag owners.\n- Clarify release notes coverage expectations.\n\n",
+  "sections": [
+    {
+      "heading": "Purpose",
+      "sequence": 1,
+      "summary": "DocsSAG delivers publication-ready drafts derived from knowledge packets and centralises editorial guardrails.",
+      "actions": [
+        "Document automation-first workflows.",
+        "Centralise editorial guardrails."
+      ],
+      "status": "n/a",
+      "knowledge_refs": [
+        "Incident Response Playbook"
+      ]
+    },
+    {
+      "heading": "Workflow",
+      "sequence": 2,
+      "summary": "Validate payloads, generate Markdown, and emit diagnostics to keep documentation consistent.",
+      "actions": [
+        "Validate payload against docs_sag_request schema.",
+        "Generate markdown with actionable sections.",
+        "Emit diagnostics metrics for observability."
+      ],
+      "status": "stable",
+      "knowledge_refs": [
+        "Knowledge Refresh Cadence"
+      ]
+    },
+    {
+      "heading": "Open Questions",
+      "sequence": 3,
+      "summary": "Outstanding details around integration timelines and release notes coverage remain unresolved.",
+      "actions": [
+        "Confirm integration timelines with KnowledgeMag owners.",
+        "Clarify release notes coverage expectations."
+      ],
+      "status": "draft",
+      "knowledge_refs": [
+        "Knowledge Refresh Cadence"
+      ]
+    }
+  ],
+  "review_notes": [
+    "One or more sections lack detailed content; expand before publication."
+  ],
+  "follow_up_questions": [
+    "Should additional sections be added to cover prerequisites or troubleshooting?"
+  ],
+  "diagnostics": {
+    "latency_ms": 24.8,
+    "confidence": 0.68,
+    "metrics": {
+      "docs_sag.latency_ms": 24.8,
+      "docs_sag.doc_type": "overview",
+      "docs_sag.section_count": 3
+    }
+  }
+}

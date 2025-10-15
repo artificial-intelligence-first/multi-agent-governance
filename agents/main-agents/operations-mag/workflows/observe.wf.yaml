@@ -1,0 +1,6 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: OperationsMAG observability workflow
+steps:
+  - id: summary
+    run: python -m flow_runner.tasks.workflow_mag.operations_stage --config ${WORKFLOW_CONFIG}

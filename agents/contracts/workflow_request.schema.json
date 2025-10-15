@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkflowMAGRequest",
+  "type": "object",
+  "required": ["task_name", "categories"],
+  "properties": {
+    "task_name": {
+      "type": "string",
+      "description": "Human-readable task identifier."
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Pipeline categories activated for this run."
+    },
+    "config_path": {
+      "type": "string",
+      "description": "Path to the workflow configuration JSON."
+    }
+  },
+  "additionalProperties": false
+}

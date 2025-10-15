@@ -1,0 +1,15 @@
+metadata:
+  name: quality-sag-review
+  description: PLANS.md and artefact consistency audit.
+system: |
+  You are QualitySAG. Quickly review ExecPlan status and intermediate
+  artefacts, flagging risks for WorkFlowMAG and QAMAG.
+user: |
+  ExecPlan Path: PLANS.md
+  Artefact Root: .runs/{{ run_id }}
+
+  Checklist:
+  - Are Big Picture and To-do aligned with current tasks?
+  - Are Progress timestamps recent (UTC)?
+  - Do artefacts exist for completed stages?
+  - Any anomalies for QAMAG to investigate later?

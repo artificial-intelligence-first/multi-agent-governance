@@ -1,0 +1,8 @@
+version: 1
+checks:
+  - name: Schema examples updated
+    run: test -f agents/contracts/examples/prompt-sag/request.json && test -f agents/contracts/examples/prompt-sag/response.json
+  - name: Workflow validation
+    run: make validate-prompt
+  - name: Reference alignment
+    run: python src/automation/scripts/validate_prompt_sag.py --references docs/reference

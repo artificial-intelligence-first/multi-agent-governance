@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://multi-agent-system.example.com/contracts/prompt_sag_response.schema.json",
+  "title": "PromptSAGResponse",
+  "description": "Schema describing PromptSAG prompt package outputs.",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "objective",
+    "prompt_components",
+    "guardrails",
+    "evaluation",
+    "diagnostics"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier copied from the request."
+    },
+    "version": {
+      "type": "string",
+      "description": "Payload version." 
+    },
+    "objective": {
+      "type": "string",
+      "description": "Restated objective for traceability."
+    },
+    "context": {
+      "type": "string",
+      "description": "Summarised context used to craft the prompt."
+    },
+    "target_models": {
+      "type": "array",
+      "description": "Models the prompt is optimised for.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt_components": {
+      "type": "array",
+      "description": "Ordered prompt fragments (system/user/etc.).",
+      "items": {
+        "type": "object",
+        "required": ["role", "content"],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "guardrails": {
+      "type": "array",
+      "description": "Guardrails that downstream agents must observe when using this prompt.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluation": {
+      "type": "array",
+      "description": "Validation steps to confirm the prompt's success.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "follow_up_questions": {
+      "type": "array",
+      "description": "Outstanding questions or clarifications needed before execution.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "required": ["latency_ms", "review_flag", "metrics"],
+      "properties": {
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "review_flag": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "prompt_sag.latency_ms": {
+              "type": "number"
+            },
+            "prompt_sag.prompt_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prompt_sag.review_flag": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

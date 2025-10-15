@@ -1,0 +1,4 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: Localization workflow retired; no automated steps remain.
+steps: []

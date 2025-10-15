@@ -1,0 +1,37 @@
+[project]
+name = "flowrunner"
+version = "0.1.0"
+description = "CLI flow orchestrator for Flow Runner"
+readme = "README.md"
+authors = [{ name = "Flow Runner Contributors" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12"
+dependencies = [
+  "mcprouter>=0.1.0",
+  "pyyaml>=6.0",
+  "pydantic>=2.6.0",
+  "python-dotenv>=1.0.0",
+  "typer>=0.12.3",
+  "rich>=13.7.0",
+  "jsonschema>=4.19.0"
+]
+
+[project.scripts]
+flowctl = "flow_runner.cli:app"
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.4",
+  "pytest-asyncio>=0.23",
+  "pytest-mock>=3.12"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

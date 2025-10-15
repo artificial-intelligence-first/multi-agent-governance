@@ -1,0 +1,5 @@
+{
+  "task_name": "workflow-mag-demo",
+  "categories": ["docs", "qa"],
+  "config_path": "runtime/automation/workflows/configs/workflow-mag/base.json"
+}

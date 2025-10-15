@@ -1,0 +1,44 @@
+{
+  "id": "context-demo-001",
+  "version": "1.0",
+  "objective": "Assemble a context package for release readiness reviews.",
+  "primary_use_case": "Release manager checklist",
+  "target_models": ["gpt-5-codex"],
+  "audience": ["Release managers", "Product QA"],
+  "constraints": [
+    "Highlight unresolved risks before success metrics",
+    "Redact customer identifiers"
+  ],
+  "evaluation_checks": [
+    "Run regression prompt suite RLS-100",
+    "Spot check manual QA script"
+  ],
+  "context_inputs": [
+    {
+      "name": "Release Runbook",
+      "type": "document",
+      "summary": "End-to-end deployment steps with rollback guidance.",
+      "importance": "critical",
+      "source": "docs/reference/engineering/runbooks/release.md",
+      "last_updated": "2025-09-15",
+      "tags": ["runbook", "operations"]
+    },
+    {
+      "name": "Risk Register",
+      "type": "dataset",
+      "summary": "Open launch risks captured during readiness reviews.",
+      "importance": "high",
+      "source": "s3://ops/risk-register.csv",
+      "last_updated": "2025-10-10",
+      "tags": ["risk", "compliance"]
+    },
+    {
+      "name": "Launch Metrics Dashboard",
+      "type": "dashboard",
+      "summary": "Key adoption and reliability metrics for the upcoming release.",
+      "importance": "medium",
+      "source": "https://metrics.example.com/d/launch",
+      "risks": ["volatile data"]
+    }
+  ]
+}

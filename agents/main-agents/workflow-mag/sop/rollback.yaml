@@ -1,0 +1,13 @@
+version: 1
+scenarios:
+  - name: Stage Failure
+    detect: "Flow Runner exits non-zero or summary.json missing stage output."
+    actions:
+      - "Stop the run and note failure in PLANS.md Surprises and Decision Log."
+      - "Inspect corresponding .runs/<run_id>/<stage> artefacts for diagnostics."
+      - "Rerun failed stage after addressing root cause; if unresolved escalate to OperationsMAG."
+  - name: Compliance Drift
+    detect: "automation.compliance.pre reports WARN/FAIL for required assets."
+    actions:
+      - "Regenerate missing templates/log directories."
+      - "Re-run compliance check before restarting workflow."

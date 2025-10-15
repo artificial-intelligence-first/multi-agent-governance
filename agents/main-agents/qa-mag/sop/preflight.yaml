@@ -1,0 +1,8 @@
+version: 1
+steps:
+  - name: Artefact Presence
+    action: "Ensure docs/prompt/context artefacts exist in .runs/<run_id>"
+  - name: Validation Targets
+    action: "Identify required make validate-* commands"
+  - name: PLANS.md Sync
+    action: "Record QA tasks in PLANS.md To-do"

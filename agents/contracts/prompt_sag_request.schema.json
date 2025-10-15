@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://multi-agent-system.example.com/contracts/prompt_sag_request.schema.json",
+  "title": "PromptSAGRequest",
+  "description": "Schema describing prompt engineering requests for PromptSAG.",
+  "type": "object",
+  "required": ["id", "version", "objective"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier for the prompt engineering task."
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version for the request payload."
+    },
+    "objective": {
+      "type": "string",
+      "description": "High-level goal describing what the prompt should accomplish."
+    },
+    "context": {
+      "type": "string",
+      "description": "Additional context (logs, diffs, background information)."
+    },
+    "constraints": {
+      "type": "array",
+      "description": "List of constraints, guardrails, or restrictions that must be respected.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "references": {
+      "type": "array",
+      "description": "Reference documents, URLs, or AGENTS.md entries relevant to the prompt.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "target_models": {
+      "type": "array",
+      "description": "Names of target models or providers the prompt will be used with.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluation": {
+      "type": "array",
+      "description": "Expected verification steps (tests, lint commands, manual review).",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

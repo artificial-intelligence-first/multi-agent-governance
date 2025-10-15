@@ -1,0 +1,6 @@
+version: 1
+steps:
+  - name: Draft Check
+    action: "Ensure docs draft exists for review"
+  - name: Reference Index
+    action: "Confirm docs/reference/files/ contains required summaries"

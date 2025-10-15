@@ -1,0 +1,22 @@
+{
+  "id": "prompt-001",
+  "version": "1.0",
+  "objective": "Design a prompt for Codex to refactor logging into structured JSON output.",
+  "context": "Services use Python 3.13 and must maintain backward compatibility.",
+  "constraints": [
+    "Touch only src/logging/*.py",
+    "Do not change logging levels",
+    "Avoid introducing new dependencies"
+  ],
+  "references": [
+    "AGENTS.md",
+    "docs/reference/engineering/prompt/OpenAI.md"
+  ],
+  "target_models": [
+    "gpt-5-codex"
+  ],
+  "evaluation": [
+    "Run pytest src/logging/tests",
+    "Document changes in CHANGELOG.md"
+  ]
+}

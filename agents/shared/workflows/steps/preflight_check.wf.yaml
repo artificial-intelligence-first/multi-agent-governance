@@ -1,0 +1,19 @@
+# preflight_check.wf.yaml
+version: 1
+name: shared-preflight-check
+description: Ensures SOP preflight requirements pass before workflow execution.
+steps:
+  - id: load_preflight
+    run: load
+    with:
+      file: {{ inputs.preflight_path }}
+  - id: evaluate_requirements
+    run: evaluate
+    with:
+      rules:
+        - condition: requirements.all == true
+          on_fail: abort
+  - id: record_result
+    run: emit
+    with:
+      format: diagnostics

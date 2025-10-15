@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://multi-agent-system.example.com/contracts/knowledge_request.schema.json",
+  "title": "KnowledgeRequest",
+  "description": "Schema describing briefs consumed by KnowledgeMag to curate governed knowledge collections.",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "knowledge_domain",
+    "title",
+    "summary",
+    "audience",
+    "topics"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the knowledge curation task."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.\\d+$",
+      "description": "Contract version. Increment the minor version for backwards compatible changes."
+    },
+    "knowledge_domain": {
+      "type": "string",
+      "description": "Domain or collection type being curated (e.g., operations, compliance, onboarding)."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Title of the knowledge collection."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "High-level description of the knowledge collection's objective."
+    },
+    "audience": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Primary consumer groups for the curated knowledge (e.g., Ops on-call, Program managers)."
+        },
+        {
+          "type": "string",
+          "description": "Comma-separated list of audience groups."
+        }
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Optional labels to classify the knowledge collection.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "topics": {
+      "type": "array",
+      "description": "Ordered topics that KnowledgeMag must curate.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "intents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sources": {
+      "type": "array",
+      "description": "References that underpin the knowledge collection.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "uri"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "type": "string",
+            "description": "Document type (e.g., runbook, policy, sop)."
+          },
+          "last_reviewed": {
+            "type": "string",
+            "description": "ISO date or free-form marker for last review."
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "outstanding_questions": {
+      "type": "array",
+      "description": "Questions the requestors expect KnowledgeMag to surface in follow-ups.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional structured metadata for automation use.",
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "deadline_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "related_agents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
