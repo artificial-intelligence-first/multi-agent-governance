@@ -1,7 +1,7 @@
 # Task Template
 
 > Use this structure when drafting workflow or prompt update tasks for the
-> Multi Agent System fleet. Keep sections concise and machine-readable so automation
+> Multi Agent Governance fleet. Keep sections concise and machine-readable so automation
 > can validate completion.
 
 ## Goal

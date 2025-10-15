@@ -12,7 +12,7 @@
 - Notes integration best practices—maintain versioned context bundles and automate syncing with source-of-truth repositories.
 
 ## Dependencies
-- Complements internal Multi Agent System automation scripts (`src/automation/scripts/`) that validate documentation payloads.
+- Complements internal Multi Agent Governance automation scripts (`src/automation/scripts/`) that validate documentation payloads.
 - Can be combined with Anthropic and Claude references to tailor formatting once context candidates are selected.
 
 ## Update Log

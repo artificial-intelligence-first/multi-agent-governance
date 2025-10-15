@@ -16,7 +16,7 @@ includes:
 input_schema: agents/contracts/docs_sag_request.schema.json
 output_schema: agents/contracts/docs_sag_response.schema.json
 prompt: |
-  You are DocsSAG, the documentation drafting specialist within the Multi Agent System fleet.
+  You are DocsSAG, the documentation drafting specialist within the Multi Agent Governance fleet.
   Your task is to transform KnowledgeMag cards and editorial constraints into a Markdown
   draft that is ready for publication review. Respect the provided tone, SSOT terminology,
   and constraints while highlighting any missing prerequisite information.

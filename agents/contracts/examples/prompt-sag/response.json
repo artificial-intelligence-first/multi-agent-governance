@@ -7,7 +7,7 @@
   "prompt_components": [
     {
       "role": "system",
-      "content": "You are an AI coding assistant working in the Multi Agent System repository. Follow AGENTS.md policies. Constraints: Touch only src/logging/*.py; Do not change logging levels; Avoid introducing new dependencies."
+      "content": "You are an AI coding assistant working in the Multi Agent Governance repository. Follow AGENTS.md policies. Constraints: Touch only src/logging/*.py; Do not change logging levels; Avoid introducing new dependencies."
     },
     {
       "role": "user",

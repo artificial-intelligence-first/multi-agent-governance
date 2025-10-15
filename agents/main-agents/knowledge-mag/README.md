@@ -1,6 +1,6 @@
 # KnowledgeMag
 
-KnowledgeMag is the knowledge-management main agent for the Multi Agent System fleet. It curates structured briefs, policies, runbooks, and reference links into coherent “knowledge cards” that downstream specialists can rely on. The agent keeps ownership, dependencies, and outstanding gaps visible so the fleet’s shared knowledge stays trustworthy.
+KnowledgeMag is the knowledge-management main agent for the Multi Agent Governance fleet. It curates structured briefs, policies, runbooks, and reference links into coherent “knowledge cards” that downstream specialists can rely on. The agent keeps ownership, dependencies, and outstanding gaps visible so the fleet’s shared knowledge stays trustworthy.
 
 ## Responsibilities
 - Normalise knowledge briefs into structured cards that capture intents, dependencies, and actionable follow-ups.

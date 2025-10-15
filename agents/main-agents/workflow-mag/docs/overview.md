@@ -1,6 +1,6 @@
 # WorkFlowMAG Overview
 
-WorkFlowMAG orchestrates the Multi Agent System pipeline. It ensures that:
+WorkFlowMAG orchestrates the Multi Agent Governance pipeline. It ensures that:
 
 1. Pre-task compliance (`automation.compliance.pre`) succeeds before any run.
 2. Flow Runner executes the configured stages defined in `workflow_mag.flow.yaml`.

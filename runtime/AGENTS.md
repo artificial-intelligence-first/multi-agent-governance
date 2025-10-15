@@ -1,7 +1,7 @@
 # AGENTS — /runtime
 
 ## Role
-- Host Flow Runner configuration, execution assets, and generated artifacts for the Multi Agent System repository.
+- Host Flow Runner configuration, execution assets, and generated artifacts for the Multi Agent Governance repository.
 - Provide a stable workspace for `.runs/` outputs and automation logs referenced throughout the governance playbook.
 
 ## Responsibilities

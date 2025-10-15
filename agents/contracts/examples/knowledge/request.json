@@ -2,8 +2,8 @@
   "id": "knowledge-example-001",
   "version": "1.0",
   "knowledge_domain": "operations",
-  "title": "Multi Agent System Operations Knowledge Pack",
-  "summary": "Curate incident response, SSOT maintenance, and staffing model references for the Multi Agent System program.",
+  "title": "Multi Agent Governance Operations Knowledge Pack",
+  "summary": "Curate incident response, SSOT maintenance, and staffing model references for the Multi Agent Governance program.",
   "audience": [
     "Ops on-call",
     "Program managers"
@@ -46,14 +46,14 @@
     {
       "id": "KB-OPS-001",
       "title": "WorkFlowMAG Runbook",
-      "uri": "https://kb.multi-agent-system.example.com/workflow-mag/runbook",
+      "uri": "https://kb.multi-agent-governance.example.com/workflow-mag/runbook",
       "type": "runbook",
       "last_reviewed": "2025-09-30"
     },
     {
       "id": "KB-OPS-002",
       "title": "Ops Staffing Model",
-      "uri": "https://kb.multi-agent-system.example.com/ops/staffing",
+      "uri": "https://kb.multi-agent-governance.example.com/ops/staffing",
       "type": "policy"
     }
   ],
@@ -62,7 +62,7 @@
     "Confirm pager escalation chart version."
   ],
   "metadata": {
-    "owner": "knowledge-custodians@multi-agent-system.example.com",
+    "owner": "knowledge-custodians@multi-agent-governance.example.com",
     "deadline_utc": "2025-10-20T23:59:00Z",
     "related_agents": [
       "workflow-mag",

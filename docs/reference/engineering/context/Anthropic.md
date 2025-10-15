@@ -15,7 +15,7 @@
 
 ## Dependencies
 - Complements DAIR.AI context-engineering workflow for stepwise experimentation and tooling.
-- Works with Multi Agent System retrieval helpers that pre-format knowledge cards before insertion into Claude-style bundles.
+- Works with Multi Agent Governance retrieval helpers that pre-format knowledge cards before insertion into Claude-style bundles.
 
 ## Update Log
 - 2025-10-13: Initial capture from Anthropic engineering blog and Claude Docs long-context example guidance.

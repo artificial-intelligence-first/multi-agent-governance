@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://multi-agent-system.example.com/contracts/docs_sag_request.schema.json",
+  "$id": "https://multi-agent-governance.example.com/contracts/docs_sag_request.schema.json",
   "title": "DocsSAGRequest",
   "description": "Schema describing documentation drafting briefs consumed by DocsSAG.",
   "type": "object",

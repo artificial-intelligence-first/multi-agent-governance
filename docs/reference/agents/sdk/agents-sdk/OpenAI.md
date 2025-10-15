@@ -12,7 +12,7 @@
 - Includes configuration samples for environment variables, rate-limit handling, and retry strategies aligned with OpenAI policy.
 
 ## Dependencies
-- Requires OpenAI API access with Agents feature enabled; can be combined with the Multi Agent System’s ContextSAG to supply structured context bundles.
+- Requires OpenAI API access with Agents feature enabled; can be combined with the Multi Agent Governance’s ContextSAG to supply structured context bundles.
 - Works alongside PromptSAG outputs to enforce guardrails and evaluation criteria before agent execution.
 
 ## Update Log

@@ -1,7 +1,7 @@
 # WorkFlowMAG Playbook
 
 ## Role
-- Orchestrates Flow Runner pipelines for Multi Agent System.
+- Orchestrates Flow Runner pipelines for Multi Agent Governance.
 - Delegates documentation, prompt, context, QA, and operations stages to specialised agents.
 - Maintains the ExecPlan (`PLANS.md`) linkage and records stage outcomes in `.runs/<run_id>`.
 

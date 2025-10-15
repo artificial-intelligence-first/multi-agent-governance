@@ -1,6 +1,6 @@
 # OperationsMAG
 
-OperationsMAG safeguards observability for the Multi Agent System automation fleet.
+OperationsMAG safeguards observability for the Multi Agent Governance automation fleet.
 It ingests telemetry summaries, tracks SLA budgets, and highlights risks or
 escalations for human operators.
 

@@ -2,8 +2,8 @@
   "id": "knowledge-example-001",
   "version": "1.0",
   "knowledge_domain": "operations",
-  "title": "Multi Agent System Operations Knowledge Pack",
-  "summary": "Consolidated knowledge covering incident response, SSOT maintenance, and staffing dependencies for the Multi Agent System program.",
+  "title": "Multi Agent Governance Operations Knowledge Pack",
+  "summary": "Consolidated knowledge covering incident response, SSOT maintenance, and staffing dependencies for the Multi Agent Governance program.",
   "audience": [
     "Ops on-call",
     "Program managers"
@@ -77,14 +77,14 @@
     {
       "id": "KB-OPS-001",
       "title": "WorkFlowMAG Runbook",
-      "uri": "https://kb.multi-agent-system.example.com/workflow-mag/runbook",
+      "uri": "https://kb.multi-agent-governance.example.com/workflow-mag/runbook",
       "type": "runbook",
       "last_reviewed": "2025-09-30"
     },
     {
       "id": "KB-OPS-002",
       "title": "Ops Staffing Model",
-      "uri": "https://kb.multi-agent-system.example.com/ops/staffing",
+      "uri": "https://kb.multi-agent-governance.example.com/ops/staffing",
       "type": "policy",
       "last_reviewed": null
     }

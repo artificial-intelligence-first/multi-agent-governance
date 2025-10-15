@@ -1,6 +1,6 @@
-# Multi Agent System AGENTS Playbook
+# Multi Agent Governance AGENTS Playbook
 
-This repository hosts the Multi Agent System agent fleet plus shared automation. Keep this file current with the latest operational reality—sync it whenever you add or change tooling, workflows, or documentation.
+This repository hosts the Multi Agent Governance agent fleet plus shared automation. Keep this file current with the latest operational reality—sync it whenever you add or change tooling, workflows, or documentation.
 
 ## Dev environment tips
 - Clone the repo and create an isolated environment: `python3 -m venv .venv && source .venv/bin/activate`.

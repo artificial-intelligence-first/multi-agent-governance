@@ -1,7 +1,7 @@
 # GPT-5 Codex Prompting Reference
 
 ## Summary
-- Consolidates the OpenAI Codex Prompting Guide and the GPT-5 Codex Cookbook notes so the Multi Agent System follows the official best practices for AI-assisted code work.
+- Consolidates the OpenAI Codex Prompting Guide and the GPT-5 Codex Cookbook notes so the Multi Agent Governance follows the official best practices for AI-assisted code work.
 - Emphasises concise, high-signal instructions that surface the right code context, verification commands, and safety guardrails for GPT-5 Codex.
 
 ## Key Details

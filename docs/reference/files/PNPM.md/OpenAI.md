@@ -20,7 +20,7 @@ pnpm is a fast, disk space–efficient package manager for Node.js projects. It 
 - Verify scripts via CI or Flow Runner workflows when pnpm-based automation is involved.
 
 ## Update Log
-- 2025-10-13 — Imported guidance from OpenAI Codex PNPM documentation and aligned with Multi Agent System usage notes.
+- 2025-10-13 — Imported guidance from OpenAI Codex PNPM documentation and aligned with Multi Agent Governance usage notes.
 
 ## Source
 - https://github.com/openai/codex/blob/main/PNPM.md

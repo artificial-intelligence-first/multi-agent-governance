@@ -1,6 +1,6 @@
 # Automation Assets
 
-This directory aggregates operational assets that support the Multi Agent System fleet.
+This directory aggregates operational assets that support the Multi Agent Governance fleet.
 
 - `flows/` — YAML definitions executed by Flow Runner (e.g., demos, smoke tests, CI regressions).
 - `scripts/` — Python/Bash utilities for validation, setup, notifications, and registry maintenance.

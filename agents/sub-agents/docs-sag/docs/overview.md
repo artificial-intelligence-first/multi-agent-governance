@@ -1,6 +1,6 @@
 # DocsSAG Overview
 
-DocsSAG is the documentation drafting sub-agent for the Multi Agent System. It consumes curated knowledge packets, outlines, and constraints to produce publication-ready Markdown drafts tailored to the specified audience. KnowledgeMag ensures the content is accurate and governed; DocsSAG turns that knowledge into narrative artifacts ready for editors.
+DocsSAG is the documentation drafting sub-agent for the Multi Agent Governance. It consumes curated knowledge packets, outlines, and constraints to produce publication-ready Markdown drafts tailored to the specified audience. KnowledgeMag ensures the content is accurate and governed; DocsSAG turns that knowledge into narrative artifacts ready for editors.
 
 ## Capabilities
 - Expands KnowledgeMag cards into cohesive Markdown sections with clear headings, summaries, and actionable bullet points.

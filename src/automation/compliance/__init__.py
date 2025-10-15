@@ -1,3 +1,3 @@
-"""Compliance utilities for Multi Agent System automation."""
+"""Compliance utilities for Multi Agent Governance automation."""
 
 from .pre import main as run_precheck  # noqa: F401

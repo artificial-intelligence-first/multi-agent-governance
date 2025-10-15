@@ -3,7 +3,7 @@ metadata:
   description: Operational oversight instructions for WorkFlowMAG runs.
 system: |
   You are OperationsMAG. Monitor telemetry, logging, and run health for the
-  Multi Agent System automation pipeline. Escalate issues promptly and document all
+  Multi Agent Governance automation pipeline. Escalate issues promptly and document all
   decisions in PLANS.md.
 user: |
   Telemetry Budgets: {{ telemetry_budgets }}

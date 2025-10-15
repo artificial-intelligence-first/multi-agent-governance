@@ -1,11 +1,11 @@
-# Multi Agent System Governance Stack
+# Multi Agent Governance Stack
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![CI: Validate SOP](https://img.shields.io/badge/CI-Validate%20SOP-blueviolet.svg)
 ![CI: Contracts Check](https://img.shields.io/badge/CI-Contracts%20Check-teal.svg)
 ![CI: Docs Link Check](https://img.shields.io/badge/CI-Docs%20Link%20Check-slateblue.svg)
 
-Multi Agent System is an open-reference governance stack for orchestrating AI agent fleets. It provides opinionated documentation, schemas, workflows, and automation that keep human-readable guidance and machine-enforced guardrails aligned. The repository does **not** ship a runnable service; instead, it offers a blueprint for teams building their own agent operations platform.
+Multi Agent Governance is an open-reference governance stack for orchestrating AI agent fleets. It provides opinionated documentation, schemas, workflows, and automation that keep human-readable guidance and machine-enforced guardrails aligned. The repository does **not** ship a runnable service; instead, it offers a blueprint for teams building their own agent operations platform.
 
 ## What’s Inside
 - **Fleet governance** – Guardrails and playbooks live beside the agents that use them. See [`agents/AGENTS.md`](agents/AGENTS.md) for the fleet map.
@@ -15,8 +15,8 @@ Multi Agent System is an open-reference governance stack for orchestrating AI ag
 
 ## Getting Started
 ```bash
-git clone https://github.com/<your-org>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/<your-org>/multi-agent-governance.git
+cd multi-agent-governance
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 make validate   # run the governance validators

@@ -13,7 +13,7 @@
 - **Minimal example**: A concise template outlining dev environment tips, testing steps, and PR expectations is available in `sample.md` within this directory for quick adoption in new repositories.
 
 ## Dependencies
-- Ensure the Multi Agent System’s own `AGENTS.md` stays aligned with this upstream guidance so local automation inherits the standard structure.
+- Ensure the Multi Agent Governance’s own `AGENTS.md` stays aligned with this upstream guidance so local automation inherits the standard structure.
 - Cross-reference `agents/SSOT.md` when introducing glossary or contract updates to keep terminology consistent for both human and agent consumers.
 - Use DocsSAG outputs (`docs/generated/`) to document implementation-specific instructions, linking back to AGENTS.md sections when relevant.
 

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://multi-agent-system.example.com/contracts/docs_sag_response.schema.json",
+  "$id": "https://multi-agent-governance.example.com/contracts/docs_sag_response.schema.json",
   "title": "DocsSAGResponse",
   "description": "Schema describing DocsSAG generated documentation payloads.",
   "type": "object",

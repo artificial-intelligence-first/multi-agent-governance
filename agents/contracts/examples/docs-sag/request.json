@@ -14,7 +14,7 @@
     "Surface unresolved knowledge gaps explicitly"
   ],
   "references": [
-    "https://docs.multi-agent-system.example.com",
+    "https://docs.multi-agent-governance.example.com",
     "Knowledge packet ID: knowledge-example-001"
   ],
   "sections": [
@@ -51,7 +51,7 @@
     }
   ],
   "metadata": {
-    "owner": "docs-ops@multi-agent-system.example.com",
+    "owner": "docs-ops@multi-agent-governance.example.com",
     "deadline_utc": "2025-10-22T23:59:00Z",
     "related_agents": [
       "knowledge-mag",

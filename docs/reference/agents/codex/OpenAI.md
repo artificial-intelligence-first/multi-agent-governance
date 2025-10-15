@@ -1,7 +1,7 @@
 # OpenAI Codex Platform Overview
 
 ## Summary
-- Collects official Codex resources—GitHub repository, CLI, IDE integrations, cloud platform, and SDK—into one reference so Multi Agent System teams can adopt Codex consistently.
+- Collects official Codex resources—GitHub repository, CLI, IDE integrations, cloud platform, and SDK—into one reference so Multi Agent Governance teams can adopt Codex consistently.
 - Focuses on setup, authentication, context handling, and operational guardrails that must stay in sync with this repository’s AGENTS policies.
 
 ## Key Details
@@ -12,7 +12,7 @@
 - **Codex CLI**
   - Official docs cover installation prerequisites, authentication (API keys, profiles), and commands such as running edits, streaming completions, or uploading context files.
   - Supports passing repository metadata (including AGENTS.md excerpts) so Codex follows project-specific rules during scripted sessions.
-  - Designed for scripted automation; align usage with Multi Agent System shell guardrails (`apply_patch`, non-destructive commands, mandatory test execution).
+  - Designed for scripted automation; align usage with Multi Agent Governance shell guardrails (`apply_patch`, non-destructive commands, mandatory test execution).
 - **IDE extensions**
   - Provide inline code assistance (completion, refactoring, explanation) within IDEs like VS Code or JetBrains.
   - Configuration pages describe permission scopes, telemetry options, and organization-level controls; verify these before enabling in shared repos.
@@ -20,7 +20,7 @@
 - **Codex Cloud**
   - Managed environment for hosting Codex workloads with dashboards for quotas, latency, and cost controls.
   - Documentation outlines environment provisioning, secret management, audit logging, and safety features (e.g., allowlists, moderation).
-  - Coordinate with Multi Agent System ops to ensure cloud projects mirror the same observability and rollback expectations defined in AGENTS/SSOT.
+  - Coordinate with Multi Agent Governance ops to ensure cloud projects mirror the same observability and rollback expectations defined in AGENTS/SSOT.
 - **Codex SDK**
   - Language-specific client libraries (e.g., JavaScript, Python) for embedding Codex into automation flows.
   - Pay attention to versioning, authentication patterns, streaming APIs, and rate-limit handling before wiring into `src/automation/` scripts.

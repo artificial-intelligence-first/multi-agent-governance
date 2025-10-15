@@ -1,6 +1,6 @@
 # ContextSAG Overview
 
-ContextSAG is the Multi Agent System sub-agent responsible for context engineering. It transforms raw context briefs into prioritised context bundles and packaging guidelines so downstream agents can operate within token limits and policy guardrails.
+ContextSAG is the Multi Agent Governance sub-agent responsible for context engineering. It transforms raw context briefs into prioritised context bundles and packaging guidelines so downstream agents can operate within token limits and policy guardrails.
 
 ## Key capabilities
 - **Prioritisation:** Scores each context input according to declared importance, freshness, and constraint alignment.

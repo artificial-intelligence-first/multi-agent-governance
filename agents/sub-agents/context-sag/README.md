@@ -1,6 +1,6 @@
 # ContextSAG
 
-ContextSAG curates, prioritises, and packages context bundles for Multi Agent System agents. It receives context-engineering briefs, scores incoming artefacts, and returns an assembly plan with packaging guidelines, risk flags, and follow-up questions. The runtime lives under `agents/sub-agents/context-sag/src/context_sag/`.
+ContextSAG curates, prioritises, and packages context bundles for Multi Agent Governance agents. It receives context-engineering briefs, scores incoming artefacts, and returns an assembly plan with packaging guidelines, risk flags, and follow-up questions. The runtime lives under `agents/sub-agents/context-sag/src/context_sag/`.
 
 ## Responsibilities
 - Normalise context-engineering briefs into a consistent structure with prioritised context blocks.

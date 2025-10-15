@@ -1,6 +1,6 @@
 # KnowledgeMag Overview
 
-KnowledgeMag serves as the knowledge custodian for the Multi Agent System. It consolidates briefs, policies, SOP updates, and reference links into a curated knowledge collection that downstream agents can trust. WorkFlowMAG supplies planning context, while KnowledgeMag ensures the information remains governed, discoverable, and actionable.
+KnowledgeMag serves as the knowledge custodian for the Multi Agent Governance. It consolidates briefs, policies, SOP updates, and reference links into a curated knowledge collection that downstream agents can trust. WorkFlowMAG supplies planning context, while KnowledgeMag ensures the information remains governed, discoverable, and actionable.
 
 ## Capabilities
 - Groups related topics into “knowledge cards” with intents, dependencies, and next actions.

@@ -48,7 +48,7 @@ routes:
   workflow:
     primary: agents/main-agents/workflow-mag:run
     backup: manual-handlers/manual-ops:triage
-    description: Orchestrate the end-to-end Multi Agent System pipeline via Flow Runner and keep PLANS.md in sync.
+    description: Orchestrate the end-to-end Multi Agent Governance pipeline via Flow Runner and keep PLANS.md in sync.
     preconditions:
       - sop: agents/main-agents/workflow-mag/sop/README.md
       - workflow: runtime/automation/flow_runner/flows/workflow_mag.flow.yaml

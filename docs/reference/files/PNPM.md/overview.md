@@ -1,7 +1,7 @@
 # PNPM Usage Guidance
 
 ## Purpose
-- Document how pnpm is used within the Multi Agent System repository.
+- Document how pnpm is used within the Multi Agent Governance repository.
 - Provide a quick refresher for agents when Node.js tooling appears in tasks.
 
 ## Core Workflow

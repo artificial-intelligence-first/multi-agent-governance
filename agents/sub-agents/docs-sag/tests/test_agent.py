@@ -45,7 +45,7 @@ def _build_sample_request() -> dict:
             },
         ],
         "constraints": ["Adhere to SSOT terminology", "Avoid speculative commitments"],
-        "references": ["https://docs.multi-agent-system.example.com"],
+        "references": ["https://docs.multi-agent-governance.example.com"],
     }
 
 

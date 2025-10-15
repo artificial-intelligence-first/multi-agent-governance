@@ -1,7 +1,7 @@
 # Claude Prompt Engineering Overview
 
 ## Summary
-- Consolidates Anthropic’s official prompt engineering guidance and interactive tutorial so the Multi Agent System can align Claude-related automation and documentation.
+- Consolidates Anthropic’s official prompt engineering guidance and interactive tutorial so the Multi Agent Governance can align Claude-related automation and documentation.
 - Highlights when to rely on prompt iteration versus finetuning, and how to structure prompts for reproducible outputs.
 
 ## Key Details
@@ -13,7 +13,7 @@
 - **Collaboration**: Capture successful prompt variants and share them across teams to speed up adoption and avoid repeating experimentation.
 
 ## Dependencies
-- Keep the Multi Agent System’s root and agent-level AGENTS.md guardrails in mind—Codex/Claude prompts should both enforce testing, safe edits, and documentation.
+- Keep the Multi Agent Governance’s root and agent-level AGENTS.md guardrails in mind—Codex/Claude prompts should both enforce testing, safe edits, and documentation.
 - Synchronize DocsSAG or KnowledgeMag guidance when Claude prompts become canonical procedures.
 - If finetuning or API requests are integrated into automation, ensure credentials and rate limits are tracked in ops playbooks.
 

@@ -1,7 +1,7 @@
 [project]
-name = "multi-agent-system"
+name = "multi-agent-governance"
 version = "0.1.0"
-description = "Multi Agent System multi-agent system"
+description = "Multi Agent Governance governance stack"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

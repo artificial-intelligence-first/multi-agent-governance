@@ -14,7 +14,7 @@ from typing import Any, Dict
 
 @dataclass
 class WorkFlowMAG:
-    """Minimal interface for orchestrating the Multi Agent System pipeline."""
+    """Minimal interface for orchestrating the Multi Agent Governance pipeline."""
 
     def run(self, payload: Dict[str, Any] | None = None) -> Dict[str, Any]:
         payload = payload or {}

@@ -158,7 +158,7 @@ class PromptSAG:
     def _generate_components(self, req: PromptRequest) -> List[PromptComponent]:
         components: List[PromptComponent] = []
         system_lines: List[str] = [
-            "You are an AI coding assistant operating within the Multi Agent System repository.",
+            "You are an AI coding assistant operating within the Multi Agent Governance repository.",
             "Follow AGENTS.md policies: run tests, avoid destructive commands, respect file boundaries.",
         ]
         if req.constraints:

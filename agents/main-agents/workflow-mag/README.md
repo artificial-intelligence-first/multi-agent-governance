@@ -1,6 +1,6 @@
 # WorkFlowMAG
 
-WorkFlowMAG governs the end-to-end Multi Agent System automation pipeline. It sequences
+WorkFlowMAG governs the end-to-end Multi Agent Governance automation pipeline. It sequences
 DocsSAG, PromptSAG, ContextSAG, QualitySAG, OperationsMAG, and QAMAG so each stage receives the artefacts it needs.
 
 ## Responsibilities

@@ -12,7 +12,7 @@
 
 ## Dependencies
 - Designed to complement OpenAI Agents SDK; compatible with Codex and GPT-based generations.
-- Can take advantage of the Multi Agent System’s PromptSAG and ContextSAG outputs to supply structured prompts and context bundles.
+- Can take advantage of the Multi Agent Governance’s PromptSAG and ContextSAG outputs to supply structured prompts and context bundles.
 
 ## Update Log
 - 2025-10-13: Initial capture from OpenAI AgentKit launch post.

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://multi-agent-system.example.com/contracts/context_sag_response.schema.json",
+  "$id": "https://multi-agent-governance.example.com/contracts/context_sag_response.schema.json",
   "title": "ContextSAGResponse",
   "description": "Schema describing ContextSAG responses containing prioritised context plans.",
   "type": "object",

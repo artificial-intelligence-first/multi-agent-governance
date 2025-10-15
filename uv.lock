@@ -182,7 +182,7 @@ wheels = [
 ]
 
 [[package]]
-name = "multi-agent-system"
+name = "multi-agent-governance"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

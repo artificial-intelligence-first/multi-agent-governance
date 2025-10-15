@@ -1,6 +1,6 @@
-# Multi Agent System Single Source of Truth
+# Multi Agent Governance Single Source of Truth
 
-This repository maintains agent-level terminology, contracts, and governance guidance under `agents/SSOT.md`. The top-level note clarifies how the specifications published by the artificial-intelligence-first **agents** and **flow-runner** projects are composed inside the Multi Agent System repository.
+This repository maintains agent-level terminology, contracts, and governance guidance under `agents/SSOT.md`. The top-level note clarifies how the specifications published by the artificial-intelligence-first **agents** and **flow-runner** projects are composed inside the Multi Agent Governance repository.
 
 ## Scope
 - Applies to every agent under `agents/` (main, sub, and shared components).

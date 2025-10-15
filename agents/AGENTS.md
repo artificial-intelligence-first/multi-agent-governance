@@ -1,6 +1,6 @@
 # Agents Directory Playbook
 
-This tree contains every Multi Agent System agent plus shared contracts and prompts. Keep these instructions close to the latest implementation.
+This tree contains every Multi Agent Governance agent plus shared contracts and prompts. Keep these instructions close to the latest implementation.
 
 ## Dev environment tips
 - Run from the repo root after sourcing `.venv`; validators in `src/automation/scripts/` expect dependencies from the shared virtual environment.

@@ -1,6 +1,6 @@
 # Flow Runner Integration
 
-WorkFlowMAG orchestrates Multi Agent System workflows using [flow-runner](https://github.com/artificial-intelligence-first/flow-runner). Vendored packages live in `src/flowrunner/` and `src/mcprouter/`, and `make setup-flow-runner` installs them into the Python user site so `flowctl` is available.
+WorkFlowMAG orchestrates Multi Agent Governance workflows using [flow-runner](https://github.com/artificial-intelligence-first/flow-runner). Vendored packages live in `src/flowrunner/` and `src/mcprouter/`, and `make setup-flow-runner` installs them into the Python user site so `flowctl` is available.
 
 ## Bootstrap
 

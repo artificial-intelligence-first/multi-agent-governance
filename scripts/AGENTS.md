@@ -1,7 +1,7 @@
 # AGENTS — /scripts
 
 ## Role
-- Provide shared automation and maintenance scripts for the Multi Agent System repository.
+- Provide shared automation and maintenance scripts for the Multi Agent Governance repository.
 - Support Flow Runner setup, validation helpers, and other cross-cutting utilities not tied to a specific agent package.
 
 ## Responsibilities

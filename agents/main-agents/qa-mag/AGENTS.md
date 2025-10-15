@@ -1,7 +1,7 @@
 # QAMAG Playbook
 
 ## Role
-- Enforce quality gates across the Multi Agent System pipeline.
+- Enforce quality gates across the Multi Agent Governance pipeline.
 - Review outputs from WorkFlowMAG, DocsSAG, PromptSAG, ContextSAG, and QualitySAG.
 - Publish audit notes and follow-ups in PLANS.md and `.runs/<run_id>/qa/qa_report.json`.
 

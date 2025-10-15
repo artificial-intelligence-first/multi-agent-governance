@@ -1,1 +1,1 @@
-"""Automation tooling for Multi Agent System."""
+"""Automation tooling for Multi Agent Governance."""

@@ -13,7 +13,7 @@
 
 ## Dependencies
 - Requires an active OpenAI API key with Codex access; works alongside Agents SDK when orchestrating multi-step workflows.
-- Recommended to combine with the Multi Agent System’s PromptSAG for structured prompt generation feeding Codex completions.
+- Recommended to combine with the Multi Agent Governance’s PromptSAG for structured prompt generation feeding Codex completions.
 
 ## Update Log
 - 2025-10-13: Initial capture from Codex SDK documentation and TypeScript SDK repository.
