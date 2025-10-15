@@ -1,4 +1,0 @@
-version: 1
-steps:
-  - name: Localization Retired
-    action: "No preflight required; localization workflows are disabled."

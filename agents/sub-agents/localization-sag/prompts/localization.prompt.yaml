@@ -1,7 +1,0 @@
-metadata:
-  name: localization-sag
-  description: Legacy prompt retained for historical reference (localization retired).
-system: |
-  Localization flows are no longer active. Do not generate localized content.
-user: |
-  This prompt is archived. No action required.

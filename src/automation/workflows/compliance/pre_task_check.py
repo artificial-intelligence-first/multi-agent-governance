@@ -94,7 +94,7 @@ def run_pre_task_check(
     references = [
         root / "docs" / "reference" / "files" / "AGENTS.md" / "OpenAI.md",
         root / "docs" / "reference" / "files" / "SSOT.md" / "overview.md",
-        root / "docs" / "reference" / "files" / "PLANS.md" / "execplan.md",
+        root / "docs" / "reference" / "files" / "PLANS.md" / "OpenAI.md",
         root / "docs" / "reference" / "files" / "PNPM.md" / "overview.md",
     ]
     missing_references = [path for path in references if not path.exists()]

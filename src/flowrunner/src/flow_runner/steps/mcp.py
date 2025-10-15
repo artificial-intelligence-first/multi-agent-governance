@@ -114,13 +114,28 @@ class McpStep(BaseStep):
     def _is_path_like(raw: str) -> bool:
         if not raw:
             return False
+        raw = raw.strip()
+        if not raw:
+            return False
         lowered = raw.lower()
         if lowered.startswith(("http://", "https://")):
             return False
-        if raw.startswith(("~", ".", os.sep)):
+        if lowered.startswith(("~", "./", "../")):
+            return True
+        if raw.startswith(os.sep) or raw.startswith("\\"):
+            return True
+        if len(raw) >= 2 and raw[1] == ":" and raw[0].isalpha():
+            return True
+        if raw.startswith(".") and len(raw) > 1 and raw[1].isalpha():
             return True
         if any(sep in raw for sep in (os.sep, "/", "\\")):
             return True
-        if Path(raw).suffix:
-            return True
+        suffix = Path(raw).suffix
+        if suffix:
+            stem = Path(raw).stem
+            normalized = stem.replace("-", "").replace("_", "")
+            if stem and any(ch.isalpha() for ch in stem):
+                return True
+            if normalized and not normalized.isdigit():
+                return True
         return False

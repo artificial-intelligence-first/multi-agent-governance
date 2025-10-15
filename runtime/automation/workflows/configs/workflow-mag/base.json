@@ -24,7 +24,7 @@
   "context": {
     "primary_sources": [
       "agents/SSOT.md",
-      "docs/reference/files/PLANS.md/execplan.md"
+      "docs/reference/files/PLANS.md/OpenAI.md"
     ]
   },
   "qa": {

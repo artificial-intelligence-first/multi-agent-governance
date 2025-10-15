@@ -13,7 +13,7 @@
 
 ## References
 - Root `SSOT.md` and `AGENTS.md` for governance.
-- `docs/reference/files/PLANS.md/execplan.md` for ExecPlan requirements.
+- `docs/reference/files/PLANS.md/OpenAI.md` for ExecPlan requirements.
 - `runtime/automation/flow_runner/flows/workflow_mag.flow.yaml` for stage order.
 
 ## SOP Index

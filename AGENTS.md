@@ -36,5 +36,8 @@ This repository hosts the Multi Agent System agent fleet plus shared automation.
 
 ## Governance checklist
 - Maintain alignment with the upstream AGENTS.md specification (see `docs/reference/OpenAI/AGENTS.md/` for synced notes and examples).
+- Ensure every ExecPlan (`PLANS.md`) is generated via `exec plan`, maintains the canonical sections with UTC-stamped updates, and is removed after stakeholders sign off on completion (see `docs/reference/files/PLANS.md/OpenAI.md`).
+- When you add or update `CHANGELOG.md`, follow the Keep a Changelog conventions captured in `docs/reference/files/CHANGELOG.md/overview.md` and keep the `Unreleased`+release sections in sync with SemVer tags.
+- When interacting with users, prefer the requester’s primary language for conversations and status updates; keep internal artefacts (docs, logs, code) in English.
 - Keep `agents/AGENT_REGISTRY.yaml`, `agents/SSOT.md`, and DocsSAG outputs in sync whenever routing or terminology shifts.
 - Schedule periodic reviews: if a directory’s AGENTS.md hasn’t changed in 60 days, confirm it still reflects reality.

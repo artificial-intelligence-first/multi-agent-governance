@@ -12,7 +12,7 @@
 
 ## References
 - Root SSOT.md / AGENTS.md.
-- `docs/reference/files/PLANS.md/execplan.md` for logging expectations.
+- `docs/reference/files/PLANS.md/OpenAI.md` for logging expectations.
 - `agents/contracts/` for schema validation targets.
 
 ## SOP Index

@@ -42,7 +42,8 @@ Next steps:
 ```
 
 ## Governance & Compliance
-- **ExecPlan workflow** – Use `uv run -m automation.execplan --task-name "<Task>"` to generate `PLANS.md` before multi-step work. Guidelines live in `docs/reference/files/PLANS.md/execplan.md`.
+- **ExecPlan workflow** – Use `uv run -m automation.execplan --task-name "<Task>"` to generate `PLANS.md` before multi-step work. Keep every required section current with timestamped updates, and remove the file once the task closes (guidance: `docs/reference/files/PLANS.md/OpenAI.md`).
+- **Changelog hygiene** – Document releases in `CHANGELOG.md` using Keep a Changelog structure so Openchangelog can parse updates (guidance: `docs/reference/files/CHANGELOG.md/overview.md`).
 - **Pre-task check** – Run `uv run -m automation.compliance.pre --task-name "<Task>" --categories <labels>` to confirm required artefacts.
 - **Testing** – Always run `make validate` and `make test` prior to PRs. Additional domain-specific validators live under `src/automation/scripts/`.
 

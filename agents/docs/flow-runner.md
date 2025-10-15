@@ -18,7 +18,7 @@ The primary orchestration flow is `runtime/automation/flow_runner/flows/workflow
 flowctl run runtime/automation/flow_runner/flows/workflow_mag.flow.yaml --dry-run
 ```
 
-`--dry-run` prints the resolved execution order without invoking external agents. Real runs emit artifacts under `.runs/<RUN_ID>/` and are now English-only—user deliverables are no longer localized automatically.
+`--dry-run` prints the resolved execution order without invoking external agents. Real runs emit artifacts under `.runs/<RUN_ID>/` and produce English-language deliverables for consistent auditing.
 
 ## Extending flows
 

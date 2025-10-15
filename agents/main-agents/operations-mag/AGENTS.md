@@ -12,7 +12,7 @@
 
 ## References
 - Root SSOT.md / AGENTS.md for governance requirements.
-- `docs/reference/files/PLANS.md/execplan.md` for ExecPlan logging.
+- `docs/reference/files/PLANS.md/OpenAI.md` for ExecPlan logging.
 - `docs/reference/files/PNPM.md/` when pnpm-based tooling is in scope.
 
 ## SOP Index
