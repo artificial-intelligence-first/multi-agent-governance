@@ -52,5 +52,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
-if __name__ == "__main__":
+def cli() -> None:
+    """Console-script entry point wrapping :func:`main` with proper exit codes."""
     raise SystemExit(main())
+
+
+if __name__ == "__main__":
+    cli()

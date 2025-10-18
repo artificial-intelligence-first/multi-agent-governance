@@ -11,7 +11,7 @@
 - `validation/` — outputs from `make validate` and targeted pytest suites.
 - `agent_usage/` — statistics exported by routing and usage auditors.
 - `schemas/` — JSON Schemas backing telemetry payloads.
-- `scripts/` — utilities that post-process telemetry (token budget checks, retention clean-up, etc.).
+- Retention tooling lives under `src/automation/scripts/` (e.g., `cleanup_logs.py` handles log pruning); keep this directory focused on telemetry artefacts only.
 - `snapshots/` — dated snapshots for migrations or audits. Treat everything under here as read-only.
 
 ## Operating Notes

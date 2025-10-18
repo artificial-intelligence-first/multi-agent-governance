@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, TextIO
+from typing import List, Optional, TextIO
 
 
 @dataclass
@@ -24,8 +24,28 @@ class CheckResults:
         return bool(self.warnings)
 
 
+_ROOT_SENTINELS = ("pyproject.toml", "uv.lock", ".git")
+
+
+def _find_repo_root(start: Path) -> Optional[Path]:
+    """Walk upward from ``start`` until a sentinel file is found."""
+    for candidate in [start, *start.parents]:
+        if any((candidate / sentinel).exists() for sentinel in _ROOT_SENTINELS):
+            return candidate
+    return None
+
+
 def _repo_root() -> Path:
-    """Return repository root (parent of src/)."""
+    """Return repository root regardless of whether the package is installed or run in-place."""
+    cwd_root = _find_repo_root(Path.cwd())
+    if cwd_root:
+        return cwd_root
+
+    module_root = _find_repo_root(Path(__file__).resolve().parent)
+    if module_root:
+        return module_root
+
+    # Fallback to historical behaviour; should only trigger in unusual packaging layouts.
     return Path(__file__).resolve().parents[4]
 
 

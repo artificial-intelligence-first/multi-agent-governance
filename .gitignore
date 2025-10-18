@@ -58,6 +58,10 @@ logs/
 # Runtime
 runtime/logs/
 runtime/automation/logs/
+!runtime/
+!runtime/automation/
+!runtime/automation/logs/
+!runtime/automation/logs/.gitkeep
 
 # Test coverage
 .coverage
