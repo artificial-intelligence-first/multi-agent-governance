@@ -11,6 +11,8 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - MCP routing lives in `.mcp/.mcp-config.yaml`; copy `.mcp/.env.mcp.example` to `.mcp/.env.mcp` for secrets. Codex, Cursor, and Flow Runner all read from this SSOT, so adjust providers and limits there instead of per-tool config.
 - Enabling the GitHub MCP server requires `GITHUB_TOKEN` (and optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp`; keep scopes minimal, rotate regularly, and note whether REST or GraphQL endpoints are in use.
 - Enabling the Context7 MCP server requires `CONTEXT7_MCP_URL`, `CONTEXT7_API_KEY`, and (optionally) `CONTEXT7_API_URL` in `.mcp/.env.mcp`; the shared config publishes it under `servers.context7` for Codex, Cursor, and Flow Runner.
+- Enabling the Serena MCP server requires setting `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT` so the stdio launch command in `servers.serena` activates the intended workspace via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server`.
+- Reference MCP servers (`everything`, `fetch`, `filesystem`, `git`, `memory`, `sequentialthinking`, `time`) ship from `modelcontextprotocol/servers`; install prerequisites (`node`/`npx`, `uvx`) and configure `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` with absolute paths before enabling write-capable tools.
 - Route all MCP configuration changes through MCPSAG (`agents/sub-agents/mcp-sag/`); follow its SOP and checklist template before editing `.mcp/.mcp-config.yaml`.
 
 ## Testing instructions
@@ -22,7 +24,7 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - Unit tests live under each agent directory. Activate the venv and run, e.g., `python -m pytest agents/sub-agents/docs-sag/tests/test_agent.py`.
 - When DocsSAG output changes, confirm the generated file appears in `docs/generated/` and passes lint/validation.
 - If you touch Flow Runner assets, run the matching validator script under `src/automation/scripts/` (e.g., `validate_workflow.py`) to confirm schema coverage.
-- For MCP updates, run `uvx mcpctl route "status"` plus targeted pytest coverage (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) as documented in MCPSAG’s playbook.
+- For MCP updates, run `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` plus targeted pytest coverage (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) as documented in MCPSAG’s playbook.
 
 ## PR instructions
 - Title format: `[component] summary`, e.g., `[docs-sag] Persist generated markdown`.

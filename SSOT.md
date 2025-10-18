@@ -12,6 +12,8 @@ This repository maintains agent-level terminology, contracts, and governance gui
 - MCP routing SSOT: `.mcp/.mcp-config.yaml` (providers, router defaults, and env bindings documented in `.mcp/AGENTS.md`). Update this whenever servers, tokens, or session policies move so Codex/Cursor/Flow Runner stay aligned.
 - GitHub MCP usage: see `docs/reference/tool/mcp/github/overview.md` for configuration, token scopes, GraphQL usage, and validation steps; declare `GITHUB_TOKEN` (plus optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp` before enabling the provider.
 - Context7 MCP usage: see `docs/reference/tool/mcp/context7/overview.md` for remote server setup, API key handling, and validation guidance; store `CONTEXT7_MCP_URL`, `CONTEXT7_API_KEY`, and optionally `CONTEXT7_API_URL` in `.mcp/.env.mcp`.
+- Serena MCP usage: see `docs/reference/tool/mcp/serena/overview.md` for stdio launch commands, context/mode defaults, and project activation flows; configure `SERENA_CONTEXT` and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp` to match the repo under automation.
+- Reference server usage: see `docs/reference/tool/mcp/servers/overview.md` plus sub-pages for Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, and Time. Provide `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` before exposing write-capable tools, and ensure Node/uv tooling versions match upstream guidance.
 - MCPSAG (agents/sub-agents/mcp-sag) governs the MCP SSOT, documentation cascade, and validation commands; execute its SOP and checklist before merging configuration changes.
 
 ## How to Use

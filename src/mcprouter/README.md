@@ -32,7 +32,7 @@ print(result.meta["token_usage"])
 
 ## CLI
 
-Use `uvx mcpctl route "hello"` to exercise the dummy provider. Pass `--log-dir` to control where JSONL audit logs are saved.
+Use `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "hello"` to exercise the dummy provider. Pass `--log-dir` to control where JSONL audit logs are saved.
 
 ## Tests
 

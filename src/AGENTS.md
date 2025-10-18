@@ -18,4 +18,4 @@
 ## MCP configuration
 - `mcp_router` and Flow Runner now read provider settings from `.mcp/.mcp-config.yaml`; extend that file instead of hardcoding environment defaults.
 - Secrets belong in `.mcp/.env.mcp` (copy from `.env.mcp.example`); never commit real keys.
-- Use `uvx mcpctl route "ping"` or the Flow Runner MCP tests (`PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`) after editing the config.
+- Use `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` or the Flow Runner MCP tests (`PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`) after editing the config.

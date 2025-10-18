@@ -34,3 +34,83 @@ servers:
     url: ${CONTEXT7_MCP_URL:-https://mcp.context7.com/mcp}
     metadata:
       api_url: ${CONTEXT7_API_URL:-https://context7.com/api/v1}
+  everything:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-everything"
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/everything
+  fetch:
+    transport: stdio
+    command:
+      program: uvx
+      args:
+        - "mcp-server-fetch"
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
+  filesystem:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-filesystem"
+        - ${MCP_FILESYSTEM_ROOT:-.}
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
+      notes: requires read/write access to configured directories
+  git:
+    transport: stdio
+    command:
+      program: uvx
+      args:
+        - "mcp-server-git"
+        - "--repository"
+        - ${MCP_GIT_REPOSITORY:-.}
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/git
+  memory:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-memory"
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/memory
+  sequentialthinking:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "-y"
+        - "@modelcontextprotocol/server-sequential-thinking"
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
+  serena:
+    transport: stdio
+    command:
+      program: uvx
+      args:
+        - --from
+        - git+https://github.com/oraios/serena
+        - serena
+        - start-mcp-server
+        - --context
+        - ${SERENA_CONTEXT:-ide-assistant}
+        - --project
+        - ${SERENA_PROJECT_ROOT:-.}
+    metadata:
+      docs: https://github.com/oraios/serena
+      registry: https://github.com/mcp/oraios/serena
+  time:
+    transport: stdio
+    command:
+      program: uvx
+      args:
+        - "mcp-server-time"
+    metadata:
+      docs: https://github.com/modelcontextprotocol/servers/tree/main/src/time

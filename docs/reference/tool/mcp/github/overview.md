@@ -28,7 +28,7 @@
 
 ## Usage
 - Agents and routers automatically pick up the GitHub configuration once `router.provider` (or `MCP_ROUTER_PROVIDER`) points to `github`.
-- For local smoke tests, run `uvx mcpctl route "status"` with the GitHub provider enabled to confirm authentication and repository access.
+- For local smoke tests, set `MCP_ROUTER_PROVIDER=github` and run `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` to confirm authentication and repository access.
 - Flow Runner MCP steps inherit the same configuration, so repository interactions can be orchestrated inside workflows without extra setup.
 - GraphQL is supported by setting `config.graphql: true`; the prompt (or `config.query`) is used as the query body, and `config.variables` is passed through unchanged.
 - Custom HTTP payloads (`config.json`, `config.data`, `config.body`, `config.text_body`) and request headers can be supplied per-step.

@@ -14,7 +14,7 @@ MCPSAG (Model Context Protocol Specialist Agent) stewards every MCP configuratio
 - Shared assets: `docs/reference/tool/mcp/`, `src/mcprouter/`, `src/flowrunner/`, `agents/AGENT_REGISTRY.yaml`, and MCPSAG-runbook artefacts under this directory.
 
 ## Validation & Observability
-- Prefers `uvx mcpctl route "status"` smoke tests, extended pytest coverage in `src/mcprouter/tests` and `src/flowrunner/tests`, and Makefile validators.
+- Prefers `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` smoke tests, extended pytest coverage in `src/mcprouter/tests` and `src/flowrunner/tests`, and Makefile validators.
 - Emits governance signals (`mcp.config_sync`, `mcp.provider.audit`, `mcp.rollback`) for OpsMAG and QAMAG escalation.
 
 ## Escalation

@@ -22,7 +22,7 @@ Standard operating procedure for MCPSAG to govern Model Context Protocol configu
    - Refresh `agents/sub-agents/AGENTS.md` and `agents/AGENT_REGISTRY.yaml` to reference MCPSAG responsibilities and routing.
    - Update ExecPlans or Flow Runner instructions if orchestrations change.
 4. **Validation**
-   - Run `uvx mcpctl route "status"` and provider-specific smoke tests.
+   - Run `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` and provider-specific smoke tests.
    - Execute automated coverage:
      - `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests -k mcp`
      - `PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`
@@ -42,8 +42,8 @@ Standard operating procedure for MCPSAG to govern Model Context Protocol configu
 5. Record the incident summary under the originating ExecPlan and update `templates/mcp_change_checklist.md` with lessons learned if applicable.
 
 ## Validation Commands
-- `uvx mcpctl route "status"`
-- `uvx mcpctl route "status" --provider github`
+- `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"`
+- `MCP_ROUTER_PROVIDER=github PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"`
 - `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests -k mcp`
 - `PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`
 - `make validate`

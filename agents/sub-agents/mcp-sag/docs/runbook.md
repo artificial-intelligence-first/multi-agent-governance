@@ -18,7 +18,7 @@ This runbook captures MCPSAG’s operational flow for adding, updating, or retir
 - Ensure `AGENT_REGISTRY.yaml` includes new routing metadata or escalation targets.
 
 ## 4. Validation & Testing
-- Smoke test via `uvx mcpctl route "status"` and provider-specific calls (`--provider github`, GraphQL queries, etc.).
+- Smoke test via `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` and provider-specific calls (`MCP_ROUTER_PROVIDER=github`, GraphQL queries, etc.).
 - Execute automated coverage:
   - `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests -k mcp`
   - `PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`

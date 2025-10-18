@@ -10,7 +10,7 @@
 - DocsSAG: `python -m pytest agents/sub-agents/docs-sag/tests/test_agent.py` plus `make validate-docs-sag`.
 - PromptSAG: `python -m pytest agents/sub-agents/prompt-sag/tests/test_agent.py` plus `make validate-prompt`.
 - ContextSAG: `python -m pytest agents/sub-agents/context-sag/tests/test_agent.py` plus `make validate-context`.
-- MCPSAG: `uvx mcpctl route "status"` plus targeted pytest runs (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) and `make validate` when configuration changes impact automation.
+- MCPSAG: `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` plus targeted pytest runs (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) and `make validate` when configuration changes impact automation.
 - Add agent-specific validators under `src/automation/scripts/` when new schemas or assets are introduced.
 
 ## PR instructions

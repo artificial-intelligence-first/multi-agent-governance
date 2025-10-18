@@ -8,6 +8,8 @@ This tree contains every Multi Agent Governance agent plus shared contracts and 
 - When editing prompts or workflows, keep relative paths short—agents resolve includes relative to their own directory.
 - MCP tooling uses the root `.mcp/.mcp-config.yaml`; do not stash agent-specific copies. When an agent needs new MCP access, coordinate with MCPSAG, extend the shared config, and note it in `.mcp/AGENTS.md`.
 - GitHub routing is available via the `github` provider—declare `GITHUB_TOKEN` (and optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp`, note whether REST or GraphQL endpoints are required, and update the docs cascade before agents depend on it.
+- Serena is exposed via `servers.serena` using a stdio command launched by `uvx`; set `SERENA_CONTEXT` and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp` so agents activate the right workspace when invoking Serena tools.
+- Reference MCP servers from `modelcontextprotocol/servers` (Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, Time) are enabled via stdio commands. Ensure `npx`/`uvx` are on `PATH`, and populate `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` with absolute paths before agents rely on write-capable operations.
 
 ## Testing instructions
 - Schema and workflow checks live in `make validate-*`; run them whenever you change prompts, SOPs, or contracts.

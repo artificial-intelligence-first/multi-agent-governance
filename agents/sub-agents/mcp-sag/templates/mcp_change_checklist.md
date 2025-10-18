@@ -29,8 +29,8 @@ Fill out this template before MCPSAG approves or implements any MCP configuratio
 - [ ] Templates or SOPs refreshed
 
 ## Validation Plan
-- [ ] `uvx mcpctl route "status"` (provider default)
-- [ ] `uvx mcpctl route "<custom>" --provider <name>` (if applicable)
+- [ ] `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` (provider default)
+- [ ] `MCP_ROUTER_PROVIDER=<name> PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "<custom>"` (if applicable)
 - [ ] `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests -k mcp`
 - [ ] `PYTHONPATH=src/flowrunner/src:src/mcprouter/src uv run python -m pytest src/flowrunner/tests/test_runner.py -k mcp`
 - [ ] `make validate`

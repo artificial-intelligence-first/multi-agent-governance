@@ -21,4 +21,4 @@ Source: https://github.com/upstash/context7 (last synced: 2025-10-18)
 
 ## Governance Notes
 - When onboarding Context7, coordinate changes with MCPSAG so its SOP, rollback plan, and routing defaults capture the new provider configuration.
-- After configuration updates, run `uvx mcpctl route "status"` against the Context7 entry (remote or local) to confirm connectivity, and document the availability in `docs/AGENTS.md` and `.mcp/AGENTS.md` if routing expectations shift.
+- After configuration updates, set `MCP_ROUTER_PROVIDER=context7` and run `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` to confirm connectivity, and document the availability in `docs/AGENTS.md` and `.mcp/AGENTS.md` if routing expectations shift.

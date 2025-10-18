@@ -19,6 +19,7 @@
 - `generated/` – DocsSAG outputs (tracked via `.gitkeep`).
 - `reference/agents/` – vendor or product-specific agent specs (e.g., `codex/`).
 - `reference/engineering/` – engineering-focused notes; prompt guidance now resides in `reference/engineering/prompt/`.
+- `reference/tool/mcp/servers/` – official MCP reference servers (Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, Time) with launch/validation guidance.
 - `reference/files/AGENTS.md/` – upstream governance for maintaining AGENTS files.
 - `reference/files/CHANGELOG.md/` – Keep a Changelog conventions and Openchangelog ingestion notes.
 - `reference/reference-template.md` – canonical starting point for new reference entries.
