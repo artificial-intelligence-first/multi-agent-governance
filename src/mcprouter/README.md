@@ -16,7 +16,7 @@
 from pathlib import Path
 from mcprouter import MCPRouter
 
-with MCPRouter.from_env(log_dir=Path(".runs/sample")) as router:
+with MCPRouter.from_env(log_dir=Path("telemetry/runs/sample")) as router:
     result = router.generate(
         prompt="Summarize the repository in two sentences.",
         model="gpt-4o-mini",

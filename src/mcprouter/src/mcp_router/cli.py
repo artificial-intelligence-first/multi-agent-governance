@@ -50,7 +50,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     route_parser.add_argument(
         "--log-dir",
-        default=".runs/mcpctl",
+        default="telemetry/runs/mcpctl",
         help="Directory where MCP logs will be written",
     )
     route_parser.set_defaults(handler=_run_route)

@@ -1,4 +1,4 @@
-Source: https://openai.com/index/introducing-agentkit/ (last synced: 2025-10-13)
+Source: https://openai.com/index/introducing-agentkit/ (last synced: 2025-10-18)
 
 # OpenAI AgentKit
 

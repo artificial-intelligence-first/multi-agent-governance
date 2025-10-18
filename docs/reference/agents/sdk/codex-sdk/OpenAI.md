@@ -1,5 +1,5 @@
-Source: https://developers.openai.com/codex/sdk (last synced: 2025-10-13)
-Source: https://github.com/openai/codex/tree/main/sdk/typescript (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/sdk (last synced: 2025-10-18)
+Source: https://github.com/openai/codex/tree/main/sdk/typescript (last synced: 2025-10-18)
 
 # Codex SDK (OpenAI)
 

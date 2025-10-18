@@ -1,6 +1,6 @@
-Source: https://developers.openai.com/codex/guides/agents-sdk (last synced: 2025-10-13)
-Source: https://github.com/openai/openai-agents-python (last synced: 2025-10-13)
-Source: https://openai.github.io/openai-agents-python/ja/ (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/guides/agents-sdk (last synced: 2025-10-18)
+Source: https://github.com/openai/openai-agents-python (last synced: 2025-10-18)
+Source: https://openai.github.io/openai-agents-python/ja/ (last synced: 2025-10-18)
 
 # OpenAI Agents SDK
 
