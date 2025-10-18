@@ -1,3 +1,6 @@
+Source: https://agents.md (last synced: 2025-10-13)
+Source: https://github.com/openai/agents.md (last synced: 2025-10-13)
+
 # AGENTS.md Overview
 
 ## Summary
@@ -40,7 +43,3 @@
 
 ## Update Log
 - 2025-10-13: Populated overview with upstream specification details and adoption context (sources synced the same day).
-
-## Source
-https://agents.md (last synced: 2025-10-13)
-https://github.com/openai/agents.md (last synced: 2025-10-13)

@@ -74,3 +74,13 @@ routes:
     telemetry:
       metric: qa.latency_ms
       budget_s: 45
+  mcp-governance:
+    primary: agents/sub-agents/mcp-sag:govern
+    backup: manual-handlers/manual-mcp:triage
+    description: Steward MCP configuration, documentation cascades, and validation so all agents share a consistent routing surface.
+    preconditions:
+      - sop: agents/sub-agents/mcp-sag/sop/README.md
+      - template: agents/sub-agents/mcp-sag/templates/mcp_change_checklist.md
+    telemetry:
+      metric: mcp.config_sync
+      budget_s: 70

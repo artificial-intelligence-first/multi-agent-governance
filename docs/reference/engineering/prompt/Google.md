@@ -1,3 +1,7 @@
+Source: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design (last synced: 2025-10-13)
+Source: https://deepmind.google/research/publications/83400/ (last synced: 2025-10-13)
+Source: https://deepmind.google/research/publications/90773/ (last synced: 2025-10-13)
+
 # Google Prompt Design References
 
 ## Summary
@@ -19,8 +23,3 @@
 
 ## Update Log
 - 2025-10-13: Initial consolidation of Google Cloud Vertex AI and Google DeepMind prompt references.
-
-## Source
-https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design
-https://deepmind.google/research/publications/83400/
-https://deepmind.google/research/publications/90773/

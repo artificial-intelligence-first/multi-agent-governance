@@ -13,10 +13,12 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Optional
+from typing import Any, Awaitable, Callable, Optional
 
+from .config import load_settings
 from .providers.base import BaseProvider, ProviderError
 from .providers.dummy_provider import DummyProvider
+from .providers.github_provider import GitHubProvider
 from .providers.openai_provider import OpenAIProvider
 from .redaction import mask_sensitive
 from .schemas import AuditRecord, ProviderRequest, ProviderResponse, QueueItem, Result
@@ -81,32 +83,53 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
     ) -> "MCPRouter":
         """Create an instance using environment defaults."""
 
-        max_sessions_str = os.getenv("MCP_MAX_SESSIONS")
         try:
-            max_sessions = max(1, int(max_sessions_str)) if max_sessions_str else 5
-        except (TypeError, ValueError):
-            max_sessions = 5
-        timeout = float(os.getenv("MCP_REQUEST_TIMEOUT_SEC", str(_DEFAULT_TIMEOUT)))
-        retries = int(os.getenv("MCP_MAX_RETRIES", str(_DEFAULT_RETRIES)))
-        backoff = float(os.getenv("MCP_BACKOFF_BASE_SEC", str(_DEFAULT_BACKOFF)))
-        flush_env = os.getenv("MCP_LOG_FLUSH_EVERY")
-        if flush_env is not None:
-            try:
-                parsed_flush = max(1, int(flush_env))
-            except (TypeError, ValueError):
-                parsed_flush = 50
-        elif log_flush_every is not None:
-            parsed_flush = max(1, log_flush_every)
+            settings = load_settings()
+        except FileNotFoundError:
+            settings = {}
+
+        router_settings_raw = settings.get("router")
+        router_settings = router_settings_raw if isinstance(router_settings_raw, dict) else {}
+        providers_config_raw = settings.get("providers")
+        providers_config = providers_config_raw if isinstance(providers_config_raw, dict) else {}
+
+        env_provider_override = os.getenv("MCP_ROUTER_PROVIDER")
+        provider_name = env_provider_override or router_settings.get("provider")
+        provider = cls._build_provider(provider_name, providers_config, env_override=env_provider_override)
+
+        max_sessions = cls._coerce_int(
+            router_settings.get("max_sessions"),
+            fallback=os.getenv("MCP_MAX_SESSIONS"),
+            default=5,
+            minimum=1,
+        )
+        timeout = cls._coerce_float(
+            router_settings.get("request_timeout_sec"),
+            fallback=os.getenv("MCP_REQUEST_TIMEOUT_SEC"),
+            default=_DEFAULT_TIMEOUT,
+        )
+        retries = cls._coerce_int(
+            router_settings.get("max_retries"),
+            fallback=os.getenv("MCP_MAX_RETRIES"),
+            default=_DEFAULT_RETRIES,
+            minimum=0,
+        )
+        backoff = cls._coerce_float(
+            router_settings.get("backoff_base_sec"),
+            fallback=os.getenv("MCP_BACKOFF_BASE_SEC"),
+            default=_DEFAULT_BACKOFF,
+        )
+        flush_default = cls._coerce_int(
+            router_settings.get("log_flush_every"),
+            fallback=os.getenv("MCP_LOG_FLUSH_EVERY"),
+            default=50,
+            minimum=1,
+        )
+        if log_flush_every is not None:
+            parsed_flush = cls._coerce_int(log_flush_every, default=flush_default, minimum=1)
         else:
-            parsed_flush = 50
-        api_key = os.getenv("OPENAI_API_KEY", "")
-        env = os.getenv("ENV", "").lower()
-        if api_key:
-            provider: BaseProvider = OpenAIProvider(api_key)
-        else:
-            if env == "production":
-                raise ValueError("OPENAI_API_KEY is required when ENV=production")
-            provider = DummyProvider()
+            parsed_flush = flush_default
+
         return cls(
             provider,
             max_sessions=max_sessions,
@@ -202,6 +225,166 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
             meta=safe_meta,
         )
 
+    # ------------------------------------------------------------------
+    # Configuration helpers
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _build_provider(
+        provider_name: Optional[str],
+        providers_config: dict[str, Any],
+        *,
+        env_override: Optional[str] = None,
+    ) -> BaseProvider:
+        alias = (provider_name or "").strip().lower()
+        env_provider = (env_override or os.getenv("MCP_ROUTER_PROVIDER", "")).strip().lower()
+        if not alias:
+            alias = env_provider or ""
+
+        api_key_env = MCPRouter._normalize_secret(os.getenv("OPENAI_API_KEY"))
+        env = os.getenv("ENV", "").lower()
+
+        if not alias:
+            if api_key_env:
+                alias = "openai"
+            else:
+                if env == "production":
+                    raise ValueError(
+                        "OPENAI_API_KEY is required when provider=openai and ENV=production"
+                    )
+                alias = "dummy"
+
+        provider_entry = providers_config.get(alias, {})
+        provider_type_raw = provider_entry.get("type") if isinstance(provider_entry, dict) else None
+        provider_type = (provider_type_raw or alias or "dummy").strip().lower()
+
+        if provider_type == "dummy":
+            return DummyProvider()
+
+        if provider_type == "openai":
+            cfg_api_key = ""
+            if isinstance(provider_entry, dict):
+                cfg_api_key = MCPRouter._normalize_secret(provider_entry.get("api_key"))
+            api_key = cfg_api_key or api_key_env
+            if api_key:
+                return OpenAIProvider(api_key)
+            if env == "production":
+                raise ValueError("OPENAI_API_KEY is required when provider=openai and ENV=production")
+            return DummyProvider()
+
+        if provider_type == "github":
+            cfg_token = ""
+            cfg_base_url = None
+            timeout_setting = None
+            cfg_api_version = None
+            if isinstance(provider_entry, dict):
+                cfg_token = MCPRouter._normalize_secret(provider_entry.get("token"))
+                cfg_base_url = provider_entry.get("base_url")
+                timeout_setting = provider_entry.get("timeout_sec")
+                cfg_api_version = provider_entry.get("api_version")
+            token_env = MCPRouter._normalize_secret(os.getenv("GITHUB_TOKEN"))
+            token = cfg_token or token_env
+            if not token:
+                raise ValueError("GITHUB_TOKEN is required when provider=github")
+            timeout = MCPRouter._coerce_float(
+                timeout_setting,
+                fallback=os.getenv("GITHUB_TIMEOUT_SEC"),
+                default=GitHubProvider.default_timeout,
+            )
+            kwargs: dict[str, Any] = {"default_timeout": timeout}
+            if isinstance(cfg_base_url, str) and cfg_base_url.strip():
+                kwargs["base_url"] = cfg_base_url.strip()
+            api_version_raw = cfg_api_version or os.getenv("GITHUB_API_VERSION") or GitHubProvider.default_api_version
+            api_version = str(api_version_raw).strip() if api_version_raw is not None else GitHubProvider.default_api_version
+            kwargs["api_version"] = api_version or GitHubProvider.default_api_version
+            return GitHubProvider(token, **kwargs)
+
+        raise ValueError(f"unsupported MCP provider type: {provider_type}")
+
+    @staticmethod
+    def _coerce_int(
+        value: Any,
+        *,
+        fallback: Any = None,
+        default: int,
+        minimum: Optional[int] = None,
+    ) -> int:
+        candidate = MCPRouter._try_parse_int(value)
+        if candidate is None:
+            candidate = MCPRouter._try_parse_int(fallback)
+        if candidate is None:
+            candidate = default
+        if minimum is not None:
+            candidate = max(minimum, candidate)
+        return candidate
+
+    @staticmethod
+    def _normalize_secret(value: Any) -> str:
+        if value is None:
+            return ""
+        if isinstance(value, str):
+            secret = value.strip()
+        else:
+            secret = str(value).strip()
+        if not secret:
+            return ""
+        normalized = secret
+        if normalized.startswith("${") and "}" in normalized:
+            return ""
+        return normalized
+
+    @staticmethod
+    def _coerce_float(
+        value: Any,
+        *,
+        fallback: Any = None,
+        default: float,
+    ) -> float:
+        candidate = MCPRouter._try_parse_float(value)
+        if candidate is None:
+            candidate = MCPRouter._try_parse_float(fallback)
+        if candidate is None:
+            candidate = default
+        return candidate
+
+    @staticmethod
+    def _try_parse_int(value: Any) -> Optional[int]:
+        if value is None:
+            return None
+        if isinstance(value, bool):
+            return int(value)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, float):
+            return int(value)
+        if isinstance(value, str):
+            raw = value.strip()
+            if not raw:
+                return None
+            try:
+                return int(raw, 10)
+            except ValueError:
+                try:
+                    return int(float(raw))
+                except ValueError:
+                    return None
+        return None
+
+    @staticmethod
+    def _try_parse_float(value: Any) -> Optional[float]:
+        if value is None:
+            return None
+        if isinstance(value, (int, float)):
+            return float(value)
+        if isinstance(value, str):
+            raw = value.strip()
+            if not raw:
+                return None
+            try:
+                return float(raw)
+            except ValueError:
+                return None
+        return None
+
     def close(self) -> None:
         """Signal the background loop to stop."""
 
@@ -217,14 +400,10 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
             self._thread.join(timeout=5)
         closer = getattr(self._provider, "aclose", None)
         if closer is not None:
-            try:
-                if asyncio.iscoroutinefunction(closer):
-                    asyncio.run(closer())
-                else:
-                    closer()
-            except RuntimeError:
-                if self._loop and asyncio.iscoroutinefunction(closer):
-                    asyncio.run_coroutine_threadsafe(closer(), self._loop).result()
+            if asyncio.iscoroutinefunction(closer):
+                self._run_async_cleanup(closer)
+            else:
+                closer()
         self._started = False
         self._audit_writer.close()
 
@@ -239,6 +418,27 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
         self._thread.start()
         asyncio.run_coroutine_threadsafe(self._start_workers(), self._loop).result()
         self._started = True
+
+    def _run_async_cleanup(self, closer: Callable[[], Awaitable[None]]) -> None:
+        """Execute an async cleanup function without leaking event loop errors."""
+
+        try:
+            asyncio.run(closer())
+            return
+        except RuntimeError as exc:
+            message = str(exc)
+            loop_available = self._loop is not None and not self._loop.is_closed()
+            if loop_available and "Event loop is closed" not in message:
+                try:
+                    asyncio.run_coroutine_threadsafe(closer(), self._loop).result()
+                    return
+                except RuntimeError:
+                    loop_available = False
+        loop = asyncio.new_event_loop()
+        try:
+            loop.run_until_complete(closer())
+        finally:
+            loop.close()
 
     def _loop_runner(self) -> None:
         assert self._loop is not None

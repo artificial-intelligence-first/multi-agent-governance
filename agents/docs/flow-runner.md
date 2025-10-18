@@ -8,7 +8,10 @@ WorkFlowMAG orchestrates Multi Agent Governance workflows using [flow-runner](ht
 make setup-flow-runner
 ```
 
-The helper script (`src/automation/scripts/setup_flow_runner.sh`) ensures the vendored packages are up to date. Add the user-site bin directory (`python -m site --user-base`) to your `PATH` so `flowctl` and `mcpctl` resolve.
+The helper script (`src/automation/scripts/setup_flow_runner.sh`) ensures the vendored packages are up to date. Add the user-site bin directory (`python -m site --user-base`) to your `PATH` so `flowctl` resolves; use `uvx mcpctl` for MCP router smoke tests.
+
+MCP routing now reads from `.mcp/.mcp-config.yaml`. Copy `.mcp/.env.mcp.example` to `.mcp/.env.mcp`, provide real tokens, and keep the file untracked so every tool (Codex, Cursor, Flow Runner) shares the same configuration.
+- Enabling the GitHub provider requires `GITHUB_TOKEN`; once set, Flow Runner MCP steps can call GitHub REST or GraphQL endpoints directly through the shared router (`config.graphql: true` sends GraphQL queries with optional `variables`).
 
 ## Running WorkFlowMAG flows
 

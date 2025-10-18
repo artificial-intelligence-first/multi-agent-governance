@@ -1,0 +1,29 @@
+# Managed by Multi Agent Governance – this file is the SSOT for MCP routing.
+#
+# Values may reference environment variables using ${VAR} or ${VAR:-default}
+# expansion. Secrets and tokens belong in .mcp/.env.mcp (ignored by git).
+
+env:
+  files:
+    - .mcp/.env.mcp
+
+router:
+  provider: ${MCP_ROUTER_PROVIDER:-dummy}
+  max_sessions: ${MCP_MAX_SESSIONS:-5}
+  request_timeout_sec: ${MCP_REQUEST_TIMEOUT_SEC:-30}
+  max_retries: ${MCP_MAX_RETRIES:-1}
+  backoff_base_sec: ${MCP_BACKOFF_BASE_SEC:-0.5}
+  log_flush_every: ${MCP_LOG_FLUSH_EVERY:-50}
+
+providers:
+  dummy:
+    type: dummy
+  openai:
+    type: openai
+    api_key: ${OPENAI_API_KEY}
+  github:
+    type: github
+    token: ${GITHUB_TOKEN}
+    base_url: ${GITHUB_API_BASE:-https://api.github.com}
+    timeout_sec: ${GITHUB_TIMEOUT_SEC:-15}
+    api_version: ${GITHUB_API_VERSION:-2022-11-28}

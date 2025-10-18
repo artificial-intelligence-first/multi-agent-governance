@@ -1,7 +1,8 @@
 # MCP Router Package Notes
 
-- CLI entry point: `mcp_router/cli.py` (exposes `mcpctl`).
-- Core router implementation lives in `mcp_router/router.py`; keep provider integrations stateless and ensure they close resources.
-- Run `uv run -m pytest packages/mcprouter/tests` plus a quick `mcpctl route "ping"` before submitting changes.
+- CLI entry point: `mcp_router/cli.py` (invoked via `uvx mcpctl`).
+- Providers and router defaults now resolve from `.mcp/.mcp-config.yaml`; update that file plus `.mcp/AGENTS.md` whenever servers or limits change.
+- First-party providers: `DummyProvider`, `OpenAIProvider`, and `GitHubProvider` (REST/GraphQL, propagating rate-limit metadata). Keep implementations stateless and ensure cleanup happens in `aclose()`.
+- Run `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests` and `uvx mcpctl route "ping"` before submitting changes.
 
-Document any new provider options or CLI flags in `packages/mcprouter/README.md`.
+Document any new provider options or CLI flags in `src/mcprouter/README.md`.

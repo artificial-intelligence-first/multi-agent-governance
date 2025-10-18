@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
+import httpx
 import pytest
 from mcp_router.providers.base import BaseProvider, ProviderError
 from mcp_router.router import MCPRouter, PromptLimitExceeded
@@ -124,3 +125,24 @@ def test_multiple_workers_receive_load(tmp_path: Path, monkeypatch: pytest.Monke
         if line.strip()
     }
     assert workers >= {"worker-0", "worker-1"}
+
+
+def test_router_builds_github_provider(monkeypatch: pytest.MonkeyPatch) -> None:
+    from mcp_router.providers.github_provider import GitHubProvider
+
+    monkeypatch.setenv("GITHUB_TOKEN", "ghp_from_env")
+    provider = MCPRouter._build_provider(
+        "github",
+        {
+            "github": {
+                "type": "github",
+                "base_url": "https://enterprise.github.example/api/v3",
+                "timeout_sec": 20,
+                "api_version": "2023-07-01",
+            }
+        },
+    )
+    assert isinstance(provider, GitHubProvider)
+    assert provider._base_url.endswith("/api/v3")
+    assert provider._client.timeout == httpx.Timeout(20)
+    assert provider._api_version == "2023-07-01"

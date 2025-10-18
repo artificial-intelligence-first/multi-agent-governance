@@ -2,11 +2,10 @@
 
 Store external reference material here using one Markdown file per topic. The directory is split into themed areas so downstream agents know where to look:
 
-- `agents/` – vendor- or product-specific agent references.
-- `engineering/` – engineering practices (e.g., prompt guidelines).
-- `files/AGENTS.md/` – governance notes that back the AGENTS cascade.
-- `sdk/` – SDK references (Codex SDK, Agents SDK, and related tooling).
-- `kit/` – Toolkits such as AgentKit; high-level frameworks built on top of SDKs.
+- `agents/` – vendor- or product-specific agent references, including `codex/`, `kit/agent-kit/`, and `sdk/`.
+- `engineering/` – engineering practices (e.g., prompt guidelines and context engineering).
+- `files/` – governance notes that back AGENTS, PLANS, SSOT, PNPM, and other repo-wide conventions.
+- `tool/` – MCP and related runtime tooling references (e.g., `tool/mcp/`).
 - `reference-template.md` – canonical template for new entries.
 
 How to use:

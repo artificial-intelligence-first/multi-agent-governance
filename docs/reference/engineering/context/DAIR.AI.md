@@ -1,3 +1,5 @@
+Source: https://www.promptingguide.ai/guides/context-engineering-guide (last synced: 2025-10-13)
+
 # DAIR.AI – Context Engineering Guide
 
 ## Summary
@@ -17,6 +19,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture from DAIR.AI context engineering guide.
-
-## Source
-https://www.promptingguide.ai/guides/context-engineering-guide

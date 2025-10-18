@@ -33,6 +33,7 @@ env.bak/
 venv.bak/
 **/venv/
 **/.venv/
+.mcp/.env.mcp
 
 # IDE
 .vscode/
@@ -65,4 +66,6 @@ htmlcov/
 
 # Documentation
 docs/generated/
+!docs/generated/
+!docs/generated/.gitkeep
 .runs/

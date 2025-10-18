@@ -1,3 +1,6 @@
+Source: https://pnpm.io/motivation (last synced: 2025-10-13)
+Source: https://github.com/openai/codex/blob/main/PNPM.md (last synced: 2025-10-13)
+
 # PNPM Usage Guidance
 
 ## Purpose
@@ -14,6 +17,5 @@
 - Do not mix npm or yarn commands inside pnpm workspaces.
 - When pnpm workflows change, update the `Source` lines in this document with the latest sync date.
 
-## Source
-- https://pnpm.io/motivation
-- https://github.com/openai/codex/blob/main/PNPM.md
+## Update Log
+- 2025-10-13: Initial summary derived from pnpm documentation and OpenAI Codex PNPM notes.

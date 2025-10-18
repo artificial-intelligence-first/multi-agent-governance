@@ -1,3 +1,6 @@
+Source: https://developers.openai.com/codex/sdk (last synced: 2025-10-13)
+Source: https://github.com/openai/codex/tree/main/sdk/typescript (last synced: 2025-10-13)
+
 # Codex SDK (OpenAI)
 
 ## Summary
@@ -17,7 +20,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture from Codex SDK documentation and TypeScript SDK repository.
-
-## Source
-https://developers.openai.com/codex/sdk
-https://github.com/openai/codex/tree/main/sdk/typescript

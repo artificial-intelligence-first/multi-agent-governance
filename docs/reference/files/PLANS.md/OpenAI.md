@@ -1,3 +1,5 @@
+Source: https://cookbook.openai.com/articles/codex_exec_plans (last synced: 2025-10-15)
+
 # ExecPlans (PLANS.md) Guidance
 
 ## Summary
@@ -48,6 +50,3 @@ This ExecPlan is a living document. Keep Progress, Surprises & Discoveries, Deci
 
 ## Update Log
 - 2025-10-15: Rewrote guidance with OpenAI Cookbook ExecPlan details and aligned repository operating rules.
-
-## Source
-- OpenAI Cookbook — “Using PLANS.md for multi-hour problem solving” (https://cookbook.openai.com/articles/codex_exec_plans, last synced: 2025-10-15)

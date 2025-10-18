@@ -1,3 +1,6 @@
+Source: https://developers.openai.com/codex/prompting (last synced: 2025-10-13)
+Source: https://cookbook.openai.com/examples/gpt-5-codex_prompting_guide (last synced: 2025-10-13)
+
 # GPT-5 Codex Prompting Reference
 
 ## Summary
@@ -23,7 +26,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture based on OpenAI Codex Prompting Guide and GPT-5 Codex Cookbook example.
-
-## Source
-https://developers.openai.com/codex/prompting
-https://cookbook.openai.com/examples/gpt-5-codex_prompting_guide

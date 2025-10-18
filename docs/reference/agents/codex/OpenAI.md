@@ -1,3 +1,9 @@
+Source: https://github.com/openai/codex (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/cli (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/ide (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/cloud (last synced: 2025-10-13)
+Source: https://developers.openai.com/codex/sdk (last synced: 2025-10-13)
+
 # OpenAI Codex Platform Overview
 
 ## Summary
@@ -33,10 +39,3 @@
 
 ## Update Log
 - 2025-10-13: Consolidated Codex GitHub, CLI, IDE, Cloud, and SDK resources into a single overview.
-
-## Source
-Source: https://github.com/openai/codex
-Source: https://developers.openai.com/codex/cli
-Source: https://developers.openai.com/codex/ide
-Source: https://developers.openai.com/codex/cloud
-Source: https://developers.openai.com/codex/sdk

@@ -1,3 +1,6 @@
+Source: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents (last synced: 2025-10-13)
+Source: https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/long-context-tips#example-multi-document-structure (last synced: 2025-10-13)
+
 # Anthropic – Effective Context Engineering for AI Agents
 
 ## Summary
@@ -19,7 +22,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture from Anthropic engineering blog and Claude Docs long-context example guidance.
-
-## Source
-https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
-https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/long-context-tips#example-multi-document-structure

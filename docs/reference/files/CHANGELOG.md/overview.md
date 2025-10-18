@@ -1,3 +1,6 @@
+Source: https://keepachangelog.com/en/1.1.0/ (last synced: 2025-10-15)
+Source: https://openchangelog.com/docs/getting-started/keep-a-changelog/ (last synced: 2025-10-15)
+
 # CHANGELOG.md Guidance
 
 ## Summary
@@ -26,7 +29,3 @@
 
 ## Update Log
 - 2025-10-15: Initial capture combining Keep a Changelog 1.1.0 guidance with Openchangelog ingestion notes.
-
-## Source
-- Keep a Changelog v1.1.0 (https://keepachangelog.com/en/1.1.0/, last synced: 2025-10-15)
-- Openchangelog Docs — Keep a Changelog Format (https://openchangelog.com/docs/getting-started/keep-a-changelog/, last synced: 2025-10-15)

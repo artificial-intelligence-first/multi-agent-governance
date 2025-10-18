@@ -1,3 +1,6 @@
+Source: https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview#prompting-vs-finetuning (last synced: 2025-10-13)
+Source: https://github.com/anthropics/prompt-eng-interactive-tutorial (last synced: 2025-10-13)
+
 # Claude Prompt Engineering Overview
 
 ## Summary
@@ -19,7 +22,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture of Anthropic prompt engineering resources.
-
-## Source
-https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview#prompting-vs-finetuning
-https://github.com/anthropics/prompt-eng-interactive-tutorial

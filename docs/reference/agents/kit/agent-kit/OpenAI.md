@@ -1,3 +1,5 @@
+Source: https://openai.com/index/introducing-agentkit/ (last synced: 2025-10-13)
+
 # OpenAI AgentKit
 
 ## Summary
@@ -16,6 +18,3 @@
 
 ## Update Log
 - 2025-10-13: Initial capture from OpenAI AgentKit launch post.
-
-## Source
-https://openai.com/index/introducing-agentkit/

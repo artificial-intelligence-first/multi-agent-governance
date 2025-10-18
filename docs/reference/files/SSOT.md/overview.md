@@ -1,3 +1,5 @@
+Source: https://en.wikipedia.org/wiki/Single_source_of_truth (last synced: 2025-10-13)
+
 # Single Source of Truth (SSOT)
 
 ## Definition
@@ -20,6 +22,3 @@ A single source of truth (SSOT) is a governance principle that designates one au
 
 ## Update Log
 - 2025-10-13 — Initial summary derived from public definitions of SSOT (e.g., Wikipedia) and tailored to the Multi Agent Governance repository.
-
-## Source
-- https://en.wikipedia.org/wiki/Single_source_of_truth

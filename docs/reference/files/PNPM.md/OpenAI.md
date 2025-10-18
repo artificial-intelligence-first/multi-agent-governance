@@ -1,3 +1,5 @@
+Source: https://github.com/openai/codex/blob/main/PNPM.md (last synced: 2025-10-13)
+
 # PNPM Usage Overview
 
 ## Background
@@ -21,6 +23,3 @@ pnpm is a fast, disk space–efficient package manager for Node.js projects. It 
 
 ## Update Log
 - 2025-10-13 — Imported guidance from OpenAI Codex PNPM documentation and aligned with Multi Agent Governance usage notes.
-
-## Source
-- https://github.com/openai/codex/blob/main/PNPM.md
