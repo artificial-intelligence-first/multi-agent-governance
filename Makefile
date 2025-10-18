@@ -1,11 +1,12 @@
 .PHONY: validate test validate-knowledge validate-docs-sag validate-prompt validate-context \
         validate-workflow validate-operations validate-qa validate-quality validate-reference \
-        setup-flow-runner
+        validate-sop setup-flow-runner
 
 PYTHON ?= $(shell if [ -x .venv/bin/python ]; then printf '.venv/bin/python'; else command -v python3; fi)
 
 validate: validate-knowledge validate-docs-sag validate-prompt validate-context \
-          validate-workflow validate-operations validate-qa validate-quality validate-reference
+          validate-workflow validate-operations validate-qa validate-quality validate-reference \
+          validate-sop
 
 validate-knowledge:
 	$(PYTHON) src/automation/scripts/validate_knowledge.py
@@ -33,6 +34,9 @@ validate-quality:
 
 validate-reference:
 	$(PYTHON) src/automation/scripts/validate_reference_sag.py
+
+validate-sop:
+	$(PYTHON) src/automation/scripts/validate_sop.py
 
 setup-flow-runner:
 	bash src/automation/scripts/setup_flow_runner.sh
