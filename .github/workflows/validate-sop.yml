@@ -25,4 +25,4 @@ jobs:
         pip install -r requirements.txt
         
     - name: Run SOP validation
-      run: make validate-sop
+      run: python3 src/automation/scripts/validate_sop.py
