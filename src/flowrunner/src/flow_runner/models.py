@@ -11,7 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel, field_validator
 class RunConfig(BaseModel):
     """Per-run configuration extracted from the flow file."""
 
-    output_dir: str = Field(default="./.runs/${RUN_ID}")
+    output_dir: str = Field(default="./telemetry/runs/${RUN_ID}")
+    env: Dict[str, str] = Field(default_factory=dict)
 
 
 class StepBase(BaseModel):

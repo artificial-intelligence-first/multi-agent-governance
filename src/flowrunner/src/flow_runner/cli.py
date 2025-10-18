@@ -111,7 +111,7 @@ PROGRESS_OPTION = typer.Option(
 )
 GC_BASE_DIR_OPTION = typer.Option(
     None,
-    help="Directory containing run outputs; defaults to FLOWCTL_BASE_OUTPUT_DIR or .runs.",
+    help="Directory containing run outputs; defaults to FLOWCTL_BASE_OUTPUT_DIR or telemetry/runs.",
 )
 GC_KEEP_OPTION = typer.Option(
     100,
@@ -133,7 +133,7 @@ LOGS_JSON_OPTION = typer.Option(
     help="Emit machine-readable summary output.",
 )
 STATS_RUNS_DIR_OPTION = typer.Option(
-    Path(".runs"),
+    Path("telemetry/runs"),
     "--runs-dir",
     help="Directory containing run outputs.",
 )
@@ -794,7 +794,7 @@ def gc(
 ) -> None:
     """Garbage-collect run directories to control disk usage."""
 
-    resolved_base = base_dir or Path(os.getenv("FLOWCTL_BASE_OUTPUT_DIR", ".runs"))
+    resolved_base = base_dir or Path(os.getenv("FLOWCTL_BASE_OUTPUT_DIR", "telemetry/runs"))
     resolved_base = resolved_base.expanduser().resolve()
     if not resolved_base.exists():
         console.print(f"[yellow]Base directory not found: {resolved_base}")
@@ -899,7 +899,7 @@ def _resolve_summary_path(run_id: str, output_dir: Optional[Path]) -> Path:
         if candidate_resolved.name == run_id:
             return summary_candidate
         return (candidate_resolved / run_id / "summary.json").resolve()
-    base_dir = os.getenv("FLOWCTL_BASE_OUTPUT_DIR", ".runs")
+    base_dir = os.getenv("FLOWCTL_BASE_OUTPUT_DIR", "telemetry/runs")
     base = Path(base_dir).expanduser().resolve() / run_id
     return (base / "summary.json").resolve()
 

@@ -7,6 +7,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict
 
+from .runtime import RuntimeContext
+
 
 def load_config(config_path: str | Path) -> Dict[str, Any]:
     """Load JSON config with optional relative `extends` support."""
@@ -52,3 +54,30 @@ def expand_path_template(value: str, run_id: str | None = None) -> str:
         result = result.replace("${RUN_ID}", run_id)
     result = os.path.expandvars(result)
     return result
+
+
+def build_runtime_context(config: Dict[str, Any], *, run_id: str) -> RuntimeContext:
+    """Create a RuntimeContext from the workflow configuration."""
+
+    paths = config.get("paths", {})
+    raw_output = paths.get("output_dir", "telemetry/logs/runtime/${RUN_ID}")
+    output_dir = Path(expand_path_template(raw_output, run_id))
+
+    raw_log = paths.get("log_dir") or paths.get("logs_dir")
+    log_dir = Path(expand_path_template(raw_log, run_id)) if raw_log else None
+
+    runtime_cfg = config.get("runtime", {})
+    payload: Dict[str, Any] = {
+        "run_id": run_id,
+        "flow": config.get("task", {}).get("flow", "workflow-mag"),
+        "output_dir": str(output_dir),
+        "runtime": runtime_cfg,
+    }
+    if log_dir:
+        payload["log_dir"] = str(log_dir)
+
+    slug = config.get("task", {}).get("slug")
+    if slug:
+        payload["slug"] = slug
+
+    return RuntimeContext.from_payload(payload)

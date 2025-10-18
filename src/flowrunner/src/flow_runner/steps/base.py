@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
@@ -22,6 +22,7 @@ class ExecutionContext:
     workspace_dir: Path
     flow_dir: Path
     mcp_log_dir: Path
+    run_env: Dict[str, str] = field(default_factory=dict)
     mcp_router: Optional["MCPRouter"] = None
 
 

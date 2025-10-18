@@ -6,6 +6,9 @@ import asyncio
 import json
 import os
 import random
+import re
+import subprocess
+import sys
 import threading
 import time
 import uuid
@@ -15,7 +18,7 @@ from dataclasses import asdict, dataclass, is_dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Callable, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Optional, Set
 
 import yaml
 from jsonschema import Draft202012Validator
@@ -156,6 +159,7 @@ class FlowRunner:
         self.mcp_log_dir = self.run_dir
         self.runs_log_path = self.run_dir / "runs.jsonl"
         self.summary_path = self.run_dir / "summary.json"
+        self.run_env = dict(flow.run.env or {})
         self._dev_fast = dev_fast
         self._perf_tracer = perf_tracer or PerfTracer(enabled=False)
         self._log_flush_every = self._resolve_flush_frequency(self._dev_fast)
@@ -175,17 +179,24 @@ class FlowRunner:
         }
         self._events: List[RunEvent] = []
         self._agent_path_tokens: List[str] = []
+        self._env_tokens: Dict[str, Optional[str]] = {}
+        self._resolved_run_env: Dict[str, str] = {}
         self._log_writer: Optional["_AsyncLineWriter"] = None
+        self._pre_task_check_done = False
+        self._pre_task_log_path: Optional[str] = None
 
     # ------------------------------------------------------------------
     def run(self) -> str:
         """Execute the flow and return the run identifier."""
 
         execution_result: Optional[ExecutionResult] = None
+        if not self._pre_task_check_done:
+            self._run_pre_task_prologue()
         with self._perf_tracer.span("init.setup"):
             self.run_dir.mkdir(parents=True, exist_ok=True)
             self.artifacts_dir.mkdir(parents=True, exist_ok=True)
             started_at = datetime.now(UTC)
+            self._push_run_env()
             self._push_agent_paths()
             self._log_writer = _AsyncLineWriter(
                 self.runs_log_path, flush_every=self._log_flush_every
@@ -207,6 +218,7 @@ class FlowRunner:
                     workspace_dir=self.workspace_dir,
                     flow_dir=self.flow_dir,
                     mcp_log_dir=self.mcp_log_dir,
+                    run_env=self._resolved_run_env,
                     mcp_router=router,
                 )
                 with self._perf_tracer.span("execute"):
@@ -217,6 +229,7 @@ class FlowRunner:
                     self._log_writer.close()
                     self._log_writer = None
                 self._pop_agent_paths()
+                self._pop_run_env()
         finished_at = datetime.now(UTC)
         if execution_result is None:
             raise StepExecutionError("flow execution aborted before producing a result")
@@ -495,6 +508,10 @@ class FlowRunner:
             json.dump(summary.model_dump(mode="json"), handle, ensure_ascii=False, indent=2)
 
     def _instantiate_step(self, spec: ShellStepSpec | McpStepSpec | AgentStepSpec) -> BaseStep:
+        extras = getattr(spec, "model_extra", {})
+        needs = extras.get("needs") if isinstance(extras, dict) else None
+        if needs and not spec.depends_on:
+            spec.depends_on.extend(str(item) for item in needs)
         if isinstance(spec, ShellStepSpec):
             return ShellStep(spec)
         if isinstance(spec, McpStepSpec):
@@ -516,6 +533,158 @@ class FlowRunner:
         if not base.is_absolute():
             base = (self.workspace_dir / base).resolve()
         return base
+
+    def _run_pre_task_prologue(self) -> None:
+        if self._pre_task_check_done or self._should_skip_pre_task_check():
+            self._pre_task_check_done = True
+            return
+        config_path = self._resolve_workflow_config_path()
+        if config_path is None:
+            self._pre_task_check_done = True
+            return
+        try:
+            config = self._load_workflow_config(config_path)
+        except Exception as exc:  # pylint: disable=broad-except
+            raise StepExecutionError(f"failed to load workflow config for pre-task check: {exc}") from exc
+        task_cfg = config.get("task")
+        if not isinstance(task_cfg, dict):
+            self._pre_task_check_done = True
+            return
+        task_name = str(task_cfg.get("name") or "").strip()
+        if not task_name:
+            self._pre_task_check_done = True
+            return
+        raw_categories = task_cfg.get("categories") or []
+        categories: List[str] = []
+        seen: Set[str] = set()
+        for item in raw_categories:
+            text = str(item).strip()
+            if not text:
+                continue
+            lower = text.lower()
+            if lower in seen:
+                continue
+            seen.add(lower)
+            categories.append(text)
+        if "flow" not in seen:
+            categories.append("flow")
+        command = [
+            sys.executable,
+            "-m",
+            "automation.compliance.pre",
+            "--task-name",
+            task_name,
+            "--categories",
+            ",".join(categories),
+        ]
+        try:
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+        except subprocess.CalledProcessError as exc:
+            stdout = exc.stdout or ""
+            stderr = exc.stderr or ""
+            details = "\n".join(line for line in (stdout.strip(), stderr.strip()) if line)
+            message = f"pre-task compliance check failed (exit {exc.returncode})"
+            if details:
+                message = f"{message}\n{details}"
+            raise StepExecutionError(message) from exc
+        output = result.stdout or ""
+        error_output = result.stderr or ""
+        if output:
+            print(output, end="" if output.endswith("\n") else "\n")
+        if error_output:
+            print(
+                error_output,
+                file=sys.stderr,
+                end="" if error_output.endswith("\n") else "\n",
+            )
+        self._pre_task_log_path = self._extract_pre_task_log_path(output)
+        self._pre_task_check_done = True
+
+    def _resolve_workflow_config_path(self) -> Optional[Path]:
+        raw = self.run_env.get("WORKFLOW_CONFIG")
+        if not raw:
+            return None
+        candidate = str(raw).replace("${RUN_ID}", self.run_id)
+        candidate = os.path.expandvars(candidate)
+        candidate = os.path.expanduser(candidate)
+        path = Path(candidate)
+        if path.is_absolute() and path.exists():
+            return path
+        relative = (self.flow_dir / path).resolve()
+        if relative.exists():
+            return relative
+        workspace_candidate = (self.workspace_dir / path).resolve()
+        if workspace_candidate.exists():
+            return workspace_candidate
+        if path.exists():
+            return path
+        return None
+
+    def _load_workflow_config(self, path: Path) -> Dict[str, Any]:
+        try:
+            from flow_runner.tasks.workflow_mag import common as workflow_common  # pylint: disable=import-outside-toplevel
+        except Exception:  # pylint: disable=broad-except
+            workflow_common = None
+        if workflow_common is not None:
+            return workflow_common.load_config(path)
+        with path.open("r", encoding="utf-8") as handle:
+            return json.load(handle)
+
+    @staticmethod
+    def _extract_pre_task_log_path(output: str) -> Optional[str]:
+        match = re.search(r"(?:\u30ed\u30b0|Log):\s*(\S+)", output)
+        if not match:
+            return None
+        return match.group(1).strip()
+
+    @staticmethod
+    def _should_skip_pre_task_check() -> bool:
+        raw = os.environ.get("FLOWCTL_SKIP_PRECHECK")
+        if raw is None:
+            return False
+        return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+    def _push_run_env(self) -> None:
+        resolved: Dict[str, str] = {}
+        for key, value in self.run_env.items():
+            if value is None:
+                continue
+            resolved_value = str(value).replace("${RUN_ID}", self.run_id)
+            expanded = os.path.expandvars(resolved_value)
+            expanded = os.path.expanduser(expanded)
+            if self._contains_unresolved_placeholder(expanded):
+                continue
+            resolved[key] = expanded
+        if self._pre_task_log_path:
+            resolved.setdefault("PRETASK_LOG", self._pre_task_log_path)
+        self._resolved_run_env = resolved
+        for key, value in resolved.items():
+            self._env_tokens[key] = os.environ.get(key)
+            os.environ[key] = value
+
+    def _pop_run_env(self) -> None:
+        for key, previous in self._env_tokens.items():
+            if previous is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = previous
+        self._env_tokens.clear()
+        self._resolved_run_env = {}
+
+    @staticmethod
+    def _contains_unresolved_placeholder(value: str) -> bool:
+        if not value:
+            return False
+        if re.search(r"\$\{[^}]+\}", value):
+            return True
+        if re.search(r"%[^%]+%", value):
+            return True
+        return False
 
     def _resolve_agent_paths(self, raw_paths: List[str]) -> List[str]:
         resolved: List[str] = []

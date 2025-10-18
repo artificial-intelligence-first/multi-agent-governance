@@ -20,7 +20,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def execute(config_path: str) -> Path:
     config = common.load_config(config_path)
     run_id = os.environ.get("AIAMS_RUN_ID", "local-run")
-    output_dir = Path(common.expand_path_template(config["paths"]["output_dir"], run_id)) / "context"
+    runtime_ctx = common.build_runtime_context(config, run_id=run_id)
+    output_dir = runtime_ctx.output_dir / "context"
     common.ensure_output_dir(output_dir)
 
     context_cfg = config.get("context", {})
@@ -32,6 +33,13 @@ def execute(config_path: str) -> Path:
     artifact_path = output_dir / "context_plan.json"
     artifact_path.write_text(json.dumps(artifact, indent=2, ensure_ascii=False), encoding="utf-8")
     common.log("context", f"Context plan scaffold written to {artifact_path}")
+    runtime_ctx.register_artifacts({"context_plan": str(artifact_path)})
+    runtime_ctx.record_step(
+        agent="ContextSAG",
+        results=[{"status": "scaffolded"}],
+        artifacts={"context_plan": str(artifact_path)},
+        metadata={"config_path": str(Path(config_path).resolve())},
+    )
     return artifact_path
 
 

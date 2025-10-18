@@ -1,6 +1,7 @@
 import json
 import os
 import shlex
+import subprocess
 import sys
 from pathlib import Path
 
@@ -933,6 +934,138 @@ def test_agent_config_passed_to_constructor(tmp_path: Path) -> None:
         if entry["event"] == "end" and entry["step"] == "config_step"
     )
     assert config_end["extra"]["result"] == {"label": "demo", "message": "hello"}
+
+
+def test_run_env_inherits_existing_values(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    flow_path = tmp_path / "env_inherit.yaml"
+    _write_flow(
+        flow_path,
+        {
+            "version": 1,
+            "run": {
+                "env": {
+                    "WORKFLOW_CONFIG": "${WORKFLOW_CONFIG}",
+                    "WORKFLOW_LOG": "~/logs/${RUN_ID}",
+                }
+            },
+            "steps": [],
+        },
+    )
+    monkeypatch.setenv("WORKFLOW_CONFIG", "/tmp/config.json")
+    monkeypatch.setenv("HOME", str(tmp_path))
+    flow = load_flow_from_path(flow_path)
+    runner = FlowRunner(flow, flow_path=flow_path, workspace_dir=tmp_path)
+    runner._push_run_env()
+    try:
+        assert os.environ["WORKFLOW_CONFIG"] == "/tmp/config.json"
+        assert runner._resolved_run_env["WORKFLOW_CONFIG"] == "/tmp/config.json"
+        log_value = runner._resolved_run_env["WORKFLOW_LOG"]
+        expected_path = (Path(tmp_path) / "logs" / runner.run_id).resolve()
+        assert Path(log_value) == expected_path
+    finally:
+        runner._pop_run_env()
+
+
+def test_run_env_skips_unresolved_placeholders(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    flow_path = tmp_path / "env_skip.yaml"
+    _write_flow(
+        flow_path,
+        {
+            "version": 1,
+            "run": {
+                "env": {
+                    "WORKFLOW_CONFIG": "${WORKFLOW_CONFIG}",
+                    "WORKFLOW_LOG": "~/logs/${RUN_ID}",
+                }
+            },
+            "steps": [],
+        },
+    )
+    monkeypatch.delenv("WORKFLOW_CONFIG", raising=False)
+    monkeypatch.setenv("HOME", str(tmp_path))
+    flow = load_flow_from_path(flow_path)
+    runner = FlowRunner(flow, flow_path=flow_path, workspace_dir=tmp_path)
+    runner._push_run_env()
+    try:
+        assert "WORKFLOW_CONFIG" not in runner._resolved_run_env
+        assert "WORKFLOW_CONFIG" not in os.environ
+        log_value = runner._resolved_run_env["WORKFLOW_LOG"]
+        assert "${" not in log_value
+    finally:
+        runner._pop_run_env()
+
+
+def test_resolve_workflow_config_path_expands_user(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    home_dir = tmp_path / "home"
+    config_dir = home_dir / "workflow"
+    config_dir.mkdir(parents=True)
+    config_path = config_dir / "config.json"
+    config_path.write_text("{}", encoding="utf-8")
+    monkeypatch.setenv("HOME", str(home_dir))
+    flow_path = tmp_path / "env_home.yaml"
+    _write_flow(
+        flow_path,
+        {
+            "version": 1,
+            "run": {
+                "env": {
+                    "WORKFLOW_CONFIG": "~/workflow/config.json",
+                }
+            },
+            "steps": [],
+        },
+    )
+    flow = load_flow_from_path(flow_path)
+    runner = FlowRunner(flow, flow_path=flow_path, workspace_dir=tmp_path)
+    resolved = runner._resolve_workflow_config_path()
+    assert resolved == config_path.resolve()
+
+
+def test_pre_task_prologue_invokes_cli(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    config_path = tmp_path / "workflow" / "config.json"
+    config_path.parent.mkdir(parents=True)
+    config_path.write_text(
+        json.dumps({"task": {"name": "Demo", "categories": ["docs"]}}),
+        encoding="utf-8",
+    )
+
+    flow_path = tmp_path / "pre_flow.yaml"
+    _write_flow(
+        flow_path,
+        {
+            "version": 1,
+            "run": {
+                "env": {
+                    "WORKFLOW_CONFIG": str(config_path),
+                }
+            },
+            "steps": [],
+        },
+    )
+
+    flow = load_flow_from_path(flow_path)
+    runner = FlowRunner(flow, flow_path=flow_path, workspace_dir=tmp_path)
+
+    captured: list[list[str]] = []
+
+    class StubResult:
+        def __init__(self) -> None:
+            self.stdout = ""
+            self.stderr = ""
+            self.returncode = 0
+
+    def fake_run(cmd, capture_output, text, check):  # type: ignore[override]
+        captured.append(list(cmd))
+        return StubResult()
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    runner._run_pre_task_prologue()
+
+    assert captured, "expected subprocess.run to be invoked"
+    command = captured[0]
+    assert command[2] == "automation.compliance.pre"
+    assert "--accept-all" not in command
+    assert "--categories" in command
 
 
 @pytest.mark.asyncio

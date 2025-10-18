@@ -19,7 +19,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def execute(config_path: str) -> Path:
     config = common.load_config(config_path)
     run_id = os.environ.get("AIAMS_RUN_ID", "local-run")
-    output_dir = Path(common.expand_path_template(config["paths"]["output_dir"], run_id)) / "docs"
+    runtime_ctx = common.build_runtime_context(config, run_id=run_id)
+    output_dir = runtime_ctx.output_dir / "docs"
     common.ensure_output_dir(output_dir)
 
     target = config.get("documentation", {}).get("target", "docs/generated/workflow-mag.md")
@@ -34,6 +35,13 @@ def execute(config_path: str) -> Path:
     )
     doc_path.write_text(content, encoding="utf-8")
     common.log("docs", f"Draft placeholder prepared at {doc_path}")
+    runtime_ctx.register_artifacts({"docs_draft": str(doc_path)})
+    runtime_ctx.record_step(
+        agent="DocsSAG",
+        results=[{"status": "scaffolded", "target": target}],
+        artifacts={"docs_draft": str(doc_path)},
+        metadata={"config_path": str(Path(config_path).resolve())},
+    )
     return doc_path
 
 

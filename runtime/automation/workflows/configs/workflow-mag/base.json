@@ -11,7 +11,7 @@
     ]
   },
   "paths": {
-    "output_dir": ".runs/${RUN_ID}",
+    "output_dir": "telemetry/runs/${RUN_ID}",
     "logs_dir": "runtime/automation/logs/workflow"
   },
   "documentation": {

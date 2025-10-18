@@ -12,7 +12,7 @@
     ]
   },
   "paths": {
-    "output_dir": ".runs/test-${RUN_ID}",
+    "output_dir": "telemetry/runs/test-${RUN_ID}",
     "logs_dir": "runtime/automation/logs/workflow/test"
   }
 }
