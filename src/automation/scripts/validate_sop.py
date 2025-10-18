@@ -33,6 +33,7 @@ def main() -> None:
         "agents/main-agents/workflow-mag",
         "agents/sub-agents/context-sag",
         "agents/sub-agents/docs-sag",
+        "agents/sub-agents/mcp-sag",
         "agents/sub-agents/prompt-sag",
         "agents/sub-agents/quality-sag",
         "agents/sub-agents/reference-sag",

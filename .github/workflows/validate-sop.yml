@@ -9,7 +9,7 @@ on:
 jobs:
   validate-sop:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 2
     
     steps:
     - name: Checkout code
@@ -20,21 +20,10 @@ jobs:
       with:
         python-version: '3.11'
         
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
-    - name: Debug environment
-      run: |
-        echo "Python version:"
-        python3 --version
-        echo "Current directory:"
-        pwd
-        echo "Script exists:"
-        ls -la src/automation/scripts/validate_sop.py
-        
     - name: Run SOP validation
       run: |
-        cd /home/runner/work/multi-agent-governance/multi-agent-governance
+        echo "Starting SOP validation..."
+        python3 --version
+        ls -la src/automation/scripts/
         python3 src/automation/scripts/validate_sop.py
+        echo "SOP validation completed successfully"
