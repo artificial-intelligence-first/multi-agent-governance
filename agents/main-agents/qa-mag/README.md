@@ -6,13 +6,13 @@ requirements.
 
 ## Responsibilities
 - Run validation scripts (`make validate-*`) relevant to the artefacts produced.
-- Summarise findings in `.runs/<run_id>/qa/qa_report.json`.
+- Summarise findings in `telemetry/runs/<run_id>/qa/qa_report.json`.
 - Update PLANS.md Progress/Decision Log with pass/fail status and follow-ups.
 
 ## Inputs
-- `.runs/<run_id>/docs/draft.md`
-- `.runs/<run_id>/prompts/prompt_package.json`
-- `.runs/<run_id>/context/context_plan.json`
+- `telemetry/runs/<run_id>/docs/draft.md`
+- `telemetry/runs/<run_id>/prompts/prompt_package.json`
+- `telemetry/runs/<run_id>/context/context_plan.json`
 
 ## Outputs
 - QA report JSON and summaries for human reviewers.

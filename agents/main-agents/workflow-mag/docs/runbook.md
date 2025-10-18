@@ -8,10 +8,10 @@
 ## Execution
 - Dry run: `PYTHONPATH=src uv run flowctl run --dry-run runtime/automation/flow_runner/flows/workflow_mag.flow.yaml` (Docs & Prompts execute in parallel; Context waits on Prompts).
 - Production: rerun without `--dry-run`.
-- Monitor `.runs/<run_id>/summary.json` for stage completion notes.
+- Monitor `telemetry/runs/<run_id>/summary.json` for stage completion notes.
 
 ## Incident Response
-- If a stage fails, consult its artefact directory inside `.runs/<run_id>`.
+- If a stage fails, consult its artefact directory inside `telemetry/runs/<run_id>`.
 - Use `sop/rollback.yaml` to determine whether to rerun stages or escalate.
 - Update PLANS.md `Surprises` and `Decision Log` with findings before resuming work.
 

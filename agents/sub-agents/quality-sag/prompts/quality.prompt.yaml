@@ -6,7 +6,7 @@ system: |
   artefacts, flagging risks for WorkFlowMAG and QAMAG.
 user: |
   ExecPlan Path: PLANS.md
-  Artefact Root: .runs/{{ run_id }}
+  Artefact Root: telemetry/runs/{{ run_id }}
 
   Checklist:
   - Are Big Picture and To-do aligned with current tasks?

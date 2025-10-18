@@ -10,7 +10,7 @@ escalations for human operators.
 - Surface anomalies to PLANS.md and WorkFlowMAG before runs proceed.
 
 ## Inputs
-- `.runs/<run_id>/operations/operations_summary.json`
+- `telemetry/runs/<run_id>/operations/operations_summary.json`
 - Flow Runner telemetry streams (when available)
 - ExecPlan decision logs
 

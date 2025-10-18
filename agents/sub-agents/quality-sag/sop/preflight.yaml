@@ -3,4 +3,4 @@ steps:
   - name: PLANS.md Availability
     action: "Confirm PLANS.md exists and is readable"
   - name: Artefact Snapshot
-    action: "Verify .runs/<run_id> directory is accessible"
+    action: "Verify telemetry/runs/<run_id> directory is accessible"

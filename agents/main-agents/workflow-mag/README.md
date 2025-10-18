@@ -6,7 +6,7 @@ DocsSAG, PromptSAG, ContextSAG, QualitySAG, OperationsMAG, and QAMAG so each sta
 ## Responsibilities
 - Resolve Flow Runner configs and launch the orchestrated workflow.
 - Synchronise PLANS.md updates with stage transitions.
-- Persist intermediate outputs under `.runs/<run_id>` for downstream review.
+- Persist intermediate outputs under `telemetry/runs/<run_id>` for downstream review.
 - Escalate to OperationsMAG when telemetry budgets are at risk.
 
 ## Inputs
@@ -15,7 +15,7 @@ DocsSAG, PromptSAG, ContextSAG, QualitySAG, OperationsMAG, and QAMAG so each sta
 - Task metadata captured in `/docs/task_template.md`
 
 ## Outputs
-- Run artefacts inside `.runs/<run_id>` (plan.json, docs, prompts, context, QA, operations summary, final summary).
+- Run artefacts inside `telemetry/runs/<run_id>` (plan.json, docs, prompts, context, QA, operations summary, final summary).
 - Log entries in `runtime/automation/logs/workflow/`.
 
 ## Related Documents

@@ -1,7 +1,7 @@
 # OperationsMAG Runbook
 
 ## Monitoring Loop
-- Review `.runs/<run_id>/operations/operations_summary.json` after each WorkFlowMAG run.
+- Review `telemetry/runs/<run_id>/operations/operations_summary.json` after each WorkFlowMAG run.
 - Compare telemetry budgets against SSOT.md expectations.
 - Record findings in PLANS.md Progress and Decision Log.
 
@@ -12,5 +12,5 @@
 
 ## Escalation Steps
 - Notify the channel defined in `agents/AGENT_REGISTRY.yaml` (default: `#ops-ai`).
-- Attach the relevant ExecPlan excerpt and `.runs/<run_id>/summary.json`.
+- Attach the relevant ExecPlan excerpt and `telemetry/runs/<run_id>/summary.json`.
 - Coordinate with QAMAG for joint assessment when quality issues coincide with latency breaches.

@@ -6,4 +6,4 @@
 ## Responsibilities
 - Check each cited source in DocsSAG/QAMAG outputs against SSOT references.
 - Flag stale or missing sources and suggest updates.
-- Store findings in `.runs/<run_id>/reference/reference_report.json`.
+- Store findings in `telemetry/runs/<run_id>/reference/reference_report.json`.

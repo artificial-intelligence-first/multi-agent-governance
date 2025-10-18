@@ -2,7 +2,7 @@
 
 ## Role
 - Monitor telemetry budgets and SLA adherence across the WorkFlowMAG pipeline.
-- Collect diagnostics from `.runs/<run_id>/operations/operations_summary.json`.
+- Collect diagnostics from `telemetry/runs/<run_id>/operations/operations_summary.json`.
 - Coordinate escalations to human operators when latency budgets or quality gates fail.
 
 ## Responsibilities

@@ -1,7 +1,7 @@
 version: 1
 steps:
   - name: Access Summary
-    action: "Confirm .runs/<run_id>/summary.json exists"
+    action: "Confirm telemetry/runs/<run_id>/summary.json exists"
   - name: Fetch Budgets
     action: "Load telemetry budgets from agents/SSOT.md or config file"
   - name: Log Directory Check

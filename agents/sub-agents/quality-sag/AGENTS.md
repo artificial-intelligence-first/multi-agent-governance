@@ -7,7 +7,7 @@
 ## Responsibilities
 - Verify PLANS.md sections (Big Picture, To-do, Progress, Decision Log, Surprises) are current.
 - Flag inconsistencies to WorkFlowMAG and QAMAG.
-- Generate interim quality notes stored under `.runs/<run_id>/quality/`.
+- Generate interim quality notes stored under `telemetry/runs/<run_id>/quality/`.
 
 ## SOP Index
 - `sop/preflight.yaml` — verify PLANS.md accessibility and checklist.

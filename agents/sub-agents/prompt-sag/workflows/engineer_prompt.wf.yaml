@@ -1,7 +1,7 @@
 $schema: ../../../docs/flow.schema.json
 version: 1
 run:
-  output_dir: .runs/${RUN_ID}
+  output_dir: telemetry/runs/${RUN_ID}
 steps:
   - id: schema_validation
     uses: shell

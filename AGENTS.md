@@ -36,7 +36,10 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
   - `agents/AGENTS.md` – fleet structure, routing expectations, and links to agent assets.
   - `docs/AGENTS.md` – documentation workflow, reference syncing rules, and DocsSAG/PromptSAG outputs.
   - `src/AGENTS.md` – automation scripts and vendored Flow Runner housekeeping.
-  - `.mcp/AGENTS.md` – MCP configuration SSOT (providers, env files, verification steps).
+  - `telemetry/AGENTS.md` – observability and retention playbook for run artefacts.
+  - `collab/AGENTS.md` – decision log and collaboration workflow.
+  - `archive/AGENTS.md` – archival policy and recovery guidance.
+  - `.mcp/AGENTS.md` / `.mcp/SSOT.md` – MCP configuration guide and source-of-truth values.
 - MCPSAG maintains the MCP cascade; see `agents/sub-agents/mcp-sag/AGENTS.md` for provider lifecycle and documentation obligations.
 - When introducing a brand-new top-level area, add an `AGENTS.md` there and link it from this file.
 

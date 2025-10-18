@@ -8,7 +8,7 @@ Use this runbook when PromptSAG encounters incidents or requires maintenance.
 - Missing or malformed prompt packets in downstream automation.
 
 ## Triage
-1. Inspect the most recent request/response pair in `.runs/<RUN_ID>/`.
+1. Inspect the most recent request/response pair in `telemetry/runs/<RUN_ID>/`.
 2. Re-run the validator locally to reproduce the failure.
 3. Check shared partials and reference docs for missing updates.
 

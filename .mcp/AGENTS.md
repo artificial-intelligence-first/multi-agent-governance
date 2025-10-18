@@ -1,16 +1,25 @@
 # MCP Configuration Playbook
 
-## Structure
-- `.mcp-config.yaml` is the single source of truth for MCP routers and servers. Use `${VAR}` or `${VAR:-default}` interpolation so secrets stay in the environment.
-- `.env.mcp` stores provider tokens; copy `.env.mcp.example` and keep the real file untracked. Define `OPENAI_API_KEY`, `MCP_ROUTER_PROVIDER`, and any per-provider overrides here.
+# MCP Configuration Playbook
 
-## Usage
-- Codex, Cursor, Flow Runner, and the `mcpctl` CLI all load configuration from this directory. Set `MCP_CONFIG_PATH`/`MCP_ENV_FILE` only when testing alternates; defaults resolve to this folder automatically.
-- Switch providers by updating `router.provider` and extending `providers` in `.mcp-config.yaml`. Avoid ad-hoc environment tweaking—update the YAML so every tool reads the same state.
-- Active provider templates: `dummy`, `openai`, and `github` (GitHub REST/GraphQL). Supply `GITHUB_TOKEN` via `.env.mcp` before enabling the GitHub provider; override `GITHUB_API_BASE` or `GITHUB_API_VERSION` when targeting Enterprise or new API releases.
-- MCPSAG (`agents/sub-agents/mcp-sag/`) owns the documentation and validation cascade for this folder; follow its SOP and checklist before merging configuration edits.
+## Mission
+- Keep the fleet aligned on a single MCP router/provider configuration surface.
+- Treat `.mcp/SSOT.md` as the source for immutable values and verification steps referenced here.
 
-## Verification
-- Run `uvx mcpctl route "ping"` to confirm routing after edits; pass `--log-dir` for audit output.
-- For regression coverage, execute `PYTHONPATH=src/mcprouter/src uv run python -m pytest src/mcprouter/tests/test_router.py`.
-- Consult MCPSAG’s playbook for extended coverage (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) and Flow Runner validation guidance.
+## Layout
+- `.mcp-config.yaml` — canonical router configuration. Execute MCPSAG SOPs before editing.
+- `.env.mcp` / `.env.mcp.example` — provider tokens (real file stays untracked).
+- `AGENTS.md` (this file) — structure and operating guidance.
+- `SSOT.md` — authoritative values, required procedures, and validation commands.
+
+## Operating Flow
+1. Record intent and impact in PLANS.md, align with MCPSAG (`agents/sub-agents/mcp-sag/`).
+2. Update `.mcp-config.yaml`; adjust `.env.mcp.example` if new variables are required.
+3. Refresh SSOT with any new defaults or verification notes.
+4. Run the validation commands listed in SSOT (e.g. `uvx mcpctl route "ping"`) and capture results in PLANS.md.
+5. During review, inspect `.mcp/` diffs together with SSOT updates to ensure consistency.
+
+## References
+- [[SSOT]]
+- `agents/sub-agents/mcp-sag/AGENTS.md` (SOP & checklist)
+- `src/mcprouter/` (router implementation and tests)

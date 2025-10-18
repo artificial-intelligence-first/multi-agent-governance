@@ -32,4 +32,4 @@ class WorkFlowMAG:
 def artifact_path(run_id: str, relative_path: str) -> Path:
     """Utility exposed for tests to reference pipeline artefacts."""
 
-    return Path(".runs") / run_id / relative_path
+    return Path("telemetry/runs") / run_id / relative_path
