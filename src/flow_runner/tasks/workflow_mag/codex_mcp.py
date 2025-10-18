@@ -6,6 +6,7 @@ import asyncio
 import json
 import logging
 import os
+import shutil
 import threading
 from concurrent.futures import TimeoutError as FutureTimeoutError
 from dataclasses import dataclass
@@ -15,7 +16,7 @@ from mcp.client.session import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 
 from agents.shared.tooling.token_utils import TokenUsage, ensure_within_limit
-from automation.workflows.lib import default_gateway_args
+from automation.workflows.lib import default_gateway_args, resolve_gateway_spec
 
 _LOG = logging.getLogger(__name__)
 
@@ -94,21 +95,34 @@ class CodexMCPManager:
         max_concurrent_sessions: int = 1,
     ) -> None:
         self._command = command
-        self._args = list(args or ["mcp"])
+        self._args = list(args or ["mcp-server"])
         if not args:
-            gateway_args = default_gateway_args()
+            spec = resolve_gateway_spec()
+            gateway_command = spec.command or "mcp"
+            resolved_command = shutil.which(gateway_command) or gateway_command
+            command_config = json.dumps(resolved_command)
+            self._args.extend(["-c", "mcp_servers={}", "-c", f"gateway.command={command_config}"])
+
+            gateway_args = list(spec.args) or default_gateway_args()
             if gateway_args:
-                filtered_args = _filter_gateway_args(gateway_args)
+                filtered_args = _filter_gateway_args(list(gateway_args))
                 config_value = json.dumps(filtered_args, separators=(",", ":"))
                 self._args.extend(["-c", f"gateway.args={config_value}"])
 
-        max_sessions_env = os.environ.get("AIAMS_CODEX_MCP_MAX_SESSIONS")
+            if spec.env:
+                env_config = json.dumps(spec.env, separators=(",", ":"))
+                self._args.extend(["-c", f"gateway.env={env_config}"])
+            if spec.cwd:
+                cwd_config = json.dumps(spec.cwd)
+                self._args.extend(["-c", f"gateway.cwd={cwd_config}"])
+
+        max_sessions_env = os.environ.get("MAG_CODEX_MCP_MAX_SESSIONS")
         if max_sessions_env is not None:
             try:
                 max_concurrent_sessions = int(max_sessions_env)
             except ValueError:  # pragma: no cover - defensive branch
                 _LOG.warning(
-                    "Invalid AIAMS_CODEX_MCP_MAX_SESSIONS value '%s'; defaulting to %s",
+                    "Invalid MAG_CODEX_MCP_MAX_SESSIONS value '%s'; defaulting to %s",
                     max_sessions_env,
                     max_concurrent_sessions,
                 )
@@ -234,7 +248,7 @@ class CodexMCPManager:
     ) -> CodexMCPCallResult:
         """Invoke Codex MCP with the given prompt and configuration."""
 
-        target_model = model or os.environ.get("AIAMS_CODEX_MODEL", "gpt-4o-mini")
+        target_model = model or os.environ.get("MAG_CODEX_MODEL", "gpt-5-codex-medium")
         token_usage: TokenUsage | None = None
         if token_limit is not None:
             token_usage = ensure_within_limit(
@@ -264,14 +278,14 @@ class CodexMCPManager:
 
         timeout_value: Optional[float] = timeout
         if timeout_value is None:
-            timeout_env = os.environ.get("AIAMS_CODEX_MCP_TIMEOUT")
+            timeout_env = os.environ.get("MAG_CODEX_MCP_TIMEOUT")
             if timeout_env:
                 try:
                     parsed_timeout = float(timeout_env)
                     if parsed_timeout > 0:
                         timeout_value = parsed_timeout
                 except ValueError:
-                    _LOG.warning("Invalid AIAMS_CODEX_MCP_TIMEOUT value '%s'; ignoring", timeout_env)
+                    _LOG.warning("Invalid MAG_CODEX_MCP_TIMEOUT value '%s'; ignoring", timeout_env)
 
         future = asyncio.run_coroutine_threadsafe(self._submit(payload), self._loop)
         try:

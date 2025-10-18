@@ -19,7 +19,7 @@ from mcprouter import MCPRouter
 with MCPRouter.from_env(log_dir=Path("telemetry/runs/sample")) as router:
     result = router.generate(
         prompt="Summarize the repository in two sentences.",
-        model="gpt-4o-mini",
+        model="gpt-5-codex-medium",
         prompt_limit=8192,
         prompt_buffer=512,
         sandbox="read-only",

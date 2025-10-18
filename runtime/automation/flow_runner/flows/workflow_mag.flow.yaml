@@ -15,7 +15,7 @@ run:
   output_dir: telemetry/runs/${RUN_ID}
   env:
     WORKFLOW_CONFIG: ${WORKFLOW_CONFIG}
-    AIAMS_RUN_ID: ${RUN_ID}
+    MAG_RUN_ID: ${RUN_ID}
 steps:
   - id: plan
     uses: flow_runner.tasks.workflow_mag.stages:PlanStage

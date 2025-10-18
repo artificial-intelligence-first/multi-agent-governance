@@ -26,9 +26,9 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
-DEFAULT_CODEX_MODEL = os.environ.get("AIAMS_CODEX_MODEL", "gpt-4o-mini")
-DEFAULT_CODEX_PROMPT_LIMIT = _env_int("AIAMS_CODEX_PROMPT_LIMIT", 8192)
-DEFAULT_CODEX_PROMPT_BUFFER = max(_env_int("AIAMS_CODEX_PROMPT_BUFFER", 512), 0)
+DEFAULT_CODEX_MODEL = os.environ.get("MAG_CODEX_MODEL", "gpt-5-codex-medium")
+DEFAULT_CODEX_PROMPT_LIMIT = _env_int("MAG_CODEX_PROMPT_LIMIT", 8192)
+DEFAULT_CODEX_PROMPT_BUFFER = max(_env_int("MAG_CODEX_PROMPT_BUFFER", 512), 0)
 
 
 def _env_float(name: str, default: float | None) -> float | None:
@@ -44,7 +44,7 @@ def _env_float(name: str, default: float | None) -> float | None:
     return value
 
 
-DEFAULT_CODEX_TIMEOUT_S = _env_float("AIAMS_CODEX_MCP_TIMEOUT", 180.0)
+DEFAULT_CODEX_TIMEOUT_S = _env_float("MAG_CODEX_MCP_TIMEOUT", 180.0)
 
 
 def _ensure_dir(path: Path) -> Path:
@@ -161,15 +161,15 @@ class RuntimeContext:
 
     def as_env(self) -> dict[str, str]:
         env = {
-            "AIAMS_RUN_ID": self.run_id,
-            "AIAMS_FLOW": self.flow,
-            "AIAMS_OUTPUT_DIR": str(self.output_dir),
-            "AIAMS_LOG_DIR": str(self.log_dir),
+            "MAG_RUN_ID": self.run_id,
+            "MAG_FLOW": self.flow,
+            "MAG_OUTPUT_DIR": str(self.output_dir),
+            "MAG_LOG_DIR": str(self.log_dir),
         }
         if self.slug:
-            env["AIAMS_SLUG"] = self.slug
+            env["MAG_SLUG"] = self.slug
         if self.input_uri:
-            env["AIAMS_INPUT_URI"] = self.input_uri
+            env["MAG_INPUT_URI"] = self.input_uri
         return env
 
     def get_section(self, name: str, *, required: bool = False) -> dict[str, Any]:

@@ -1,0 +1,4 @@
+{"ts": "2025-10-18T04:48:47.554020Z", "model": "debug-model", "worker": "worker-0", "latency_ms": 10.28275000044232, "prompt_chars": 6, "token_usage": {"tokens": {"input": 0, "output": 0, "total": 0}}, "status": "ok", "error": null}
+{"ts": "2025-10-18T05:17:08.081580Z", "model": "debug-model", "worker": "worker-0", "latency_ms": 397.217207999347, "prompt_chars": 6, "token_usage": {"tokens": 2}, "status": "error", "error": "github request failed: 401 Unauthorized"}
+{"ts": "2025-10-18T05:17:27.417780Z", "model": "debug-model", "worker": "worker-0", "latency_ms": 333.152125000197, "prompt_chars": 11, "token_usage": {"tokens": 3}, "status": "error", "error": "github request failed: 401 Unauthorized"}
+{"ts": "2025-10-18T05:19:12.637089Z", "model": "debug-model", "worker": "worker-0", "latency_ms": 514.9994579996928, "prompt_chars": 11, "token_usage": {"tokens": {"input": 0, "output": 0, "total": 0}}, "status": "ok", "error": null}

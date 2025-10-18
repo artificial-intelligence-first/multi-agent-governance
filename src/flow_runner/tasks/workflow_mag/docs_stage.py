@@ -18,7 +18,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def execute(config_path: str) -> Path:
     config = common.load_config(config_path)
-    run_id = os.environ.get("AIAMS_RUN_ID", "local-run")
+    run_id = os.environ.get("MAG_RUN_ID", "local-run")
     runtime_ctx = common.build_runtime_context(config, run_id=run_id)
     output_dir = runtime_ctx.output_dir / "docs"
     common.ensure_output_dir(output_dir)
