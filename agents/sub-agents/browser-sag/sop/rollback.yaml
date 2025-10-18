@@ -1,0 +1,65 @@
+name: BrowserSAG Rollback Procedures
+description: Rollback procedures for browser automation failures
+
+rollback_triggers:
+  - authentication_failure: "Authentication credentials are invalid or expired"
+  - url_inaccessible: "Target URLs are not accessible or return errors"
+  - automation_failure: "Browser automation fails repeatedly"
+  - data_quality_issue: "Extracted data is incomplete or inaccurate"
+  - resource_exhaustion: "System resources insufficient for browser operations"
+  - compliance_violation: "Target website terms of service violations detected"
+
+procedures:
+  authentication_failure:
+    steps:
+      - "Stop all active browser sessions"
+      - "Notify OpsMAG for credential updates"
+      - "Clear cached authentication data"
+      - "Wait for credential refresh before retry"
+      - "Log failure details for audit trail"
+      
+  url_inaccessible:
+    steps:
+      - "Verify target URL availability manually"
+      - "Check network connectivity and DNS resolution"
+      - "Validate URL format and parameters"
+      - "Contact site administrators if persistent issues"
+      - "Document accessibility issues for future reference"
+      
+  automation_failure:
+    steps:
+      - "Terminate all browser processes"
+      - "Clear browser cache and temporary files"
+      - "Review browser logs for error patterns"
+      - "Consider alternative automation approaches"
+      - "Escalate to manual review if automation continues to fail"
+      
+  data_quality_issue:
+    steps:
+      - "Validate extraction logic and selectors"
+      - "Check for page structure changes"
+      - "Compare with manual data collection"
+      - "Update extraction rules if needed"
+      - "Re-run extraction with corrected logic"
+      
+  resource_exhaustion:
+    steps:
+      - "Close all browser sessions immediately"
+      - "Clear system memory and temporary files"
+      - "Reduce concurrent automation tasks"
+      - "Monitor system resource usage"
+      - "Consider scaling to additional resources"
+      
+  compliance_violation:
+    steps:
+      - "Stop all automation activities immediately"
+      - "Review terms of service compliance"
+      - "Contact legal/compliance team"
+      - "Update automation policies if needed"
+      - "Document violation details for audit"
+
+notification_recipients:
+  - "OpsMAG: For infrastructure and credential issues"
+  - "QAMAG: For data quality and validation issues"
+  - "GovernanceSAG: For compliance and policy violations"
+  - "Requesting Agent: For task completion status updates"

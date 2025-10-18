@@ -1,0 +1,38 @@
+name: BrowserSAG Preflight Checklist
+description: Pre-execution validation for browser automation tasks
+
+checks:
+  - name: Chrome DevTools MCP Server Status
+    type: service_check
+    required: true
+    description: Verify Chrome DevTools MCP server is running and accessible
+    
+  - name: Playwright MCP Server Status  
+    type: service_check
+    required: true
+    description: Verify Playwright MCP server is configured and ready
+    
+  - name: Target URL Accessibility
+    type: url_check
+    required: true
+    description: Confirm target URLs are accessible and responsive
+    
+  - name: Authentication Credentials
+    type: credential_check
+    required: false
+    description: Verify authentication tokens/credentials are valid if required
+    
+  - name: Browser Environment
+    type: environment_check
+    required: true
+    description: Confirm browser environment is properly configured
+    
+  - name: Resource Availability
+    type: resource_check
+    required: true
+    description: Verify sufficient system resources for browser automation
+    
+  - name: Compliance Check
+    type: compliance_check
+    required: true
+    description: Confirm target websites comply with terms of service and automation policies
