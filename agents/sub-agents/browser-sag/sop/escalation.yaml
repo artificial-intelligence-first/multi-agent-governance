@@ -1,0 +1,22 @@
+name: browser_sag_escalation
+version: 0.1.1
+description: Escalation path for BrowserSAG incidents (security, tooling, or MCP failures).
+triggers:
+  - Chrome DevTools MCP session fails to launch after two retries.
+  - Playwright MCP session fails to launch or loses connectivity to managed browsers.
+  - MarkItDown MCP returns conversion failures for mandatory artefacts.
+  - Unexpected data exposure or policy violations detected during a run.
+  - Chrome or Playwright channel regression impacting baseline workflows.
+path:
+  - role: BrowserSAG on-call
+    action: Capture logs (Chrome DevTools, Playwright, MarkItDown), isolate the failing run, and notify MCPSAG within 15 minutes.
+  - role: MCPSAG
+    action: Audit `.mcp/.mcp-config.yaml`, update browser MCP references, and coordinate tooling fixes.
+  - role: GovernanceSAG
+    action: Assess policy impact, update AGENTS/SSOT guidance, and determine if operations freeze is required.
+communications:
+  - channel: "#ops-ai"
+    message: >
+      BrowserSAG incident triggered. Include run ID, prompt package, Chrome/Playwright versions, conversion context, and summary of impact.
+  - channel: ExecPlan
+    message: Document remediation timeline and validation steps before closing the incident.

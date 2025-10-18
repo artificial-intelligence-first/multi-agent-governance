@@ -1,0 +1,8 @@
+version: 1
+steps:
+  - name: Artefact Availability
+    action: "Confirm AGENTS.md, SSOT.md, CHANGELOG.md, and PLANS.md are readable"
+  - name: MCP Documentation
+    action: "Verify .mcp/AGENTS.md exists and references current providers"
+  - name: Telemetry Folder
+    action: "Create or confirm telemetry/runs/<run_id>/governance directory"

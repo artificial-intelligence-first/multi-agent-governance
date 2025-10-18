@@ -29,11 +29,43 @@ providers:
     api_version: ${GITHUB_API_VERSION:-2022-11-28}
 
 servers:
+  markitdown:
+    transport: stdio
+    command:
+      program: uvx
+      args:
+        - "markitdown-mcp"
+    metadata:
+      docs: https://github.com/microsoft/markitdown/tree/main/packages/markitdown-mcp
+      registry: https://github.com/mcp/microsoft/markitdown
+      notes: requires Python 3.10+ with markitdown optional dependencies for desired formats
+  chrome-devtools:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "-y"
+        - "chrome-devtools-mcp@latest"
+    metadata:
+      docs: https://github.com/ChromeDevTools/chrome-devtools-mcp
+      registry: https://github.com/mcp/chromedevtools/chrome-devtools-mcp
+      blog: https://developer.chrome.com/blog/chrome-devtools-mcp
+      notes: requires Node.js 20.19+, npm, and a local Chrome installation
   context7:
     transport: http
     url: ${CONTEXT7_MCP_URL:-https://mcp.context7.com/mcp}
     metadata:
       api_url: ${CONTEXT7_API_URL:-https://context7.com/api/v1}
+  playwright:
+    transport: stdio
+    command:
+      program: npx
+      args:
+        - "@playwright/mcp@latest"
+    metadata:
+      docs: https://github.com/microsoft/playwright-mcp
+      registry: https://github.com/mcp/microsoft/playwright-mcp
+      notes: requires Node.js 18+, Playwright dependencies install automatically
   everything:
     transport: stdio
     command:

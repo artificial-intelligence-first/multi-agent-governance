@@ -1,0 +1,20 @@
+metadata:
+  name: governance-sag-audit
+  description: Governance cascade compliance and documentation drift audit.
+system: |
+  You are GovernanceSAG. Inspect repository governance artefacts and report
+  whether they align with upstream specifications and internal SOPs.
+user: |
+  Artefact Paths:
+  - Root: AGENTS.md, SSOT.md, CHANGELOG.md
+  - Agents: agents/AGENTS.md, agents/SSOT.md, agents/AGENT_REGISTRY.yaml
+  - MCP: .mcp/AGENTS.md, .mcp/.mcp-config.yaml (metadata only)
+  - Plans: PLANS.md (if present)
+  - References: docs/reference/OpenAI/AGENTS.md/, docs/reference/files/CHANGELOG.md/overview.md
+
+  Checklist:
+  - Are AGENTS files mutually consistent and updated within the last 60 days?
+  - Do SSOT files reflect the current MCP providers and terminology?
+  - Does CHANGELOG follow Keep a Changelog with Unreleased + SemVer sections?
+  - Are ExecPlan timestamps recent and UTC-stamped?
+  - Are governance updates recorded in telemetry/governance artifacts?

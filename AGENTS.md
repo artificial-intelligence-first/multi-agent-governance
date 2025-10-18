@@ -12,6 +12,9 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - Enabling the GitHub MCP server requires `GITHUB_TOKEN` (and optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp`; keep scopes minimal, rotate regularly, and note whether REST or GraphQL endpoints are in use.
 - Enabling the Context7 MCP server requires `CONTEXT7_MCP_URL`, `CONTEXT7_API_KEY`, and (optionally) `CONTEXT7_API_URL` in `.mcp/.env.mcp`; the shared config publishes it under `servers.context7` for Codex, Cursor, and Flow Runner.
 - Enabling the Serena MCP server requires setting `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT` so the stdio launch command in `servers.serena` activates the intended workspace via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server`.
+- Enabling the Chrome DevTools MCP server requires Node.js 20.19+, npm, and a local Chrome install; the shared config launches `servers.chrome-devtools` via `npx -y chrome-devtools-mcp@latest`, and you can add flags like `--headless` or `--executablePath` through MCPSAG when standardising behaviour.
+- Enabling the MarkItDown MCP server requires Python 3.10+ and the `markitdown-mcp` package (install extras for desired file converters); the shared config launches `servers.markitdown` via `uvx markitdown-mcp`.
+- Enabling the Playwright MCP server requires Node.js 18+ and Playwright browser binaries; the shared config launches `servers.playwright` via `npx @playwright/mcp@latest`, with CLI flags available for headless mode, traces, and storage state.
 - Reference MCP servers (`everything`, `fetch`, `filesystem`, `git`, `memory`, `sequentialthinking`, `time`) ship from `modelcontextprotocol/servers`; install prerequisites (`node`/`npx`, `uvx`) and configure `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` with absolute paths before enabling write-capable tools.
 - Route all MCP configuration changes through MCPSAG (`agents/sub-agents/mcp-sag/`); follow its SOP and checklist template before editing `.mcp/.mcp-config.yaml`.
 
@@ -53,5 +56,6 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - When you add or update `CHANGELOG.md`, follow the Keep a Changelog conventions captured in `docs/reference/files/CHANGELOG.md/overview.md` and keep the `Unreleased`+release sections in sync with SemVer tags.
 - When interacting with users, prefer the requester’s primary language for conversations and status updates; keep internal artefacts (docs, logs, code) in English.
 - Keep `agents/AGENT_REGISTRY.yaml`, `agents/SSOT.md`, and DocsSAG outputs in sync whenever routing or terminology shifts.
+- Loop in GovernanceSAG (`agents/sub-agents/governance-sag/`) when updating AGENTS/SSOT/CHANGELOG/PLANS artefacts or when governance drift is detected.
 - Schedule periodic reviews: if a directory’s AGENTS.md hasn’t changed in 60 days, confirm it still reflects reality.
 - Involve MCPSAG whenever MCP providers, credentials, or SDK dependencies move; confirm its checklist and runbook are updated alongside the change.

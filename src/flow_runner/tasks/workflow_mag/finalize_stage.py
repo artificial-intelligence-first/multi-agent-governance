@@ -29,11 +29,13 @@ def execute(config_path: str) -> Path:
         "task": config["task"],
         "artifacts": [
             "plan.json",
+            "browser/browser_plan.json",
             "docs/draft.md",
             "prompts/prompt_package.json",
             "context/context_plan.json",
             "qa/qa_report.json",
             "operations/operations_summary.json",
+            "governance/governance_report.json",
         ],
         "status": "pipeline scaffold complete; awaiting agent execution.",
         "registered_artifacts": runtime_ctx.list_artifacts(),

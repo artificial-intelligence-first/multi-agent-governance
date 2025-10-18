@@ -6,6 +6,8 @@ env:
 steps:
   - id: plan
     run: python -m flow_runner.tasks.workflow_mag.orchestrate --config ${WORKFLOW_CONFIG} --stage plan
+  - id: browser
+    run: python -m flow_runner.tasks.workflow_mag.browser_stage --config ${WORKFLOW_CONFIG}
   - id: docs
     run: python -m flow_runner.tasks.workflow_mag.docs_stage --config ${WORKFLOW_CONFIG}
   - id: prompts
@@ -16,5 +18,7 @@ steps:
     run: python -m flow_runner.tasks.workflow_mag.qa_stage --config ${WORKFLOW_CONFIG}
   - id: operations
     run: python -m flow_runner.tasks.workflow_mag.operations_stage --config ${WORKFLOW_CONFIG}
+  - id: governance
+    run: python -m flow_runner.tasks.workflow_mag.governance_stage --config ${WORKFLOW_CONFIG}
   - id: finalize
     run: python -m flow_runner.tasks.workflow_mag.finalize_stage --config ${WORKFLOW_CONFIG}

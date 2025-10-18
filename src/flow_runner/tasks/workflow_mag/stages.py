@@ -5,7 +5,17 @@ from __future__ import annotations
 import os
 from typing import Any, Dict
 
-from . import orchestrate, docs_stage, prompt_stage, context_stage, qa_stage, operations_stage, finalize_stage
+from . import (
+    orchestrate,
+    browser_stage,
+    docs_stage,
+    prompt_stage,
+    context_stage,
+    qa_stage,
+    operations_stage,
+    governance_stage,
+    finalize_stage,
+)
 
 
 class _BaseStage:
@@ -61,8 +71,20 @@ class OperationsStage(_BaseStage):
         return {"stage": "operations", "status": "completed", "artifact": str(path)}
 
 
+class GovernanceStage(_BaseStage):
+    def __call__(self, **kwargs: Any) -> Dict[str, Any]:
+        config = _config_from_kwargs(kwargs)
+        path = governance_stage.execute(config)
+        return {"stage": "governance", "status": "completed", "artifact": str(path)}
+
+
 class FinalizeStage(_BaseStage):
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         config = _config_from_kwargs(kwargs)
         path = finalize_stage.execute(config)
         return {"stage": "finalize", "status": "completed", "artifact": str(path)}
+class BrowserStage(_BaseStage):
+    def __call__(self, **kwargs: Any) -> Dict[str, Any]:
+        config = _config_from_kwargs(kwargs)
+        path = browser_stage.execute(config)
+        return {"stage": "browser", "status": "completed", "artifact": str(path)}

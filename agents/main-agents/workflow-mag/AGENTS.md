@@ -2,13 +2,13 @@
 
 ## Role
 - Orchestrates Flow Runner pipelines for Multi Agent Governance.
-- Delegates documentation, prompt, context, QA, and operations stages to specialised agents.
+- Delegates browser, documentation, prompt, context, QA, and operations stages to specialised agents.
 - Maintains the ExecPlan (`PLANS.md`) linkage and records stage outcomes in `telemetry/runs/<run_id>`.
 
 ## Responsibilities
 - Validate that `automation.compliance.pre` passes before launching flows.
 - Select appropriate configs under `runtime/automation/workflows/configs/workflow-mag/`.
-- Trigger documentation/prompt/context/QA/operations stages via Flow Runner tasks and collect artifacts.
+- Trigger browser/documentation/prompt/context/QA/operations stages via Flow Runner tasks and collect artifacts.
 - Update `/docs/task_template.md` and `runtime/automation/logs/` with run metadata.
 
 ## References

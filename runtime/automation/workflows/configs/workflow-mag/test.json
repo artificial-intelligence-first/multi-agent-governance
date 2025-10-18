@@ -8,7 +8,8 @@
       "prompt",
       "context",
       "qa",
-      "operations"
+      "operations",
+      "governance"
     ]
   },
   "paths": {

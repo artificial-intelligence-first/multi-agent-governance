@@ -1,0 +1,6 @@
+$schema: ../../docs/flow.schema.json
+version: 1
+description: GovernanceSAG compliance audit workflow
+steps:
+  - id: governance-audit
+    run: python -m flow_runner.tasks.workflow_mag.governance_stage --config ${WORKFLOW_CONFIG}

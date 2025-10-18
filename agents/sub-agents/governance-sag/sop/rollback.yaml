@@ -1,0 +1,17 @@
+version: 1
+scenarios:
+  - name: AGENTS Drift
+    detect: "Missing or outdated GovernanceSAG references in AGENTS cascade"
+    actions:
+      - "Coordinate with DocsSAG to update affected AGENTS.md files"
+      - "Log corrective action in telemetry/runs/<run_id>/governance/rollback.log"
+  - name: SSOT Out-of-Sync
+    detect: "SSOT.md and .mcp/AGENTS.md contain conflicting provider details"
+    actions:
+      - "Engage MCPSAG to run the MCP change checklist"
+      - "Document final provider list in agents/SSOT.md"
+  - name: Changelog Noncompliance
+    detect: "CHANGELOG.md missing Unreleased or latest release notes"
+    actions:
+      - "Draft corrections via DocsSAG and request release owner approval"
+      - "Re-run make validate before clearing the incident"

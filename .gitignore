@@ -73,3 +73,5 @@ docs/generated/
 !docs/generated/
 !docs/generated/.gitkeep
 .runs/
+telemetry/runs/*
+!telemetry/runs/.gitkeep

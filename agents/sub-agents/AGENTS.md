@@ -11,6 +11,7 @@
 - PromptSAG: `python -m pytest agents/sub-agents/prompt-sag/tests/test_agent.py` plus `make validate-prompt`.
 - ContextSAG: `python -m pytest agents/sub-agents/context-sag/tests/test_agent.py` plus `make validate-context`.
 - MCPSAG: `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"` plus targeted pytest runs (`src/mcprouter/tests -k mcp`, `src/flowrunner/tests/test_runner.py -k mcp`) and `make validate` when configuration changes impact automation.
+- GovernanceSAG: `python -m pytest agents/sub-agents/governance-sag/tests/test_governance_sag_agent.py` and ensure governance telemetry is populated during pipeline dry runs.
 - Add agent-specific validators under `src/automation/scripts/` when new schemas or assets are introduced.
 
 ## PR instructions
@@ -26,3 +27,5 @@
 - `quality-sag/` – ExecPlan and interim quality auditor.
 - `reference-sag/` – reference and citation auditor.
 - `mcp-sag/` – MCP configuration specialist that governs `.mcp/.mcp-config.yaml`, documentation cascades, and validation workflows.
+- `governance-sag/` – governance compliance monitor that keeps AGENTS/SSOT/CHANGELOG/PLANS artefacts aligned.
+- `browser-sag/` – browser automation specialist orchestrating Chrome DevTools, Playwright, and MarkItDown MCP servers.

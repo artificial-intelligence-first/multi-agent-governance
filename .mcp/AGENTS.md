@@ -18,8 +18,12 @@
 3. Refresh SSOT with any new defaults or verification notes.
 4. Run the validation commands listed in SSOT (e.g. `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"`) and capture results in PLANS.md.
 5. During review, inspect `.mcp/` diffs together with SSOT updates to ensure consistency.
+6. Notify GovernanceSAG (`agents/sub-agents/governance-sag/`) after documentation or config updates so governance telemetry captures the latest MCP state.
 
 ## Providers & Servers
+- **MarkItDown** – Runs via `uvx markitdown-mcp` under `servers.markitdown`; install Python 3.10+ and desired MarkItDown extras (`[pdf]`, `[docx]`, etc.) before invoking `convert_to_markdown`.
+- **Chrome DevTools** – Runs via `npx -y chrome-devtools-mcp@latest` under `servers.chrome-devtools`; requires Node.js 20.19+, npm, and a local Chrome install. Supports headless mode, remote debugging via `--browserUrl`/`--wsEndpoint`, and verbose logging with `DEBUG=*`.
+- **Playwright** – Runs via `npx @playwright/mcp@latest` under `servers.playwright`; requires Node.js 18+ and installs Playwright browser binaries on first launch. Coordinate CLI flags (`--headless`, `--save-trace`, etc.) when standardising behaviour.
 - **GitHub** – Requires `GITHUB_TOKEN` plus optional overrides (`GITHUB_API_BASE`, `GITHUB_API_VERSION`, `GITHUB_TIMEOUT_SEC`). Router provider alias: `github`.
 - **Context7** – Registered under `servers.context7`; defaults to the public HTTPS endpoint with no auth headers so anonymous access keeps working. Add a `CONTEXT7_API_KEY` header manually in `.mcp/.mcp-config.yaml` (or a local override) when you provision higher rate limits. Surface the REST API base as `CONTEXT7_API_URL` when automations need direct HTTP calls. Keep secrets in `.env.mcp` only; update `.env.mcp.example` with placeholders.
 - **Everything** – Stdio server launched via `npx -y @modelcontextprotocol/server-everything`; no local state, but requires Node/npm availability. Useful for validating prompts/resources/tools support in MCP clients.

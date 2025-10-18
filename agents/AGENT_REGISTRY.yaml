@@ -84,3 +84,25 @@ routes:
     telemetry:
       metric: mcp.config_sync
       budget_s: 70
+  governance-compliance:
+    primary: agents/sub-agents/governance-sag:govern
+    backup: manual-handlers/manual-governance:triage
+    description: Audit AGENTS/SSOT/CHANGELOG/PLANS artefacts for governance compliance and surface drift to orchestration agents.
+    preconditions:
+      - sop: agents/sub-agents/governance-sag/sop/README.md
+      - prompt: agents/sub-agents/governance-sag/prompts/governance.prompt.yaml
+    telemetry:
+      metric: governance.audit_ms
+      budget_s: 55
+  browser-automation:
+    primary: agents/sub-agents/browser-sag:browse
+    backup: manual-handlers/manual-browser:triage
+    description: Execute governed browser automation runs via Chrome DevTools, Playwright, and MarkItDown MCP servers, capturing traces, accessibility logs, and converted artefacts.
+    preconditions:
+      - sop: agents/sub-agents/browser-sag/sop/browse_run.yaml
+      - reference: docs/reference/tool/mcp/chrome-devtools/overview.md
+      - reference: docs/reference/tool/mcp/playwright/overview.md
+      - reference: docs/reference/tool/mcp/markitdown/overview.md
+    telemetry:
+      metric: browser.latency_ms
+      budget_s: 90

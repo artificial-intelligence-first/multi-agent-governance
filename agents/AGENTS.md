@@ -9,6 +9,9 @@ This tree contains every Multi Agent Governance agent plus shared contracts and 
 - MCP tooling uses the root `.mcp/.mcp-config.yaml`; do not stash agent-specific copies. When an agent needs new MCP access, coordinate with MCPSAG, extend the shared config, and note it in `.mcp/AGENTS.md`.
 - GitHub routing is available via the `github` provider—declare `GITHUB_TOKEN` (and optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp`, note whether REST or GraphQL endpoints are required, and update the docs cascade before agents depend on it.
 - Serena is exposed via `servers.serena` using a stdio command launched by `uvx`; set `SERENA_CONTEXT` and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp` so agents activate the right workspace when invoking Serena tools.
+- Chrome DevTools is available under `servers.chrome-devtools`; ensure Node.js 20.19+, npm, and Chrome/Chromium are installed before agents depend on browser automation, and coordinate `--headless`/`--executablePath` defaults through MCPSAG.
+- MarkItDown is available under `servers.markitdown`; install Python 3.10+ with `markitdown-mcp` (plus optional extras like `[pdf]`, `[docx]`) before requesting conversions from BrowserSAG.
+- Playwright is available under `servers.playwright`; ensure Node.js 18+ and Playwright browser binaries are present, and standardise CLI flags (`--headless`, `--save-trace`, etc.) with MCPSAG when needed.
 - Reference MCP servers from `modelcontextprotocol/servers` (Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, Time) are enabled via stdio commands. Ensure `npx`/`uvx` are on `PATH`, and populate `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` with absolute paths before agents rely on write-capable operations.
 
 ## Testing instructions
@@ -29,6 +32,7 @@ This tree contains every Multi Agent Governance agent plus shared contracts and 
 
 ## Directory hints
 - `main-agents/` – primary orchestrators (WorkFlowMAG, KnowledgeMag, OperationsMAG, QAMAG). See each subdirectory’s AGENTS.md for runtime instructions.
-- `sub-agents/` – supporting specialists (DocsSAG, PromptSAG, ContextSAG, QualitySAG, ReferenceSAG, MCPSAG). See `agents/sub-agents/AGENTS.md` for detailed responsibilities.
+- `sub-agents/` – supporting specialists (DocsSAG, PromptSAG, ContextSAG, QualitySAG, ReferenceSAG, GovernanceSAG, MCPSAG). See `agents/sub-agents/AGENTS.md` for detailed responsibilities.
+- `sub-agents/browser-sag/` – Browser automation workflows (Chrome DevTools, Playwright, MarkItDown) governed by BrowserSAG.
 - `contracts/` – JSON Schemas and examples; coordinate changes with validators and DocsSAG rules.
 - `shared/` – prompt partials and shared tooling; keep naming consistent so prompts can include them reliably.

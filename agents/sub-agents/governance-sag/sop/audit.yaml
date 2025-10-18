@@ -1,0 +1,22 @@
+version: 1
+checklist:
+  - name: AGENTS Cascade
+    verify:
+      - "Root + directory AGENTS.md reference GovernanceSAG responsibilities"
+      - "Last updated timestamps within 60 days or documented exemption"
+  - name: SSOT Alignment
+    verify:
+      - "SSOT.md and agents/SSOT.md mention current MCP providers and scopes"
+      - ".mcp/AGENTS.md links to latest SOP checklist"
+  - name: Changelog Compliance
+    verify:
+      - "CHANGELOG.md includes Unreleased section and follows Keep a Changelog"
+      - "Latest SemVer tag notes are present"
+  - name: ExecPlan Hygiene
+    verify:
+      - "PLANS.md contains canonical sections with UTC timestamps"
+      - "Surprises and Decision Log entries reflect last 24 hours"
+  - name: Telemetry Capture
+    verify:
+      - "Governance report saved under telemetry/runs/<run_id>/governance/"
+      - "Escalations sent to WorkFlowMAG/QAMAG when drift detected"

@@ -3,11 +3,13 @@
     "name": "workflow-mag-demo",
     "categories": [
       "workflow",
+      "browser",
       "documentation",
       "prompt",
       "context",
       "qa",
-      "operations"
+      "operations",
+      "governance"
     ]
   },
   "paths": {
@@ -27,6 +29,23 @@
       "docs/reference/files/PLANS.md/OpenAI.md"
     ]
   },
+  "browser": {
+    "targets": [],
+    "mcp_servers": [
+      "chrome-devtools",
+      "playwright",
+      "markitdown"
+    ],
+    "expected_artifacts": [
+      "screenshots",
+      "accessibility_snapshots",
+      "markdown_exports",
+      "traces"
+    ],
+    "instructions": [
+      "Document navigation goals and required artefacts prior to downstream stages."
+    ]
+  },
   "qa": {
     "checklist": [
       "documentation completeness",
@@ -37,10 +56,29 @@
   "operations": {
     "telemetry_budget_s": {
       "workflow": 120,
+      "browser": 90,
       "docs": 60,
       "prompt": 45,
       "context": 65,
       "qa": 40
     }
+  },
+  "governance": {
+    "checks": [
+      "AGENTS cascade alignment",
+      "SSOT propagation",
+      "CHANGELOG compliance",
+      "ExecPlan hygiene",
+      "Telemetry capture"
+    ],
+    "sources": [
+      "AGENTS.md",
+      "agents/AGENTS.md",
+      "agents/SSOT.md",
+      ".mcp/AGENTS.md",
+      "CHANGELOG.md",
+      "PLANS.md",
+      "docs/reference/"
+    ]
   }
 }

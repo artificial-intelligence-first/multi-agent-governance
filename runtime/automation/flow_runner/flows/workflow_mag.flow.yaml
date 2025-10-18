@@ -10,6 +10,8 @@ agent_paths:
   - ../../../../agents/sub-agents/context-sag/src
   - ../../../../agents/sub-agents/quality-sag/src
   - ../../../../agents/sub-agents/reference-sag/src
+  - ../../../../agents/sub-agents/browser-sag/src
+  - ../../../../agents/sub-agents/governance-sag/src
   - ../../../../src
 run:
   output_dir: telemetry/runs/${RUN_ID}
@@ -19,11 +21,14 @@ run:
 steps:
   - id: plan
     uses: flow_runner.tasks.workflow_mag.stages:PlanStage
-  - id: docs
+  - id: browser
     needs: [plan]
+    uses: flow_runner.tasks.workflow_mag.stages:BrowserStage
+  - id: docs
+    needs: [plan, browser]
     uses: flow_runner.tasks.workflow_mag.stages:DocsStage
   - id: prompts
-    needs: [plan]
+    needs: [plan, browser]
     uses: flow_runner.tasks.workflow_mag.stages:PromptsStage
   - id: context
     needs: [prompts]
@@ -34,6 +39,9 @@ steps:
   - id: operations
     needs: [qa]
     uses: flow_runner.tasks.workflow_mag.stages:OperationsStage
-  - id: finalize
+  - id: governance
     needs: [operations]
+    uses: flow_runner.tasks.workflow_mag.stages:GovernanceStage
+  - id: finalize
+    needs: [governance]
     uses: flow_runner.tasks.workflow_mag.stages:FinalizeStage

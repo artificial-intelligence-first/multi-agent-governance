@@ -1,0 +1,10 @@
+$schema: ../../../docs/flow.schema.json
+version: 1
+run:
+  output_dir: telemetry/runs/${RUN_ID}
+steps:
+  - id: browser_assets_validation
+    uses: shell
+    run: >
+      python src/automation/scripts/validate_browser_sag.py
+    timeout_sec: 30

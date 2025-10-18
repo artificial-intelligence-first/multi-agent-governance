@@ -4,6 +4,9 @@
 - `.mcp/.mcp-config.yaml` is the authoritative router configuration. Use `${VAR}` / `${VAR:-default}` for environment-specific overrides.
 - `.mcp/.env.mcp` stores provider secrets (`OPENAI_API_KEY`, `MCP_ROUTER_PROVIDER`, `GITHUB_TOKEN`, etc.). Template: `.env.mcp.example`.
 - Default router provider is `dummy`. Enable `openai`, `github`, etc. by extending the `providers` section and updating `.env.mcp`.
+- MarkItDown MCP server lives under `servers.markitdown`; we launch it with `uvx markitdown-mcp` so hosts need Python 3.10+ and the `markitdown-mcp` package (install extras for required converters).
+- Chrome DevTools MCP server lives under `servers.chrome-devtools`; we launch it with `npx -y chrome-devtools-mcp@latest`, so hosts must have Node.js 20.19+ and a Chrome/Chromium build available. Enable verbose logging with `DEBUG=*` and pass CLI flags (e.g., `--headless`, `--browserUrl`, `--executablePath`) via the shared config when standardising behaviour.
+- Playwright MCP server lives under `servers.playwright`; we launch it with `npx @playwright/mcp@latest`, which requires Node.js 18+ and downloads browser binaries on demand. Set CLI flags (`--headless`, `--browser`, `--save-trace`, etc.) in shared config if fleet-wide defaults are needed.
 - Context7 MCP server lives under `servers.context7`; declare `CONTEXT7_MCP_URL` (HTTPS endpoint), `CONTEXT7_API_KEY` (header value), and optionally `CONTEXT7_API_URL` for tooling that calls the REST API directly.
 - Serena MCP server is registered at `servers.serena` using the stdio transport. Launch via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` and provide workspace defaults with `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp`.
 - Reference servers from `modelcontextprotocol/servers` are exposed under `servers.*` (everything, fetch, filesystem, git, memory, sequentialthinking, time). Ensure `npx` and `uvx` are available. Set `MCP_FILESYSTEM_ROOT` and `MCP_GIT_REPOSITORY` to absolute paths before enabling write-capable servers.
@@ -13,6 +16,7 @@
 2. Execute MCPSAG SOP/checklist (`agents/sub-agents/mcp-sag/`).
 3. Edit `.mcp-config.yaml`; update `.env.mcp.example` if new variables are introduced.
 4. Run all validation commands below and note outcomes in PLANS.md.
+5. Notify GovernanceSAG so governance telemetry reflects the new MCP state and documentation updates.
 
 ## Validation Commands
 - Connectivity: `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"`

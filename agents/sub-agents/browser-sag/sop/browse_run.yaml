@@ -1,0 +1,34 @@
+name: browser_sag_browse_run
+version: 0.1.1
+description: >
+  Baseline runbook for launching Chrome DevTools, Playwright, and MarkItDown MCP servers via BrowserSAG,
+  capturing artefacts, converting outputs, and shutting down cleanly.
+steps:
+  - id: prep-environment
+    summary: Confirm host prerequisites
+    checklist:
+      - Verify Node.js >= 20.19.0 and npm are on PATH (covers Chrome DevTools + Playwright requirements).
+      - Verify Python >= 3.10 is available with `uvx` and `markitdown-mcp` (plus required extras) installed.
+      - Confirm Chrome/Chromium stable build and Playwright browser binaries are installed and accessible.
+      - Ensure `.mcp/.env.mcp` exposes required environment variables (DEBUG, flags, proxy settings).
+      - Validate router status with `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli route "status"`.
+  - id: configure-session
+    summary: Select prompt and flags
+    checklist:
+      - Choose a prompt package from `agents/sub-agents/browser-sag/prompts/`.
+      - Set Chrome DevTools / Playwright flags (e.g., `--headless`, `--browser`, traces) according to request sensitivity.
+      - Determine whether MarkItDown conversion is required and stage URIs or files accordingly.
+      - Document chosen configuration in the ExecPlan update.
+  - id: execute-tools
+    summary: Run browser MCP tools
+    checklist:
+      - Launch Chrome DevTools MCP via `npx -y chrome-devtools-mcp@latest` for tracing/debug commands.
+      - Launch Playwright MCP via `npx @playwright/mcp@latest` when accessibility-driven navigation is required.
+      - Capture requested artefacts (traces, screenshots, accessibility snapshots, console logs) and store under `telemetry/runs/<run_id>/browser/`.
+      - Invoke MarkItDown MCP (`uvx markitdown-mcp`) to convert downloaded resources into Markdown when instructed.
+  - id: validate-and-close
+    summary: Wrap up the run
+    checklist:
+      - Review artefacts for sensitive data; redact as required and document conversion parameters.
+      - Exit MCP sessions and confirm Chrome/Playwright processes stop.
+      - Record findings and outstanding actions in the ExecPlan log.

@@ -4,6 +4,9 @@
 - `github/overview.md` — configuration and usage details for GitHub’s MCP server implementation.
 - `context7/overview.md` — setup, authentication, and governance notes for the Context7 MCP server.
 - `serena/overview.md` — stdio launch guidance, context/mode defaults, and project activation tips for the Serena MCP server.
+- `chrome-devtools/overview.md` — Chrome DevTools automation server requirements, launch flags, and validation workflows for browser debugging.
+- `markitdown/overview.md` — Markdown conversion tooling for local/remote artefacts via MarkItDown MCP.
+- `playwright/overview.md` — Playwright-based automation server covering accessibility-driven browser actions.
 - `servers/overview.md` — reference implementations from `modelcontextprotocol/servers`, with per-server guides (Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, Time).
 - `sdk/` — language-specific SDK notes (Python, TypeScript) covering installation, capabilities, and usage patterns.
 
