@@ -7,7 +7,7 @@ FLOW_RUNNER_SPEC=${FLOW_RUNNER_SPEC:-"${REPO_ROOT}/src/flowrunner"}
 MCP_ROUTER_SPEC=${MCP_ROUTER_SPEC:-"${REPO_ROOT}/src/mcprouter"}
 
 if ! command -v "${PYTHON_BIN}" >/dev/null 2>&1; then
-  echo "[setup-flow-runner] ${PYTHON_BIN} not found. Install Python 3.11+ and rerun." >&2
+  echo "[setup-flow-runner] ${PYTHON_BIN} not found. Install Python 3.14.x (or at least 3.12+) and rerun." >&2
   exit 1
 fi
 
@@ -23,6 +23,6 @@ cat <<'MSG'
 [setup-flow-runner] Done.
 - Ensure '
   python3 -m site --user-base
-' bin directory is on your PATH (e.g., export PATH="$HOME/Library/Python/3.12/bin:$PATH").
+' bin directory is on your PATH (e.g., export PATH="$HOME/Library/Python/3.14/bin:$PATH").
 - Example: flowctl run runtime/automation/flow_runner/flows/workflow_mag.flow.yaml --dry-run
 MSG

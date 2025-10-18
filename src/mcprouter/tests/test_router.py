@@ -26,6 +26,8 @@ class FlakyProvider(BaseProvider):
 @pytest.fixture(autouse=True)
 def reset_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.setenv("MCP_ROUTER_PROVIDER", "dummy")
     monkeypatch.setenv("MCP_MAX_SESSIONS", "1")
 
 

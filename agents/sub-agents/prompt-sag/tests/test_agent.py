@@ -14,7 +14,7 @@ def _build_sample_request() -> dict:
         "id": "prompt-001",
         "version": "1.0",
         "objective": "Create a prompt that updates README.md with new setup instructions.",
-        "context": "Repository uses Python 3.13, pytest, and make validate.",
+        "context": "Repository uses Python 3.14 (compatible with 3.12+), pytest, and make validate.",
         "constraints": [
             "Avoid editing files outside README.md.",
             "Always run make validate before finalising.",

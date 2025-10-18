@@ -1,9 +1,10 @@
 # Automation & Vendor Sources Guide
 
 ## Dev environment tips
-- Activate `.venv` before running any scripts; automation expects Python 3.13+.
+- Activate `.venv` before running any scripts; automation is validated on Python 3.12–3.14 (CI targets 3.14.x).
 - Keep vendored Flow Runner packages (`src/flowrunner/`, `src/mcprouter/`) untouched unless you are syncing from upstream.
 - Use `python -m pip install -r requirements.txt` if additional tooling is introduced; document it in /AGENTS.md.
+- Coordinate dependency pin or lockfile changes with DepsSAG before editing project metadata.
 
 ## Testing instructions
 - Validators under `src/automation/scripts/` are invoked by `make validate-*`; run them directly when debugging (e.g., `python src/automation/scripts/validate_docs_sag.py`).

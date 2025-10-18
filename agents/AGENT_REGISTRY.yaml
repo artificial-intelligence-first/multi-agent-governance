@@ -106,3 +106,13 @@ routes:
     telemetry:
       metric: browser.latency_ms
       budget_s: 90
+  dependency-governance:
+    primary: agents/sub-agents/deps-sag:maintain
+    backup: manual-handlers/manual-deps:triage
+    description: Plan and execute dependency upgrades, regenerate uv locks, and coordinate security advisories or rollout risks with downstream agents.
+    preconditions:
+      - sop: agents/sub-agents/deps-sag/sop/README.md
+      - sop: agents/sub-agents/deps-sag/sop/upgrade.yaml
+    telemetry:
+      metric: deps.latency_ms
+      budget_s: 80

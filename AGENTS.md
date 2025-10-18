@@ -4,6 +4,7 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 
 ## Dev environment tips
 - Clone the repo and create an isolated environment: `python3 -m venv .venv && source .venv/bin/activate`.
+- The fleet is validated on Python 3.12–3.14 (CI runs 3.14.x); upgrade local interpreters accordingly before running automation or tests.
 - Install local tooling as needed via `pip install pytest` (tests expect pytest 8+) and reuse the same venv for validation scripts under `src/automation/`.
 - DocsSAG writes Markdown to `docs/generated/`; ensure that directory stays in Git so downstream agents can read the latest drafts.
 - For reference updates, follow `docs/reference/README.md`—use the template and update `last synced` whenever you pull new facts.
@@ -17,6 +18,7 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - Enabling the Playwright MCP server requires Node.js 18+ and Playwright browser binaries; the shared config launches `servers.playwright` via `npx @playwright/mcp@latest`, with CLI flags available for headless mode, traces, and storage state.
 - Reference MCP servers (`everything`, `fetch`, `filesystem`, `git`, `memory`, `sequentialthinking`, `time`) ship from `modelcontextprotocol/servers`; install prerequisites (`node`/`npx`, `uvx`) and configure `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` with absolute paths before enabling write-capable tools.
 - Route all MCP configuration changes through MCPSAG (`agents/sub-agents/mcp-sag/`); follow its SOP and checklist template before editing `.mcp/.mcp-config.yaml`.
+- Route dependency upgrades and lock regeneration through DepsSAG (`agents/sub-agents/deps-sag/`); coordinate change windows and SOP execution before altering pinned versions.
 
 ## Testing instructions
 - Run `make validate` before every commit to check knowledge, prompt, and docs automation scripts.
@@ -45,8 +47,9 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
   - `telemetry/AGENTS.md` – observability and retention playbook for run artefacts.
   - `collab/AGENTS.md` – decision log and collaboration workflow.
   - `archive/AGENTS.md` – archival policy and recovery guidance.
-  - `.mcp/AGENTS.md` / `.mcp/SSOT.md` – MCP configuration guide and source-of-truth values.
+- `.mcp/AGENTS.md` / `.mcp/SSOT.md` – MCP configuration guide and source-of-truth values.
 - MCPSAG maintains the MCP cascade; see `agents/sub-agents/mcp-sag/AGENTS.md` for provider lifecycle and documentation obligations.
+- DepsSAG curates dependency lifecycles; see `agents/sub-agents/deps-sag/AGENTS.md` for upgrade playbooks and coordination steps.
 - When introducing a brand-new top-level area, add an `AGENTS.md` there and link it from this file.
 
 ## Governance checklist
@@ -57,5 +60,6 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - When interacting with users, prefer the requester’s primary language for conversations and status updates; keep internal artefacts (docs, logs, code) in English.
 - Keep `agents/AGENT_REGISTRY.yaml`, `agents/SSOT.md`, and DocsSAG outputs in sync whenever routing or terminology shifts.
 - Loop in GovernanceSAG (`agents/sub-agents/governance-sag/`) when updating AGENTS/SSOT/CHANGELOG/PLANS artefacts or when governance drift is detected.
+- Loop in DepsSAG (`agents/sub-agents/deps-sag/`) before adjusting language/toolchain requirements, dependency pins, or lockfiles so downstream agents can plan validations.
 - Schedule periodic reviews: if a directory’s AGENTS.md hasn’t changed in 60 days, confirm it still reflects reality.
 - Involve MCPSAG whenever MCP providers, credentials, or SDK dependencies move; confirm its checklist and runbook are updated alongside the change.

@@ -1,0 +1,24 @@
+version: 1
+steps:
+  - name: Preflight
+    action: "Run sop/preflight.yaml and address blockers before proceeding"
+  - name: Change Window Approval
+    action: "Notify WorkflowMAG + GovernanceSAG in #ops-ai of the planned upgrade scope and downtime (if any)"
+  - name: Sync Baseline
+    action: "uv sync --frozen to reproduce the current environment and capture package versions (uv pip list --freeze > telemetry/runs/<run_id>/deps/before.txt)"
+  - name: Upgrade Locks
+    action: |
+      "Execute:
+       uv lock --upgrade
+       (cd src/mcprouter && uv lock --upgrade)
+       Confirm pyproject.toml constraints reflect the intended upper/lower bounds"
+  - name: Regenerate Requirements
+    action: "Update requirements.txt and any mirrored constraints, ensuring versions match pyproject pins"
+  - name: Vendored Validation
+    action: "Run targeted tests: make validate, pytest agents/... as needed, plus uv run pytest for flowrunner/mcprouter"
+  - name: Security Scan
+    action: "Run pip-audit or uv pip audit; record advisories in telemetry/runs/<run_id>/deps/audit.json"
+  - name: Documentation Update
+    action: "Coordinate with DocsSAG to draft release notes; update AGENTS.md / SSOT.md with new baselines if they changed"
+  - name: Handoff
+    action: "Send summary (changes, risks, outstanding advisories) to GovernanceSAG + QAMAG for sign-off"

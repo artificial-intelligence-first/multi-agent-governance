@@ -18,3 +18,4 @@
 - Reference MCP servers from `modelcontextprotocol/servers` expose Everything/Fetch/Filesystem/Git/Memory/Sequential Thinking/Time; require `npx`/`uvx` on PATH and absolute paths via `MCP_FILESYSTEM_ROOT` / `MCP_GIT_REPOSITORY` when enabling filesystem or Git mutations.
 - MCPSAG (agents/sub-agents/mcp-sag) owns the MCP change checklist and validation SOP—loop it in before altering provider dependencies or SDK versions.
 - GovernanceSAG (agents/sub-agents/governance-sag) audits AGENTS/SSOT/CHANGELOG/PLANS artefacts; involve it whenever governance SOPs or terminology shift.
+- DepsSAG (agents/sub-agents/deps-sag) plans dependency upgrades, regenerates uv locks, and coordinates security advisories with WorkflowMAG/QAMAG/GovernanceSAG; loop it in before altering language/toolchain baselines.

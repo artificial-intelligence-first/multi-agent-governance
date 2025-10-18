@@ -23,6 +23,7 @@ def test_governance_sag_audit_creates_report(tmp_path, monkeypatch):
     (repo_root / "SSOT.md").write_text("GovernanceSAG", encoding="utf-8")
     (repo_root / "agents" / "SSOT.md").write_text("GovernanceSAG", encoding="utf-8")
     (repo_root / ".mcp" / "AGENTS.md").write_text("GovernanceSAG", encoding="utf-8")
+    (repo_root / ".mcp" / "SSOT.md").write_text("GovernanceSAG", encoding="utf-8")
     (repo_root / "CHANGELOG.md").write_text("## [Unreleased]\n", encoding="utf-8")
     plans = repo_root / "PLANS.md"
     plans.write_text(

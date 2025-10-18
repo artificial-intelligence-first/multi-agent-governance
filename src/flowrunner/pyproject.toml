@@ -8,12 +8,13 @@ license = { text = "Apache-2.0" }
 requires-python = ">=3.12"
 dependencies = [
   "mcprouter>=0.1.0",
-  "pyyaml>=6.0",
-  "pydantic>=2.6.0",
-  "python-dotenv>=1.0.0",
-  "typer>=0.12.3",
-  "rich>=13.7.0",
-  "jsonschema>=4.19.0"
+  "pyyaml>=6.0.2",
+  "pydantic>=2.10.4",
+  "python-dotenv>=1.0.1",
+  "typer>=0.12.4",
+  "rich>=13.9.2",
+  "jsonschema>=4.23,<4.24",
+  "jsonschema-specifications>=2024.10.1,<2025"
 ]
 
 [project.scripts]
@@ -21,9 +22,9 @@ flowctl = "flow_runner.cli:app"
 
 [project.optional-dependencies]
 test = [
-  "pytest>=7.4",
-  "pytest-asyncio>=0.23",
-  "pytest-mock>=3.12"
+  "pytest>=8.3.3",
+  "pytest-asyncio>=0.23.8",
+  "pytest-mock>=3.14.0"
 ]
 
 [tool.setuptools.packages.find]

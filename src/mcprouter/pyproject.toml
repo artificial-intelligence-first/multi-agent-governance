@@ -7,9 +7,9 @@ authors = [{ name = "Flow Runner Contributors" }]
 license = { text = "Apache-2.0" }
 requires-python = ">=3.12"
 dependencies = [
-  "httpx>=0.27.0",
-  "pydantic>=2.6.0",
-  "typing-extensions>=4.8.0"
+  "httpx>=0.27.2,<0.28",
+  "pydantic>=2.10.4",
+  "typing-extensions>=4.12.2"
 ]
 
 [project.scripts]
@@ -17,9 +17,9 @@ mcpctl = "mcp_router.cli:main"
 
 [project.optional-dependencies]
 test = [
-  "pytest>=7.4",
-  "pytest-asyncio>=0.23",
-  "anyio>=4.3"
+  "pytest>=8.3.3",
+  "pytest-asyncio>=0.23.8",
+  "anyio>=4.7.0"
 ]
 
 [project.urls]

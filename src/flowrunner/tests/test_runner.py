@@ -18,6 +18,8 @@ from typer.testing import CliRunner
 def set_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setenv("FLOWCTL_BASE_OUTPUT_DIR", str(tmp_path / ".runs"))
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.setenv("MCP_ROUTER_PROVIDER", "dummy")
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
 
 
 def _write_flow(path: Path, data: dict) -> None:
@@ -210,8 +212,8 @@ def test_workflow_mag_flow_parallelization_graph() -> None:
     }
 
     assert "translate" not in dependencies
-    assert dependencies["docs"] == {"plan"}
-    assert dependencies["prompts"] == {"plan"}
+    assert dependencies["docs"] == {"plan", "browser"}
+    assert dependencies["prompts"] == {"plan", "browser"}
     assert "localization" not in dependencies
     assert dependencies["context"] == {"prompts"}
     assert dependencies["qa"] == {"docs", "context"}

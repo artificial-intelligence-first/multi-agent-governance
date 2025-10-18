@@ -1,0 +1,12 @@
+version: 1
+steps:
+  - name: Interpreter Baseline
+    action: "Confirm python --version returns 3.14.x (CI baseline; ensure at least 3.12+ locally)"
+  - name: Tooling Availability
+    action: "Verify uv >= 0.9 and make are on PATH (uv --version, make --version)"
+  - name: Artefact Presence
+    action: "Ensure pyproject.toml, requirements.txt, uv.lock, src/flowrunner/pyproject.toml, src/mcprouter/pyproject.toml are readable"
+  - name: Git Hygiene
+    action: "Check git status is clean or capture intentional local deltas before upgrades"
+  - name: Security Feed
+    action: "Review GHSA / pip-audit feeds for blocking advisories on target packages"

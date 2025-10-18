@@ -34,7 +34,7 @@ When a flow declares `$schema`, `flowctl` validates the document against the ref
 
 - Run logs flush every 50 writes by default; set `FLOWCTL_LOG_FLUSH_EVERY` to customise the cadence or drop to `1` when you need immediate persistence.
 - MCP router cadence and concurrency come from `.mcp/.mcp-config.yaml` (`router.log_flush_every`, `router.max_sessions`). Adjust those values—or their environment overrides—so Codex, Cursor, and Flow Runner stay aligned.
-- Pass `--progress` while running longer flows to stream step status updates in-place. On Python 3.14.0 the upstream `dataclasses` module has a known bug that breaks Typer; run `flowctl` with Python 3.12 or 3.13 until a patched interpreter is available.
+- Pass `--progress` while running longer flows to stream step status updates in-place. The toolkit is validated on Python 3.12–3.14 (CI runs 3.14.x); avoid prerelease interpreters until upstream Typer regressions are resolved.
 
 ## Tests
 

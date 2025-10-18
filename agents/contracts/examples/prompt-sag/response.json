@@ -2,7 +2,7 @@
   "id": "prompt-001",
   "version": "1.0",
   "objective": "Design a prompt for Codex to refactor logging into structured JSON output.",
-  "context": "Services use Python 3.13 and must maintain backward compatibility.",
+  "context": "Services use Python 3.14 (and must remain compatible with 3.12+).",
   "target_models": ["gpt-5-codex"],
   "prompt_components": [
     {
@@ -11,7 +11,7 @@
     },
     {
       "role": "user",
-      "content": "Refactor the logging module to emit structured JSON. Context: Services use Python 3.13 and must maintain backward compatibility. Verification expectations: - Run pytest src/logging/tests - Document changes in CHANGELOG.md"
+      "content": "Refactor the logging module to emit structured JSON. Context: Services use Python 3.14 (compatible with 3.12+). Verification expectations: - Run pytest src/logging/tests - Document changes in CHANGELOG.md"
     }
   ],
   "guardrails": [

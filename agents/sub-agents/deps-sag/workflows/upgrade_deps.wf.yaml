@@ -1,0 +1,22 @@
+$schema: ../../../docs/flow.schema.json
+version: 1
+run:
+  output_dir: telemetry/runs/${RUN_ID}
+steps:
+  - id: lock_consistency
+    uses: shell
+    run: >
+      uv lock --check &&
+      uv lock --project src/mcprouter --check
+    timeout_sec: 60
+  - id: dependency_snapshot
+    uses: shell
+    run: >
+      mkdir -p telemetry/deps-sag &&
+      uv tree --frozen > telemetry/deps-sag/${RUN_ID}-root.txt &&
+      uv tree --project src/mcprouter --frozen > telemetry/deps-sag/${RUN_ID}-mcprouter.txt
+    timeout_sec: 60
+  - id: validation_suite
+    uses: shell
+    run: make validate
+    timeout_sec: 600

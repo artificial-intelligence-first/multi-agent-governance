@@ -1,0 +1,20 @@
+version: 1
+scenarios:
+  - name: Build Regression
+    detect: "CI or make validate fails after an upgrade"
+    actions:
+      - "Reproduce the failure locally and capture logs under telemetry/runs/<run_id>/deps/rollback.log"
+      - "Revert the offending dependency pin or lock change while preserving security fixes"
+      - "Notify WorkflowMAG, QAMAG, and GovernanceSAG with impact and next steps"
+  - name: Security Blocker
+    detect: "Upstream advisory recommends holding or reverting a newly released version"
+    actions:
+      - "Pin the affected dependency to the last known safe version"
+      - "Document the advisory link and mitigation plan in agents/SSOT.md and telemetry"
+      - "Coordinate with DocsSAG to communicate the hold in release notes"
+  - name: Environment Drift
+    detect: "uv lock --upgrade introduces interpreter/tooling requirements outside the agreed baseline"
+    actions:
+      - "Restore prior lockfiles and constraints"
+      - "Schedule a follow-up upgrade window once baseline tooling is ready"
+      - "Update AGENTS cascade with any temporary restrictions or compatibility notes"
