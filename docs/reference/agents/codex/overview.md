@@ -38,4 +38,4 @@ Source: https://developers.openai.com/codex/sdk (last synced: 2025-10-13)
 - Store API keys or cloud credentials outside the repo; reference their existence (not values) in AGENTS updates or ops runbooks.
 
 ## Update Log
-- 2025-10-13: Initial platform overview compiled from OpenAI documentation.
+- 2025-10-13: Consolidated Codex GitHub, CLI, IDE, Cloud, and SDK resources into a single overview.

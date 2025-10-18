@@ -45,7 +45,8 @@ def load_settings(
         if candidate.exists():
             load_dotenv(candidate, override=False)
 
-    return _interpolate(raw_data)
+    interpolated = _interpolate(raw_data)
+    return _prune_empty_headers(interpolated)
 
 
 def _resolve_config_path(root: Path, override: str | os.PathLike[str] | None) -> Path:
@@ -124,3 +125,17 @@ def _expand_env(raw: str) -> str:
 
     interpolated = _ENV_PATTERN.sub(replacer, raw)
     return os.path.expandvars(interpolated)
+
+
+def _prune_empty_headers(value: Any) -> Any:
+    if isinstance(value, dict):
+        result: dict[str, Any] = {}
+        for key, item in value.items():
+            processed = _prune_empty_headers(item)
+            if key == "headers" and isinstance(processed, dict):
+                processed = {h_key: h_val for h_key, h_val in processed.items() if h_val not in ("", None)}
+            result[key] = processed
+        return result
+    if isinstance(value, list):
+        return [_prune_empty_headers(item) for item in value]
+    return value

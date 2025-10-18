@@ -10,6 +10,7 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - Use `pnpm` only inside vendored examples; core automation relies on Python. If you need `pnpm`, install via Homebrew and run commands from the repository root.
 - MCP routing lives in `.mcp/.mcp-config.yaml`; copy `.mcp/.env.mcp.example` to `.mcp/.env.mcp` for secrets. Codex, Cursor, and Flow Runner all read from this SSOT, so adjust providers and limits there instead of per-tool config.
 - Enabling the GitHub MCP server requires `GITHUB_TOKEN` (and optional `GITHUB_API_BASE` / `GITHUB_API_VERSION`) in `.mcp/.env.mcp`; keep scopes minimal, rotate regularly, and note whether REST or GraphQL endpoints are in use.
+- Enabling the Context7 MCP server requires `CONTEXT7_MCP_URL`, `CONTEXT7_API_KEY`, and (optionally) `CONTEXT7_API_URL` in `.mcp/.env.mcp`; the shared config publishes it under `servers.context7` for Codex, Cursor, and Flow Runner.
 - Route all MCP configuration changes through MCPSAG (`agents/sub-agents/mcp-sag/`); follow its SOP and checklist template before editing `.mcp/.mcp-config.yaml`.
 
 ## Testing instructions

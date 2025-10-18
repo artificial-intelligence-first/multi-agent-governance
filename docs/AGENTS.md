@@ -22,3 +22,13 @@
 - `reference/files/AGENTS.md/` – upstream governance for maintaining AGENTS files.
 - `reference/files/CHANGELOG.md/` – Keep a Changelog conventions and Openchangelog ingestion notes.
 - `reference/reference-template.md` – canonical starting point for new reference entries.
+
+## README placement
+- Keep `README.md` at every human-maintained root inside `docs/` (for example `docs/`, `docs/reference/`, and each curated theme subfolder) so downstream agents understand the scope, update cadence, and templates in play.
+- Skip `README.md` in purely generated or transient directories (`docs/generated/`, language export folders, or other automation outputs); rely on `.gitkeep` and automation docs instead.
+- When introducing a new curated subdirectory (e.g., `docs/reference/<topic>/`), seed a short `README.md` that links back to `reference-template.md`, lists owners/review cadence, and points to any per-folder SOP.
+
+## Markdown naming
+- Default to `overview.md` for the primary narrative inside each docs subdirectory; this is where you summarise the topic, link sources, and note update cadence.
+- When a folder aggregates multiple upstream sources (for example `docs/reference/engineering/prompt/`), split entries by source or publisher using descriptive TitleCase filenames such as `Anthropic.md`, `Google.md`, or `OpenAI.md`.
+- Keep per-source files focused on that provider’s guidance, still based on `reference-template.md`, and cross-link them from the folder’s `overview.md` so readers can pivot between vendor-specific notes.

@@ -38,11 +38,8 @@ Source: https://github.com/openai/agents.md (last synced: 2025-10-13)
 - Add or update tests for the code you change, even if nobody asked.
 
 ### PR instructions
-- Once tests pass, run `pnpm lint` from the repo root in case there’s shared tooling.
-- List every change in your PR description with checkboxes, calling out the tests you ran plus any follow-up work.
-- Ask for review by tagging your team’s Slack or GitHub handle. Include context for risky changes (e.g., migrations, rewrites).
-- Don’t merge when CI is red. Leave review feedback in the PR so others know the current status.
-- Update documentation and changelog entries as necessary.
+- Title format: [<project_name>] <Title>
+- Always run `pnpm lint` and `pnpm test` before committing.
 
 ## Update Log
-- 2025-10-13: Initial summary of the agents.md specification and community adoption notes.
+- 2025-10-13: Populated overview with upstream specification details and adoption context (sources synced the same day).
