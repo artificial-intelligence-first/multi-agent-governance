@@ -1,0 +1,10 @@
+version: 1
+steps:
+  - description: Disable MCP router temporarily
+    run: mv .mcp/.mcp-config.yaml .mcp/.mcp-config.yaml.disabled
+  - description: Restore previous MCP configuration from git history
+    run: git checkout HEAD~1 -- .mcp/.mcp-config.yaml
+  - description: Re-run MCP router tests to confirm regression
+    run: python3 -m pytest src/mcprouter/tests/ -v
+  - description: Notify stakeholders about the rollback
+    run: echo "MCP router rolled back to previous stable version"

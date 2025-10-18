@@ -1,0 +1,8 @@
+version: 1
+checks:
+  - name: MCP configuration exists
+    run: test -f .mcp/.mcp-config.yaml
+  - name: MCP environment template exists
+    run: test -f .mcp/.env.mcp.example
+  - name: MCP router validation
+    run: python3 -m pytest src/mcprouter/tests/ -v
