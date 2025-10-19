@@ -35,3 +35,12 @@ Follow this checklist whenever running a security review, responding to incident
 - Documentation updated (`agents/SSOT.md`, `.mcp/AGENTS.md`, `.mcp/SSOT.md`, DocsSAG references).
 - Telemetry events recorded (security.latency_ms, security.findings_total, audit anomalies).
 - GovernanceSAG notified when policy updates or documentation revisions are required.
+
+## sop_refs
+sop_refs:
+  - label: Preflight checks
+    path: ./preflight.yaml
+  - label: Rollback steps
+    path: ./rollback.yaml
+  - label: Prompt guardrail tests
+    path: ../tests/test_prompt_security_features.py

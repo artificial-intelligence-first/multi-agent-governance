@@ -1,0 +1,10 @@
+version: 1
+steps:
+  - description: Revert SecuritySAG prompt bundle to the previous revision
+    run: git checkout HEAD~1 -- agents/sub-agents/security-sag/prompts/security_sag.prompt.yaml
+  - description: Restore SecuritySAG documentation updates
+    run: git checkout HEAD~1 -- agents/sub-agents/security-sag/docs agents/sub-agents/security-sag/AGENTS.md AGENTS.md agents/AGENTS.md agents/AGENT_REGISTRY.yaml agents/SSOT.md .mcp/AGENTS.md .mcp/SSOT.md
+  - description: Re-run SecuritySAG automation tests
+    run: python3 -m pytest agents/sub-agents/security-sag/tests/test_prompt_security_features.py -v
+  - description: Notify GovernanceSAG and OpsMAG about the rollback
+    run: echo "SecuritySAG rollback applied—GovernanceSAG and OpsMAG notified"

@@ -1,0 +1,8 @@
+version: 1
+checks:
+  - name: SecuritySAG configuration present
+    run: test -f .mcp/.mcp-config.yaml
+  - name: SecuritySAG prompt bundle committed
+    run: test -f agents/sub-agents/security-sag/prompts/security_sag.prompt.yaml
+  - name: SecuritySAG prompt guardrails pass
+    run: python3 -m pytest agents/sub-agents/security-sag/tests/test_prompt_security_features.py -v
