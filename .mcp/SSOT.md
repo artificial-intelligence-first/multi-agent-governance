@@ -10,6 +10,7 @@
 - Context7 MCP server lives under `servers.context7`; declare `CONTEXT7_MCP_URL` (HTTPS endpoint), `CONTEXT7_API_KEY` (header value), and optionally `CONTEXT7_API_URL` for tooling that calls the REST API directly.
 - Serena MCP server is registered at `servers.serena` using the stdio transport. Launch via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` and provide workspace defaults with `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp`.
 - Reference servers from `modelcontextprotocol/servers` are exposed under `servers.*` (everything, fetch, filesystem, git, memory, sequentialthinking, time). Ensure `npx` and `uvx` are available. Set `MCP_FILESYSTEM_ROOT` and `MCP_GIT_REPOSITORY` to absolute paths before enabling write-capable servers.
+- GitHub MCP security endpoints (secret scanning, push protection, prompt review, audit log, branch protection) underpin SecuritySAG workflows; tokens must include `security_events`, `repo`, `read:org`, `workflow`, and `audit_log` scopes and findings should flow into `docs/generated/security-securitysag.md`.
 
 ## Change Procedure
 1. Capture objective, impact, and validation plan in PLANS.md.

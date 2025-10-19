@@ -23,6 +23,7 @@
 - `reference/tool/mcp/chrome-devtools/` – Chrome DevTools MCP launch requirements, CLI flags, and validation workflows.
 - `reference/tool/mcp/markitdown/` – MarkItDown MCP conversion tooling requirements and usage notes.
 - `reference/tool/mcp/playwright/` – Playwright MCP automation options, flags, and validation guidance.
+- `reference/tool/mcp/github/` – GitHub MCP configuration, security capabilities (secret scanning, push protection, prompt review, audit logging, authorization), and update cadence for SecuritySAG.
 - `reference/files/AGENTS.md/` – upstream governance for maintaining AGENTS files.
 - `reference/files/CHANGELOG.md/` – Keep a Changelog conventions and Openchangelog ingestion notes.
 - `reference/reference-template.md` – canonical starting point for new reference entries.

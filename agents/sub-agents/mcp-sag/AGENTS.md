@@ -21,6 +21,8 @@
 - `.mcp/.mcp-config.yaml` (router/provider definitions).
 - `.mcp/.env.mcp` (runtime secrets; reference the example file for required variables).
 - `docs/reference/tool/mcp/` (protocol, GitHub provider, SDK guidance).
+- `agents/sub-agents/mcp-sag/prompts/mcp_sag.prompt.yaml` (baseline agent instructions).
+- `agents/sub-agents/mcp-sag/workflows/` (Flow Runner automation hooks; expand as orchestration matures).
 - `src/mcprouter/` and `src/flowrunner/` (runtime integrations and unit tests).
 - `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli` (runtime smoke tests) and Makefile aliases (`make validate`, `make validate-prompt`, etc.).
 

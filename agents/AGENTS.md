@@ -32,7 +32,7 @@ This tree contains every Multi Agent Governance agent plus shared contracts and 
 
 ## Directory hints
 - `main-agents/` – primary orchestrators (WorkFlowMAG, KnowledgeMag, OperationsMAG, QAMAG). See each subdirectory’s AGENTS.md for runtime instructions.
-- `sub-agents/` – supporting specialists (DocsSAG, PromptSAG, ContextSAG, QualitySAG, ReferenceSAG, GovernanceSAG, MCPSAG). See `agents/sub-agents/AGENTS.md` for detailed responsibilities.
+- `sub-agents/` – supporting specialists (DocsSAG, PromptSAG, ContextSAG, QualitySAG, ReferenceSAG, GovernanceSAG, MCPSAG, SecuritySAG, BrowserSAG, DepsSAG). See `agents/sub-agents/AGENTS.md` for detailed responsibilities.
 - `sub-agents/browser-sag/` – Browser automation workflows (Chrome DevTools, Playwright, MarkItDown) governed by BrowserSAG.
 - `contracts/` – JSON Schemas and examples; coordinate changes with validators and DocsSAG rules.
 - `shared/` – prompt partials and shared tooling; keep naming consistent so prompts can include them reliably.

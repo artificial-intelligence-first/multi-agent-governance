@@ -116,3 +116,14 @@ routes:
     telemetry:
       metric: deps.latency_ms
       budget_s: 80
+  security:
+    primary: agents/sub-agents/security-sag:secure
+    backup: manual-handlers/manual-security:triage
+    description: Orchestrate GitHub MCP security tooling (secret scanning, push protection, prompt-injection defence, access audits, authorization hardening) and drive remediation across the fleet.
+    preconditions:
+      - sop: agents/sub-agents/security-sag/sop/README.md
+      - prompt: agents/sub-agents/security-sag/prompts/security_sag.prompt.yaml
+      - reference: docs/reference/tool/mcp/github/security.md
+    telemetry:
+      metric: security.latency_ms
+      budget_s: 75

@@ -9,6 +9,7 @@
 - When policies change, update this file together with /SSOT.md to keep agents aligned.
 - MCP routing changes must flow through `.mcp/.mcp-config.yaml`; document any new providers or keys referenced by agents here and in `.mcp/AGENTS.md`.
 - GitHub MCP server support requires `GITHUB_TOKEN` credentials; record scope/rotation details (REST + GraphQL) when agents start consuming GitHub data.
+- SecuritySAG consumes GitHub MCP security tooling (secret scanning, push protection, prompt review, code scanning, audit logs, authorization checks); provision tokens with `security_events`, `repo`, `read:org`, `workflow`, and `audit_log` scopes and document findings in `docs/generated/security-securitysag.md`.
 - Context7 MCP server support requires `CONTEXT7_MCP_URL`/`CONTEXT7_API_KEY` (HTTPS endpoint + API key) and optional `CONTEXT7_API_URL` for REST fallbacks; capture rotation cadence and access levels alongside GitHub notes.
 - Serena MCP server support runs via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server`; align `SERENA_CONTEXT` and `SERENA_PROJECT_ROOT` with each agent’s workspace assumptions and log which projects are pre-indexed.
 - Chrome DevTools MCP server support runs under `servers.chrome-devtools` via `npx -y chrome-devtools-mcp@latest`; note which hosts have Node.js 20.19+, npm, and Chrome installed, and whether `--headless`, `--browserUrl`, or custom `--executablePath` flags are required for automation.

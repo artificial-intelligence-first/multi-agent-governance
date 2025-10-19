@@ -30,3 +30,4 @@
 - `governance-sag/` – governance compliance monitor that keeps AGENTS/SSOT/CHANGELOG/PLANS artefacts aligned.
 - `browser-sag/` – browser automation specialist orchestrating Chrome DevTools, Playwright, and MarkItDown MCP servers.
 - `deps-sag/` – dependency lifecycle specialist that plans upgrades, regenerates locks, and coordinates with DocsSAG/GovernanceSAG/QAMAG on rollout impacts.
+- `security-sag/` – GitHub MCP-driven security specialist that handles secret scanning, push protection, prompt-injection defence, access audits, and authorization hardening.
