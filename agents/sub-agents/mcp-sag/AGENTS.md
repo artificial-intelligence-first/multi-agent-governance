@@ -25,6 +25,7 @@
 - `agents/sub-agents/mcp-sag/workflows/` (Flow Runner automation hooks; expand as orchestration matures).
 - `src/mcprouter/` and `src/flowrunner/` (runtime integrations and unit tests).
 - `PYTHONPATH=src/mcprouter/src uv run python -m mcp_router.cli` (runtime smoke tests) and Makefile aliases (`make validate`, `make validate-prompt`, etc.).
+- `docs/skills-integration.md` (Skills metadata loader, embedding cache, telemetry, and feature flag design).
 
 ## SOP Summary
 1. **Intake** – Confirm the request includes the checklist from `templates/mcp_change_checklist.md` and applicable upstream references.

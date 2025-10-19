@@ -1,0 +1,160 @@
+{
+  "summary": {
+    "samples": 6,
+    "top_k": 3,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "top1_accuracy": 1.0,
+    "matches_evaluated": 9,
+    "allow_exec_checks": 9,
+    "allow_exec_mismatches": 0,
+    "allow_exec_accuracy": 1.0
+  },
+  "results": [
+    {
+      "id": "draft-quality-001",
+      "query": "DocsSAG draft needs a quality sweep: confirm sections align with the outline, SSOT terminology is intact, and Markdown formatting passes publication review.",
+      "expected": [
+        "draft-quality"
+      ],
+      "predicted": [
+        "draft-quality"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {
+        "draft-quality": false
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 1,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "draft-quality-002",
+      "query": "We received a backlog of partial DocsSAG drafts. Prioritise fixes, tag severity, confirm outline coverage, and hand off remediation tasks to the right owners for publication readiness.",
+      "expected": [
+        "document-triage",
+        "draft-quality"
+      ],
+      "predicted": [
+        "draft-quality",
+        "document-triage"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false,
+        false
+      ],
+      "expected_allow_exec": {
+        "draft-quality": false,
+        "document-triage": false
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "flow-guard-001",
+      "query": "Flow Runner just flagged a script request. Validate the skills exec allowlist, sha256 fingerprint, and telemetry coverage before approving.",
+      "expected": [
+        "flow-runner-guardrails"
+      ],
+      "predicted": [
+        "flow-runner-guardrails"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        true
+      ],
+      "expected_allow_exec": {
+        "flow-runner-guardrails": true
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 1,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "flow-guard-002",
+      "query": "Need the runbook for rotating Flow Runner skill allowlists: update hashes, document sandbox expectations, notify GovernanceSAG, and capture the security review checklist (auth scope, threat model) plus incident response contacts.",
+      "expected": [
+        "flow-runner-guardrails",
+        "security-review"
+      ],
+      "predicted": [
+        "flow-runner-guardrails",
+        "security-review"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        true,
+        false
+      ],
+      "expected_allow_exec": {
+        "flow-runner-guardrails": true,
+        "security-review": false
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "flow-guard-003",
+      "query": "Phase 2 pilot dry-run: exercise the deny-by-default guard, record blocked attempts, and confirm skills_exec telemetry wiring.",
+      "expected": [
+        "flow-runner-guardrails"
+      ],
+      "predicted": [
+        "flow-runner-guardrails"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        true
+      ],
+      "expected_allow_exec": {
+        "flow-runner-guardrails": true
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 1,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "draft-quality-003",
+      "query": "Before enabling skills_exec, double-check the DocsSAG draft quality rubric and link the remediation log to Flow Runner traces.",
+      "expected": [
+        "draft-quality",
+        "flow-runner-guardrails"
+      ],
+      "predicted": [
+        "draft-quality",
+        "flow-runner-guardrails"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false,
+        true
+      ],
+      "expected_allow_exec": {
+        "draft-quality": false,
+        "flow-runner-guardrails": true
+      },
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    }
+  ]
+}

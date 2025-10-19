@@ -35,6 +35,12 @@
 - **Serena** – Added under `servers.serena` using the stdio transport. We launch via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` with defaults pulled from `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT`. Update `.mcp/.env.mcp` with a workspace-specific project path so Codex, Cursor, and Flow Runner activate the right repository before invoking tools.
 - **Time** – Python server via `uvx mcp-server-time`; optionally set `LOCAL_TIMEZONE` before launch to pin the system timezone when running outside managed hosts.
 
+## Skills integration
+- MCPSAG scans `/skills/` and `agents/<agent>/skills/` at startup, reading each `SKILL.md` frontmatter into an embedding cache. Use the approved offline model (`bge-large-en`) via `uv run python scripts/embed_skills.py`; external embedding APIs require GovernanceSAG approval.
+- Skill enablement is guarded by the `skills_v1` feature flag in router config. Keep it disabled in production until pilots meet acceptance metrics, then flip the flag via `.mcp/.mcp-config.yaml` + PLANS.md Decision Log.
+- Execution guardrails rely on `skills/ALLOWLIST.txt` (path + sha256 + args) and telemetry emitted from Flow Runner. Update this file in lockstep with registry changes and ensure hashes are computed inside the repo sandbox.
+- Telemetry events (`skill_selected`, `skill_loaded`, `skill_exec_attempt`, `skill_exec_result`) feed dashboards under `telemetry/skills/`; ensure routes are registered before enabling the flag in shared environments.
+
 ## References
 - [[SSOT]]
 - `agents/sub-agents/mcp-sag/AGENTS.md` (SOP & checklist)

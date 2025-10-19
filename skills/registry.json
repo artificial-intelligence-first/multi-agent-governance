@@ -1,0 +1,86 @@
+{
+  "skills": [
+    {
+      "name": "template-skill",
+      "path": "skills/_template/SKILL.md",
+      "owner": "TemplateOwner",
+      "tags": [
+        "template"
+      ],
+      "enabled": false,
+      "allow_exec": false,
+      "sha256": null,
+      "notes": "Copy to new directory and replace placeholders before enabling."
+    },
+    {
+      "name": "api-design",
+      "path": "skills/api-design/SKILL.md",
+      "owner": "GovernanceSAG",
+      "tags": [
+        "api",
+        "design",
+        "documentation"
+      ],
+      "enabled": true,
+      "allow_exec": false,
+      "sha256": null,
+      "notes": "Steady-state shared Skill for API governance guidance; read-only ingestion."
+    },
+    {
+      "name": "security-review",
+      "path": "skills/security-review/SKILL.md",
+      "owner": "GovernanceSAG",
+      "tags": [
+        "security",
+        "review",
+        "governance"
+      ],
+      "enabled": true,
+      "allow_exec": false,
+      "sha256": null,
+      "notes": "Steady-state shared Skill for security review workflows; read-only ingestion."
+    },
+    {
+      "name": "document-triage",
+      "path": "skills/document-triage/SKILL.md",
+      "owner": "DocsSAG",
+      "tags": [
+        "docs",
+        "triage",
+        "quality"
+      ],
+      "enabled": true,
+      "allow_exec": false,
+      "sha256": null,
+      "notes": "Steady-state shared Skill for document triage and backlog management; read-only ingestion."
+    },
+    {
+      "name": "draft-quality",
+      "path": "agents/sub-agents/docs-sag/skills/draft-quality/SKILL.md",
+      "owner": "DocsSAG",
+      "tags": [
+        "docs",
+        "quality",
+        "review"
+      ],
+      "enabled": true,
+      "allow_exec": false,
+      "sha256": null,
+      "notes": "Agent-local Skill for DocsSAG draft quality checks; read-only ingestion."
+    },
+    {
+      "name": "flow-runner-guardrails",
+      "path": "skills/flow-runner-guardrails/SKILL.md",
+      "owner": "FlowRunnerMaintainers",
+      "tags": [
+        "automation",
+        "flow-runner",
+        "guardrails"
+      ],
+      "enabled": true,
+      "allow_exec": true,
+      "sha256": null,
+      "notes": "Shared automation Skill for Flow Runner guardrail reviews; execution allowed via allowlist."
+    }
+  ]
+}

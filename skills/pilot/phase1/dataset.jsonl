@@ -1,0 +1,10 @@
+{"id": "api-design-001", "query": "Draft a new projects API spec that aligns with governance and pagination rules.", "expected_skills": ["api-design"]}
+{"id": "api-design-002", "query": "Review the proposed update to the webhook payload and ensure status codes and retry policy are documented.", "expected_skills": ["api-design"]}
+{"id": "api-design-003", "query": "Need guidance on documenting query parameters and OpenAPI examples for the integrations endpoint.", "expected_skills": ["api-design"]}
+{"id": "security-review-001", "query": "Security review checklist for a new service launch; confirm token scope handling and incident response.", "expected_skills": ["security-review"]}
+{"id": "security-review-002", "query": "We found an auth gap in the deployment. What steps are required before signoff from GovernanceSAG?", "expected_skills": ["security-review"]}
+{"id": "document-triage-001", "query": "Incoming documentation backlog needs triage and tagging for DocsSAG follow-up.", "expected_skills": ["document-triage"]}
+{"id": "document-triage-002", "query": "Prioritize the doc updates from last week's release notes and route to the correct owners.", "expected_skills": ["document-triage"]}
+{"id": "api-design-004", "query": "Does the new beta endpoint need versioning guidance and rate limit headers defined?", "expected_skills": ["api-design"]}
+{"id": "security-review-003", "query": "Evaluate SBOM coverage and push protection settings before we merge the release branch.", "expected_skills": ["security-review"]}
+{"id": "document-triage-003", "query": "Classify feedback from the support queue and flag docs that need immediate updates.", "expected_skills": ["document-triage"]}

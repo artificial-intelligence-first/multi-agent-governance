@@ -53,6 +53,15 @@ This repository hosts the Multi Agent Governance agent fleet plus shared automat
 - DepsSAG curates dependency lifecycles; see `agents/sub-agents/deps-sag/AGENTS.md` for upgrade playbooks and coordination steps.
 - When introducing a brand-new top-level area, add an `AGENTS.md` there and link it from this file.
 
+## Skills program
+- **Owner**: GovernanceSAG (program lead) with MCPSAG as technical steward; status coordination lives in `#skills-adoption` and updates must flow into `PLANS.md`.
+- **Layout**: Shared Skills reside under `/skills/`; agent-scoped overrides live in `agents/<agent>/skills/` and supersede shared entries when `name` conflicts arise.
+- **Registry & lint**: Maintain `skills/registry.json` + `skills/ALLOWLIST.txt`; run `make validate-skills` (hooked into `make validate`) before every push to enforce frontmatter length, token budgets, and dangerous-command detection.
+- **Routing**: MCPSAG caches Skill metadata at startup, applies BM25 + local embeddings to match `description`, and loads bodies under the `skills_v1` feature flag. Flow Runner enforces deny-by-default execution with allowlist + sha256 checks and telemetry.
+- **Migration**: When SOPs/AGENTS content move into Skills, trim legacy prose to a link, log the cleanup in the Skills Decision Log, and cross-reference changes in `agents/SSOT.md`.
+- **Governance**: Keep `.mcp/AGENTS.md`, `.mcp/SSOT.md`, and telemetry dashboards aligned whenever Skills routing, embedding models, or execution policies change; schedule 60-day reviews to retire stale or unused Skills.
+- **Steady state**: Run 30日ごとの Skills レビュー（レジストリ・allowlist・テレメトリ）、`make validate-skills`/`pytest -k skills_guard` を必須化し、異常は GovernanceSAG へ1営業日以内にエスカレーションする。
+
 ## Governance checklist
 - Maintain alignment with the upstream AGENTS.md specification (see `docs/reference/OpenAI/AGENTS.md/` for synced notes and examples).
 - Keep `.mcp/AGENTS.md` synced with operational changes whenever you add or retire MCP servers so downstream agents share the same defaults.

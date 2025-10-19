@@ -10,6 +10,7 @@ from flow_runner.models import StepBase
 
 if TYPE_CHECKING:  # pragma: no cover
     from mcp_router import MCPRouter
+    from flow_runner.skills_guard import SkillExecutionGuard
 
 
 @dataclass
@@ -24,6 +25,7 @@ class ExecutionContext:
     mcp_log_dir: Path
     run_env: Dict[str, str] = field(default_factory=dict)
     mcp_router: Optional["MCPRouter"] = None
+    skill_guard: Optional["SkillExecutionGuard"] = None
 
 
 class StepExecutionError(RuntimeError):

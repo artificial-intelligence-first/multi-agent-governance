@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Any, Awaitable, Callable, Optional
+from typing import Any, Awaitable, Callable, Optional, Sequence
 
 from .config import load_settings
 from .providers.base import BaseProvider, ProviderError
@@ -22,6 +22,7 @@ from .providers.github_provider import GitHubProvider
 from .providers.openai_provider import OpenAIProvider
 from .redaction import mask_sensitive
 from .schemas import AuditRecord, ProviderRequest, ProviderResponse, QueueItem, Result
+from .skills import SkillManager
 
 _DEFAULT_TIMEOUT = 30.0
 _DEFAULT_RETRIES = 1
@@ -51,6 +52,7 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
         backoff_base: float = _DEFAULT_BACKOFF,
         log_dir: Optional[Path] = None,
         log_flush_every: int = 1,
+        skills: Optional[SkillManager] = None,
     ) -> None:
         if max_sessions < 1:
             raise ValueError("max_sessions must be at least 1")
@@ -70,6 +72,7 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
         self._started = False
         self._audit_writer = _AsyncLineWriter(self._log_path, flush_every=log_flush_every)
         self._audit_writer.start()
+        self._skills_manager = skills
 
     # ------------------------------------------------------------------
     # Construction helpers
@@ -96,6 +99,7 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
         env_provider_override = os.getenv("MCP_ROUTER_PROVIDER")
         provider_name = env_provider_override or router_settings.get("provider")
         provider = cls._build_provider(provider_name, providers_config, env_override=env_provider_override)
+        skills_manager = cls._build_skills_manager(settings)
 
         max_sessions = cls._coerce_int(
             router_settings.get("max_sessions"),
@@ -138,6 +142,7 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
             backoff_base=backoff,
             log_dir=log_dir,
             log_flush_every=parsed_flush,
+            skills=skills_manager,
         )
 
     # ------------------------------------------------------------------
@@ -171,6 +176,22 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
         if not self._started:
             self._ensure_started()
         config = dict(config or {})
+        if self._skills_manager and self._skills_manager.enabled:
+            try:
+                matches = self._skills_manager.prepare_payload(prompt)
+            except Exception:  # pylint: disable=broad-except
+                matches = []
+            if matches:
+                skill_config = {
+                    "version": "skills_v1",
+                    "matches": matches,
+                    "exec_enabled": self._skills_manager.exec_enabled,
+                }
+                existing = config.get("skills")
+                if isinstance(existing, dict):
+                    existing.update(skill_config)
+                else:
+                    config["skills"] = skill_config
         timeout = timeout_sec or self._request_timeout
         retry_budget = retries if retries is not None else self._max_retries
         prompt_chars = len(prompt)
@@ -299,6 +320,68 @@ class MCPRouter(AbstractContextManager["MCPRouter"]):
             return GitHubProvider(token, **kwargs)
 
         raise ValueError(f"unsupported MCP provider type: {provider_type}")
+
+    @staticmethod
+    def _build_skills_manager(settings: dict[str, Any]) -> Optional[SkillManager]:
+        features_raw = settings.get("features")
+        features_dict = features_raw if isinstance(features_raw, dict) else {}
+        normalized_flags = {k: SkillManager._coerce_bool(v) for k, v in features_dict.items()}
+        if not normalized_flags.get("skills_v1", False):
+            return None
+        root = Path.cwd()
+        skills_settings_raw = settings.get("skills")
+        skills_settings = skills_settings_raw if isinstance(skills_settings_raw, dict) else {}
+        cache_dir = skills_settings.get("cache_dir")
+        telemetry_dir = skills_settings.get("telemetry_dir")
+        resolved_cache = None
+        if isinstance(cache_dir, str) and cache_dir.strip():
+            candidate = Path(cache_dir.strip())
+            resolved_cache = candidate if candidate.is_absolute() else root / candidate
+        resolved_telemetry = None
+        if isinstance(telemetry_dir, str) and telemetry_dir.strip():
+            candidate = Path(telemetry_dir.strip())
+            resolved_telemetry = candidate if candidate.is_absolute() else root / candidate
+        embedder = MCPRouter._build_embedder(skills_settings)
+        kwargs: dict[str, Any] = {
+            "root": root,
+            "feature_flags": normalized_flags,
+        }
+        if resolved_cache is not None:
+            kwargs["cache_dir"] = resolved_cache
+        if resolved_telemetry is not None:
+            kwargs["telemetry_dir"] = resolved_telemetry
+        if embedder is not None:
+            kwargs["embedder"] = embedder
+        if "top_k" in skills_settings:
+            kwargs["top_k"] = MCPRouter._coerce_int(skills_settings.get("top_k"), default=3, minimum=1)
+        if "threshold" in skills_settings:
+            kwargs["threshold"] = MCPRouter._coerce_float(skills_settings.get("threshold"), default=0.75)
+        try:
+            return SkillManager(**kwargs)
+        except Exception:  # pylint: disable=broad-except
+            return None
+
+    @staticmethod
+    def _build_embedder(settings: dict[str, Any]) -> Optional[Callable[[Sequence[str]], Sequence[Sequence[float]]]]:
+        runtime_enabled = settings.get("load_embedder", True)
+        if isinstance(runtime_enabled, str):
+            runtime_enabled = runtime_enabled.lower() in {"1", "true", "yes", "on"}
+        if not runtime_enabled:
+            return None
+        model_name = settings.get("embedding_model") or "BAAI/bge-large-en"
+        try:
+            from sentence_transformers import SentenceTransformer  # type: ignore[import]
+        except ImportError:
+            return None
+        try:
+            transformer = SentenceTransformer(model_name)
+        except Exception:  # pylint: disable=broad-except
+            return None
+
+        def _encode(texts: Sequence[str]) -> Sequence[Sequence[float]]:
+            return transformer.encode(list(texts), normalize_embeddings=True)
+
+        return _encode
 
     @staticmethod
     def _coerce_int(

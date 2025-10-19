@@ -1,5 +1,7 @@
 # DocsSAG Runbook
 
+> Quality review guidance for DocsSAG drafts now lives in `agents/sub-agents/docs-sag/skills/draft-quality/SKILL.md`; consult that Skill before escalating incidents.
+
 ## Detection
 - Alert when `docs_sag.latency_ms` exceeds 45 seconds on the p95 over 10-minute windows.
 - Trigger incident if schema validation failures for DocsSAG responses exceed 2% of runs within an hour.

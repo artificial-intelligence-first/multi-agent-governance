@@ -11,4 +11,5 @@
 ## SOP Index
 - `docs/overview.md` — scope, routing, and collaboration guidance.
 - `docs/runbook.md` — drafting workflow, diagnostics, and incident response.
+- `skills/draft-quality/SKILL.md` — publication-readiness checklist and remediation workflow.
 - `sop/preflight.yaml` / `sop/rollback.yaml` — operational readiness and recovery steps.

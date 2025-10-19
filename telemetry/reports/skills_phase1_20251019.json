@@ -1,0 +1,217 @@
+{
+  "summary": {
+    "samples": 10,
+    "top_k": 3,
+    "precision": 0.8182,
+    "recall": 0.9,
+    "f1": 0.8571,
+    "top1_accuracy": 0.8,
+    "matches_evaluated": 11,
+    "allow_exec_checks": 0,
+    "allow_exec_mismatches": 0
+  },
+  "results": [
+    {
+      "id": "api-design-001",
+      "query": "Draft a new projects API spec that aligns with governance and pagination rules.",
+      "expected": [
+        "api-design"
+      ],
+      "predicted": [
+        "api-design"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "api-design-002",
+      "query": "Review the proposed update to the webhook payload and ensure status codes and retry policy are documented.",
+      "expected": [
+        "api-design"
+      ],
+      "predicted": [
+        "api-design"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "api-design-003",
+      "query": "Need guidance on documenting query parameters and OpenAPI examples for the integrations endpoint.",
+      "expected": [
+        "api-design"
+      ],
+      "predicted": [
+        "api-design"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "security-review-001",
+      "query": "Security review checklist for a new service launch; confirm token scope handling and incident response.",
+      "expected": [
+        "security-review"
+      ],
+      "predicted": [
+        "security-review"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "security-review-002",
+      "query": "We found an auth gap in the deployment. What steps are required before signoff from GovernanceSAG?",
+      "expected": [
+        "security-review"
+      ],
+      "predicted": [
+        "security-review"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "document-triage-001",
+      "query": "Incoming documentation backlog needs triage and tagging for DocsSAG follow-up.",
+      "expected": [
+        "document-triage"
+      ],
+      "predicted": [
+        "document-triage"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "document-triage-002",
+      "query": "Prioritize the doc updates from last week's release notes and route to the correct owners.",
+      "expected": [
+        "document-triage"
+      ],
+      "predicted": [
+        "security-review",
+        "document-triage"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false,
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0
+    },
+    {
+      "id": "api-design-004",
+      "query": "Does the new beta endpoint need versioning guidance and rate limit headers defined?",
+      "expected": [
+        "api-design"
+      ],
+      "predicted": [
+        "api-design"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "security-review-003",
+      "query": "Evaluate SBOM coverage and push protection settings before we merge the release branch.",
+      "expected": [
+        "security-review"
+      ],
+      "predicted": [
+        "security-review"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "id": "document-triage-003",
+      "query": "Classify feedback from the support queue and flag docs that need immediate updates.",
+      "expected": [
+        "document-triage"
+      ],
+      "predicted": [
+        "security-review"
+      ],
+      "threshold": 0.75,
+      "allow_exec": [
+        false
+      ],
+      "expected_allow_exec": {},
+      "allow_exec_mismatches": {},
+      "allow_exec_checks": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1
+    }
+  ]
+}

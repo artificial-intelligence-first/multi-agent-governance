@@ -36,6 +36,10 @@ When a flow declares `$schema`, `flowctl` validates the document against the ref
 - MCP router cadence and concurrency come from `.mcp/.mcp-config.yaml` (`router.log_flush_every`, `router.max_sessions`). Adjust those values—or their environment overrides—so Codex, Cursor, and Flow Runner stay aligned.
 - Pass `--progress` while running longer flows to stream step status updates in-place. The toolkit is validated on Python 3.12–3.14 (CI runs 3.14.x); avoid prerelease interpreters until upstream Typer regressions are resolved.
 
+## Skill execution guard
+
+See `skills/flow-runner-guardrails/SKILL.md` for the canonical allowlist workflow, telemetry expectations, and operator checklist. Flow Runner wiring remains unchanged; enable via `MCP_SKILLS_EXEC` and invoke scripts with `FlowRunner.run_skill_script(...)` as required.
+
 ## Tests
 
 ```bash

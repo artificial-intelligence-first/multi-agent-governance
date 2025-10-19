@@ -9,6 +9,7 @@
 - `playwright/overview.md` — Playwright-based automation server covering accessibility-driven browser actions.
 - `servers/overview.md` — reference implementations from `modelcontextprotocol/servers`, with per-server guides (Everything, Fetch, Filesystem, Git, Memory, Sequential Thinking, Time).
 - `sdk/` — language-specific SDK notes (Python, TypeScript) covering installation, capabilities, and usage patterns.
+- [`skills-integration.md`](skills-integration.md) — MCPSAG design for discovering `/skills/`, embedding metadata, and routing Skills via feature flags and telemetry.
 
 Centralise documentation for `.mcp/.mcp-config.yaml`, `.mcp/.env.mcp`, and managed MCP servers in this folder. When introducing a new source, duplicate `docs/reference/reference-template.md`, cite upstream URLs with `last synced` dates, enumerate supported transports (REST, GraphQL, SSE, etc.), capture required environment variables, populate the Update Log, and keep content in English so downstream agents maintain consistent instructions across the fleet. Update relevant `AGENTS.md` files whenever MCP workflows or dependencies change.
 

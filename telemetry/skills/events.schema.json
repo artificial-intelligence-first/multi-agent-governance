@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Skills Telemetry Event",
+  "type": "object",
+  "required": [
+    "ts",
+    "event",
+    "data"
+  ],
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when the event was recorded."
+    },
+    "event": {
+      "type": "string",
+      "enum": [
+        "skill_selected",
+        "skill_loaded",
+        "skill_resource_requested",
+        "skill_embedding_fallback",
+        "skill_exec_attempt",
+        "skill_exec_result"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload.",
+      "oneOf": [
+        {
+          "description": "`skill_selected` details candidate ranking and threshold context.",
+          "required": [
+            "query_preview",
+            "threshold",
+            "selected",
+            "available",
+            "feature_flag"
+          ],
+          "properties": {
+            "query_preview": {
+              "type": "string",
+              "description": "First 160 characters of the query text."
+            },
+            "threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "selected": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "path",
+                  "score",
+                  "rank"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "keyword_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "embedding_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "rank": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "threshold": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "allow_exec": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "available": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "feature_flag": {
+              "type": "string"
+            },
+            "skill": {
+              "type": "string",
+              "description": "Skill name that initiated the attempt."
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "description": "`skill_loaded` captures body retrieval telemetry.",
+          "required": [
+            "path",
+            "tokens",
+            "truncated",
+            "allow_exec"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "truncated": {
+              "type": "boolean"
+            },
+            "allow_exec": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "description": "`skill_resource_requested` captures secondary resource access.",
+          "required": [
+            "path",
+            "resource",
+            "reason"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "resource": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "description": "`skill_embedding_fallback` records embedding failures.",
+          "required": [
+            "reason"
+          ],
+          "properties": {
+            "reason": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "description": "`skill_exec_attempt` logs Flow Runner execution checks.",
+          "required": [
+            "path",
+            "script",
+            "allow_exec"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "script": {
+              "type": "string"
+            },
+            "allow_exec": {
+              "type": "boolean"
+            },
+            "sandbox": {
+              "type": "string"
+            },
+            "skill": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "description": "`skill_exec_result` captures post-execution summary.",
+          "required": [
+            "path",
+            "script",
+            "status"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "script": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "allowed",
+                "blocked",
+                "succeeded",
+                "failed"
+              ]
+            },
+            "latency_ms": {
+              "type": "number",
+              "minimum": 0
+            },
+            "exit_code": {
+              "type": "integer"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "stdout_preview": {
+              "type": "string"
+            },
+            "stderr_preview": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

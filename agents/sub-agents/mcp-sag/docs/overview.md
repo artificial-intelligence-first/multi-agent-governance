@@ -21,3 +21,7 @@ MCPSAG governs the Model Context Protocol configuration for the Multi Agent Gove
 5. Escalate issues via incident workflows when provider stability or access is compromised.
 
 Refer to `runbook.md` for detailed step-by-step execution and escalation paths.
+
+## Skills integration
+- See `skills-integration.md` for the metadata loader, embedding cache, feature flag, and telemetry design that enables MCPSAG to progressively load `/skills/` artefacts for Codex agents.
+- Align change checklists with the Skills program before flipping `skills_v1` or `skills_exec` feature flags in shared environments.

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2025-10-19T06:54:50.105158Z",
+  "skills": {
+    "agents/sub-agents/docs-sag/skills/draft-quality/SKILL.md": {
+      "name": "draft-quality",
+      "description": "DocsSAG-only preflight for Markdown drafts: verify outline coverage, SSOT terminology, draft quality rubric adherence, severity logging, release readiness gates, Flow Runner trace linkage, and publication sign-off requirements.",
+      "path": "agents/sub-agents/docs-sag/skills/draft-quality/SKILL.md",
+      "frontmatter_hash": "036ac44afe48240f0baf1dfd91f5289b324a104f7482a79b950c8fc16a361ce2",
+      "mtime": 1760852822.6266992,
+      "enabled": true,
+      "allow_exec": false,
+      "tags": [
+        "docs",
+        "quality",
+        "review"
+      ]
+    },
+    "skills/api-design/SKILL.md": {
+      "name": "api-design",
+      "description": "Apply to REST and OpenAPI design tasks: draft CRUD resources, pagination contracts, request/response schemas, HTTP status guidance, rate limit headers, and governance-aligned API documentation.",
+      "path": "skills/api-design/SKILL.md",
+      "frontmatter_hash": "7c1068e2ce9c9306d3d6e4a8574ac91391bdcecabbbe56767199ec9f27348846",
+      "mtime": 1760851144.3377335,
+      "enabled": true,
+      "allow_exec": false,
+      "tags": [
+        "api",
+        "design",
+        "documentation"
+      ]
+    },
+    "skills/document-triage/SKILL.md": {
+      "name": "document-triage",
+      "description": "Apply to DocsSAG and KnowledgeMag triage: backlog grooming, severity tagging, metadata freshness checks, release note routing, ownership hand-offs, remediation tracking, and publication readiness coordination.",
+      "path": "skills/document-triage/SKILL.md",
+      "frontmatter_hash": "d4a53b408b1d9278ac9ffc378b87ff30b35122701f2ce6d7dfbfa4c853a3feb5",
+      "mtime": 1760852705.0617044,
+      "enabled": true,
+      "allow_exec": false,
+      "tags": [
+        "docs",
+        "triage",
+        "quality"
+      ]
+    },
+    "skills/flow-runner-guardrails/SKILL.md": {
+      "name": "flow-runner-guardrails",
+      "description": "Use when maintaining Flow Runner skills execution guardrails: manage skills_exec feature flags, allowlist hashes, sandbox expectations, and telemetry for approved scripts.",
+      "path": "skills/flow-runner-guardrails/SKILL.md",
+      "frontmatter_hash": "41a49ef81f4d423cba44baaa59d268f660c1f1555a409814293a1ac40987100d",
+      "mtime": 1760852415.6558433,
+      "enabled": true,
+      "allow_exec": true,
+      "tags": [
+        "automation",
+        "flow-runner",
+        "guardrails"
+      ]
+    },
+    "skills/security-review/SKILL.md": {
+      "name": "security-review",
+      "description": "Apply to security reviews covering authn/authz changes, threat modeling, SBOM coverage, secret management, push protection, incident response runbooks, GovernanceSAG compliance checklists, and escalation contact updates.",
+      "path": "skills/security-review/SKILL.md",
+      "frontmatter_hash": "20802c6a8f65f11cde91f82e29235acb8c613ff521d12190a3252b4d604dd769",
+      "mtime": 1760851699.558796,
+      "enabled": true,
+      "allow_exec": false,
+      "tags": [
+        "security",
+        "review",
+        "governance"
+      ]
+    }
+  }
+}

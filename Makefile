@@ -1,12 +1,12 @@
 .PHONY: validate test validate-knowledge validate-docs-sag validate-prompt validate-context \
         validate-workflow validate-operations validate-qa validate-quality validate-reference \
-        validate-sop setup-flow-runner
+        validate-sop validate-skills setup-flow-runner pilot-skills-phase1 pilot-skills-phase2
 
 PYTHON ?= $(shell if [ -x .venv/bin/python ]; then printf '.venv/bin/python'; else command -v python3; fi)
 
 validate: validate-knowledge validate-docs-sag validate-prompt validate-context \
           validate-workflow validate-operations validate-qa validate-quality validate-reference \
-          validate-sop
+          validate-sop validate-skills
 
 validate-knowledge:
 	$(PYTHON) src/automation/scripts/validate_knowledge.py
@@ -38,8 +38,19 @@ validate-reference:
 validate-sop:
 	$(PYTHON) src/automation/scripts/validate_sop.py
 
+validate-skills:
+	$(PYTHON) src/automation/scripts/validate_skills.py
+
 setup-flow-runner:
 	bash src/automation/scripts/setup_flow_runner.sh
+
+pilot-skills-phase1:
+	PYTHONPATH=src/mcprouter/src $(PYTHON) src/automation/scripts/analyze_skills_pilot.py \
+		--dataset skills/pilot/phase1/dataset.jsonl --top-k 3 --threshold 0.75
+
+pilot-skills-phase2:
+	PYTHONPATH=src/mcprouter/src $(PYTHON) src/automation/scripts/analyze_skills_pilot.py \
+		--dataset skills/pilot/phase2/dataset.jsonl --top-k 3 --threshold 0.75 --skills-exec
 
 test:
 	$(PYTHON) -m pytest

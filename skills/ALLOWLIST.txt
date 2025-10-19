@@ -1,0 +1,4 @@
+# format: <relative-path> <sha256> <args-pattern>
+# Examples (comment out until execution is approved):
+# skills/security-review/scripts/run_scanner.py 0123456789abcdef... ^--target \S+$
+skills/flow-runner-guardrails/scripts/report_guardrails.py d5d58f4de57023c954c1ed4a3c97401cd23b37104f8629ab222a0715572c4ad4 ^(?:--allowlist\s+\S+)?(?:\s+--output\s+\S+)?$

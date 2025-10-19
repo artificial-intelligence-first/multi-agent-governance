@@ -15,6 +15,18 @@ router:
   backoff_base_sec: ${MCP_BACKOFF_BASE_SEC:-0.5}
   log_flush_every: ${MCP_LOG_FLUSH_EVERY:-50}
 
+features:
+  skills_v1: ${MCP_SKILLS_V1:-false}
+  skills_exec: ${MCP_SKILLS_EXEC:-false}
+
+skills:
+  embedding_model: ${MCP_SKILLS_MODEL:-BAAI/bge-large-en}
+  load_embedder: ${MCP_SKILLS_LOAD_EMBEDDER:-false}
+  top_k: ${MCP_SKILLS_TOP_K:-3}
+  threshold: ${MCP_SKILLS_THRESHOLD:-0.75}
+  cache_dir: .mcp/cache
+  telemetry_dir: telemetry/skills
+
 providers:
   dummy:
     type: dummy

@@ -18,7 +18,7 @@ from dataclasses import asdict, dataclass, is_dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from queue import SimpleQueue
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Set
 
 import yaml
 from jsonschema import Draft202012Validator
@@ -36,6 +36,7 @@ from flow_runner.models import (
     StepSummary,
     compute_percentile,
 )
+from flow_runner.skills_guard import SkillExecutionError, SkillExecutionGuard
 from flow_runner.steps.agent import AgentStep
 from flow_runner.steps.base import BaseStep, ExecutionContext, StepExecutionError
 from flow_runner.steps.mcp import McpStep
@@ -165,6 +166,7 @@ class FlowRunner:
         self._log_flush_every = self._resolve_flush_frequency(self._dev_fast)
         self._event_handler = event_handler
         self.agent_paths = self._resolve_agent_paths(flow.agent_paths)
+        self._skill_guard = self._build_skill_guard()
         raw_steps: list[BaseStep] = []
         seen_ids: set[str] = set()
         for spec in flow.steps.root:
@@ -227,6 +229,7 @@ class FlowRunner:
                     mcp_log_dir=self.mcp_log_dir,
                     run_env=self._resolved_run_env,
                     mcp_router=router,
+                    skill_guard=self._skill_guard,
                 )
                 with self._perf_tracer.span("execute"):
                     execution_result = self._run_execution(context)
@@ -267,6 +270,34 @@ class FlowRunner:
                 completed.add(step.id)
                 pending.pop(step.id, None)
         return plan
+
+    # ------------------------------------------------------------------
+    def run_skill_script(
+        self,
+        *,
+        skill_name: str,
+        script_path: str | Path,
+        args: Sequence[str] | None = None,
+        allow_exec: bool,
+        env: Optional[Mapping[str, str]] = None,
+    ) -> Dict[str, object]:
+        """Execute a skill script through the guardrail subsystem."""
+
+        if self._skill_guard is None:
+            raise StepExecutionError("skill guard is not initialized")
+        try:
+            return self._skill_guard.execute(
+                skill_name=skill_name,
+                script_path=script_path,
+                args=args,
+                allow_exec=allow_exec,
+                workspace_dir=self.workspace_dir,
+                env=env,
+            )
+        except SkillExecutionError as exc:
+            raise StepExecutionError(
+                f"skill script execution blocked ({exc.reason})"
+            ) from exc
 
     # ------------------------------------------------------------------
     async def _execute(self, context: ExecutionContext) -> ExecutionResult:
@@ -832,6 +863,30 @@ class FlowRunner:
         if isinstance(value, (str, int, float, bool)) or value is None:
             return value
         return str(value)
+
+    def _build_skill_guard(self) -> Optional[SkillExecutionGuard]:
+        exec_flag = self._resolve_bool(os.getenv("MCP_SKILLS_EXEC"), default=False)
+        sandbox_mode = os.getenv("MCP_SKILLS_SANDBOX", "read-only")
+        allowlist = (self.workspace_dir / "skills/ALLOWLIST.txt").resolve()
+        telemetry_path = (self.workspace_dir / "telemetry/skills/events.jsonl").resolve()
+        return SkillExecutionGuard(
+            root=self.workspace_dir,
+            exec_enabled=exec_flag,
+            sandbox_mode=sandbox_mode,
+            allowlist_path=allowlist,
+            telemetry_path=telemetry_path,
+        )
+
+    @staticmethod
+    def _resolve_bool(value: Optional[str], *, default: bool) -> bool:
+        if value is None:
+            return default
+        normalized = value.strip().lower()
+        if normalized in {"1", "true", "t", "yes", "y", "on"}:
+            return True
+        if normalized in {"0", "false", "f", "no", "n", "off"}:
+            return False
+        return default
 
 
 class _AsyncLineWriter:

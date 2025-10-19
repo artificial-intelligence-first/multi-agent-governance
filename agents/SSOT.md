@@ -20,3 +20,10 @@
 - MCPSAG (agents/sub-agents/mcp-sag) owns the MCP change checklist and validation SOP—loop it in before altering provider dependencies or SDK versions.
 - GovernanceSAG (agents/sub-agents/governance-sag) audits AGENTS/SSOT/CHANGELOG/PLANS artefacts; involve it whenever governance SOPs or terminology shift.
 - DepsSAG (agents/sub-agents/deps-sag) plans dependency upgrades, regenerates uv locks, and coordinates security advisories with WorkflowMAG/QAMAG/GovernanceSAG; loop it in before altering language/toolchain baselines.
+- **Skill** – Filesystem bundle containing `SKILL.md` (frontmatter + instructions) plus optional resources/scripts. Shared Skills live in `/skills/`; agent overrides reside in `agents/<agent>/skills/`.
+- **Skill Registry** – `skills/registry.json` records owner, tags, execution policy, and enablement state; GovernanceSAG reviews changes, MCPSAG consumes it at router startup.
+- **skills_v1** – Feature flag enabling progressive Skill loading inside MCPSAG. Default off; toggle per-environment after pilots pass acceptance criteria.
+- **Skills Lint** – `make validate-skills` target (wired into `make validate`) that validates frontmatter fields, token budgets, path references, and dangerous commands before Skills merge.
+- **skills_exec** – Feature flag gating Skill script execution inside Flow Runner; keep disabled outside controlled pilots and document flips in `PLANS.md`.
+- **Flow Runner guardrails Skill** – `skills/flow-runner-guardrails/SKILL.md`; source of truth for allowlist hashing, telemetry, and escalation paths when enabling `skills_exec`.
+- **DocsSAG draft-quality Skill** – `agents/sub-agents/docs-sag/skills/draft-quality/SKILL.md`; replaces legacy runbook sections for publication readiness checks and remediation tracking.

@@ -1,0 +1,160 @@
+{
+  "baseline_tokens": 1716,
+  "skill_tokens": {
+    "api-design": 398,
+    "security-review": 422,
+    "document-triage": 454,
+    "flow-runner-guardrails": 477,
+    "draft-quality": 432
+  },
+  "average_reduction": 0.6976981351981352,
+  "samples": [
+    {
+      "id": "api-design-001",
+      "skills": [
+        "api-design"
+      ],
+      "skill_tokens": 398,
+      "baseline_tokens": 1716,
+      "reduction": 0.7680652680652681
+    },
+    {
+      "id": "api-design-002",
+      "skills": [
+        "api-design"
+      ],
+      "skill_tokens": 398,
+      "baseline_tokens": 1716,
+      "reduction": 0.7680652680652681
+    },
+    {
+      "id": "api-design-003",
+      "skills": [
+        "api-design"
+      ],
+      "skill_tokens": 398,
+      "baseline_tokens": 1716,
+      "reduction": 0.7680652680652681
+    },
+    {
+      "id": "security-review-001",
+      "skills": [
+        "security-review"
+      ],
+      "skill_tokens": 422,
+      "baseline_tokens": 1716,
+      "reduction": 0.754079254079254
+    },
+    {
+      "id": "security-review-002",
+      "skills": [
+        "security-review"
+      ],
+      "skill_tokens": 422,
+      "baseline_tokens": 1716,
+      "reduction": 0.754079254079254
+    },
+    {
+      "id": "document-triage-001",
+      "skills": [
+        "document-triage"
+      ],
+      "skill_tokens": 454,
+      "baseline_tokens": 1716,
+      "reduction": 0.7354312354312355
+    },
+    {
+      "id": "document-triage-002",
+      "skills": [
+        "document-triage"
+      ],
+      "skill_tokens": 454,
+      "baseline_tokens": 1716,
+      "reduction": 0.7354312354312355
+    },
+    {
+      "id": "api-design-004",
+      "skills": [
+        "api-design"
+      ],
+      "skill_tokens": 398,
+      "baseline_tokens": 1716,
+      "reduction": 0.7680652680652681
+    },
+    {
+      "id": "security-review-003",
+      "skills": [
+        "security-review"
+      ],
+      "skill_tokens": 422,
+      "baseline_tokens": 1716,
+      "reduction": 0.754079254079254
+    },
+    {
+      "id": "document-triage-003",
+      "skills": [
+        "document-triage"
+      ],
+      "skill_tokens": 454,
+      "baseline_tokens": 1716,
+      "reduction": 0.7354312354312355
+    },
+    {
+      "id": "draft-quality-001",
+      "skills": [
+        "draft-quality"
+      ],
+      "skill_tokens": 432,
+      "baseline_tokens": 1716,
+      "reduction": 0.7482517482517482
+    },
+    {
+      "id": "draft-quality-002",
+      "skills": [
+        "document-triage",
+        "draft-quality"
+      ],
+      "skill_tokens": 886,
+      "baseline_tokens": 1716,
+      "reduction": 0.4836829836829837
+    },
+    {
+      "id": "flow-guard-001",
+      "skills": [
+        "flow-runner-guardrails"
+      ],
+      "skill_tokens": 477,
+      "baseline_tokens": 1716,
+      "reduction": 0.7220279720279721
+    },
+    {
+      "id": "flow-guard-002",
+      "skills": [
+        "flow-runner-guardrails",
+        "security-review"
+      ],
+      "skill_tokens": 899,
+      "baseline_tokens": 1716,
+      "reduction": 0.4761072261072261
+    },
+    {
+      "id": "flow-guard-003",
+      "skills": [
+        "flow-runner-guardrails"
+      ],
+      "skill_tokens": 477,
+      "baseline_tokens": 1716,
+      "reduction": 0.7220279720279721
+    },
+    {
+      "id": "draft-quality-003",
+      "skills": [
+        "draft-quality",
+        "flow-runner-guardrails"
+      ],
+      "skill_tokens": 909,
+      "baseline_tokens": 1716,
+      "reduction": 0.4702797202797203
+    }
+  ]
+}

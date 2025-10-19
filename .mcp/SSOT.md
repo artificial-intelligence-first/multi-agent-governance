@@ -11,6 +11,9 @@
 - Serena MCP server is registered at `servers.serena` using the stdio transport. Launch via `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` and provide workspace defaults with `SERENA_CONTEXT` (default `ide-assistant`) and `SERENA_PROJECT_ROOT` in `.mcp/.env.mcp`.
 - Reference servers from `modelcontextprotocol/servers` are exposed under `servers.*` (everything, fetch, filesystem, git, memory, sequentialthinking, time). Ensure `npx` and `uvx` are available. Set `MCP_FILESYSTEM_ROOT` and `MCP_GIT_REPOSITORY` to absolute paths before enabling write-capable servers.
 - GitHub MCP security endpoints (secret scanning, push protection, prompt review, audit log, branch protection) underpin SecuritySAG workflows; tokens must include `security_events`, `repo`, `read:org`, `workflow`, and `audit_log` scopes and findings should flow into `docs/generated/security-securitysag.md`.
+- Skills metadata lives in `/skills/` and `agents/<agent>/skills/`; `skills/registry.json` provides canonical owner, enablement, and execution policy fields. Keep hashes in `skills/ALLOWLIST.txt` aligned with each executable script.
+- Embedding cache is produced locally via `uv run python scripts/embed_skills.py` using sentence-transformer `bge-large-en`. Do not call external embedding APIs without GovernanceSAG approval and update this file if the model or script changes.
+- `skills_v1` feature flag resides in `.mcp/.mcp-config.yaml` under router options. Document every flag flip (environment + timestamp) in PLANS.md and roll back by toggling the same setting if regressions occur.
 
 ## Change Procedure
 1. Capture objective, impact, and validation plan in PLANS.md.
