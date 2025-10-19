@@ -165,7 +165,14 @@ class FlowRunner:
         self._log_flush_every = self._resolve_flush_frequency(self._dev_fast)
         self._event_handler = event_handler
         self.agent_paths = self._resolve_agent_paths(flow.agent_paths)
-        raw_steps = [self._instantiate_step(spec) for spec in flow.steps.root]
+        raw_steps: list[BaseStep] = []
+        seen_ids: set[str] = set()
+        for spec in flow.steps.root:
+            step = self._instantiate_step(spec)
+            if step.id in seen_ids:
+                raise StepExecutionError(f"duplicate step id detected: {step.id}")
+            seen_ids.add(step.id)
+            raw_steps.append(step)
         self._steps_by_id = {step.id: step for step in raw_steps}
         allowed_ids = self._resolve_allowed_ids(set(only) if only else None)
         self._precompleted = self._resolve_precompleted(raw_steps, allowed_ids, continue_from)

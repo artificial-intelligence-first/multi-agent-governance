@@ -215,7 +215,7 @@ class RuntimeContext:
             for key, value in artifacts.items():
                 if value is None:
                     continue
-                self._artifacts[key] = str(Path(value).resolve())
+                self._artifacts[key] = self._normalise_path(value)
 
     def record_step(
         self,
@@ -232,7 +232,7 @@ class RuntimeContext:
             record = StepRecord(
                 agent=agent,
                 results=serialised_results,
-                artifacts={k: str(Path(v).resolve()) for k, v in artifacts.items() if v},
+                artifacts={k: self._normalise_path(v) for k, v in artifacts.items() if v},
                 metadata=metadata,
             )
             self._history.append(record)
@@ -240,7 +240,7 @@ class RuntimeContext:
                 for key, value in artifacts.items():
                     if value is None:
                         continue
-                    self._artifacts[key] = str(Path(value).resolve())
+                    self._artifacts[key] = self._normalise_path(value)
 
             step_path = self.steps_dir / f"{agent}.json"
             payload = {
@@ -370,6 +370,11 @@ class RuntimeContext:
             return None
         raw = path.read_text(encoding="utf-8")
         return json.loads(raw)
+
+    @staticmethod
+    def _normalise_path(value: str) -> str:
+        path = Path(str(value)).expanduser()
+        return str(path.resolve())
 
 
 ContextLike = Union[RuntimeContext, dict[str, Any], None]
