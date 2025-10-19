@@ -37,7 +37,12 @@ def prepare_environment(context: RuntimeContext | None = None) -> dict[str, str]
     env = os.environ.copy()
     root = str(Path.cwd())
     existing = env.get("PYTHONPATH")
-    env["PYTHONPATH"] = f"{root}:{existing}" if existing else root
+    path_entries: list[str] = []
+    if existing:
+        path_entries = [entry for entry in existing.split(os.pathsep) if entry]
+    if root not in path_entries:
+        path_entries.insert(0, root)
+    env["PYTHONPATH"] = os.pathsep.join(path_entries) if path_entries else root
     if context:
         env.update(context.as_env())
     return env
