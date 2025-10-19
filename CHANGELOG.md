@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BrowserSAG sub-agent with Chrome DevTools, Playwright, and MarkItDown MCP integrations plus validation workflow.
 - GovernanceSAG sub-agent and Flow Runner governance stage for automated AGENTS/SSOT/CHANGELOG/PLANS audits.
 - MarkItDown / Playwright MCP reference documentation and validation scripts.
+- Prompt stage Codex integration can optionally run review prompts and capture dedicated artifacts.
 
 ### Changed
 - Updated AGENTS, SSOT, MCP configuration, and WorkFlowMAG docs to reflect the new browser/governance workflows.
